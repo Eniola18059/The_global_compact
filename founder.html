@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Founder — Global Compact for Peace, Human Security and Responsible International Cooperation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:      #08111F;
+      --navy-mid:  #0D1B2E;
+      --navy-light:#152235;
+      --gold:      #C9A84C;
+      --gold-light:#E2C87A;
+      --gold-dim:  #8A6E30;
+      --cream:     #F4EFE4;
+      --white:     #FFFFFF;
+      --muted:     #8A9BB0;
+      --border:    rgba(201,168,76,0.18);
+      --font-display: 'Cinzel', serif;
+      --font-body:    'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: var(--font-body); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 clamp(20px,5vw,80px); height: 72px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,17,31,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: contain; }
+    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: clamp(9px,1.1vw,11px); letter-spacing: 0.1em; color: var(--cream); text-transform: uppercase; font-weight: 600; }
+    .nav-logo-text span:last-child { font-size: 9px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; list-style: none; height: 72px; }
+    .nav-item { position: relative; height: 100%; display: flex; align-items: center; }
+    .nav-item > a, .nav-trigger { font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); text-decoration: none; font-weight: 500; padding: 0 14px; height: 100%; display: flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-family: var(--font-body); transition: color 0.2s; white-space: nowrap; }
+    .nav-item > a:hover, .nav-trigger:hover, .nav-item:hover > a, .nav-item:hover > .nav-trigger { color: var(--gold); }
+    .nav-trigger svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.25s; }
+    .nav-item:hover .nav-trigger svg { transform: rotate(180deg); }
+    .mega-panel { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(8,17,31,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px clamp(20px,5vw,80px) 40px; z-index: 199; animation: megaFade 0.22s ease forwards; }
+    .nav-item:hover .mega-panel { display: block; }
+    @keyframes megaFade { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+    .mega-inner { display: grid; gap: 36px; }
+    .mega-inner.cols-4 { grid-template-columns: repeat(4,1fr); }
+    .mega-inner.cols-3 { grid-template-columns: repeat(3,1fr); }
+    .mega-inner.cols-5 { grid-template-columns: repeat(5,1fr); }
+    .mega-col-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .mega-links { display: flex; flex-direction: column; gap: 1px; }
+    .mega-link { display: flex; align-items: flex-start; gap: 11px; padding: 8px 10px; border-radius: 3px; text-decoration: none; transition: background 0.2s; }
+    .mega-link:hover { background: rgba(201,168,76,0.06); }
+    .mega-link-dot { width: 5px; height: 5px; border: 1px solid var(--gold-dim); border-radius: 50%; flex-shrink: 0; margin-top: 5px; transition: background 0.2s; }
+    .mega-link:hover .mega-link-dot { background: var(--gold); border-color: var(--gold); }
+    .mega-link-text strong { display: block; font-size: 12px; color: var(--cream); font-weight: 500; margin-bottom: 2px; }
+    .mega-link-text span { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .nav-cta-btn { padding: 9px 22px; border: 1px solid var(--gold-dim); color: var(--gold); border-radius: 2px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 10px; transition: background 0.25s, color 0.25s; }
+    .nav-cta-btn:hover { background: var(--gold); color: var(--navy); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-burger span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: all 0.3s ease; }
+    .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+    .mobile-drawer { display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0; background: rgba(8,17,31,0.99); backdrop-filter: blur(20px); z-index: 198; overflow-y: auto; padding: 0 clamp(20px,5vw,48px) 48px; }
+    .mobile-drawer.open { display: block; }
+    .mob-section { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 18px 0 4px; }
+    .mob-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; padding: 0 4px; }
+    .mob-section a { display: block; font-size: 13px; color: var(--muted); text-decoration: none; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.03); transition: color 0.2s; }
+    .mob-section a:hover { color: var(--cream); }
+    .mob-section a:last-child { border-bottom: none; }
+    .mob-engage { padding: 28px 0; }
+    .mob-engage a { display: inline-flex; padding: 12px 28px; border: 1px solid var(--gold-dim); color: var(--gold); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 2px; }
+    @media(max-width:1100px){ .nav-links,.nav-cta-btn{display:none} .nav-burger{display:flex} }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      min-height: 100svh;
+      padding: 72px 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left {
+      background: var(--navy-mid);
+      border-right: 1px solid var(--border);
+      padding: clamp(60px,8vw,120px) clamp(20px,5vw,80px) clamp(60px,8vw,100px);
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .hero-right {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    /* Portrait placeholder — replaced when photo is added */
+    .portrait-placeholder {
+      width: 100%; height: 100%;
+      min-height: 500px;
+      background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-mid) 60%, rgba(201,168,76,0.05) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; position: relative;
+    }
+    .portrait-placeholder::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    }
+    .portrait-icon {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      border: 2px solid var(--gold-dim);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .portrait-icon svg { width: 48px; height: 48px; stroke: var(--gold-dim); fill: none; stroke-width: 1; }
+    .portrait-placeholder-text {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold-dim); position: relative; z-index: 1; text-align: center;
+    }
+    .portrait-badge {
+      position: absolute; bottom: 32px; left: 32px; right: 32px;
+      background: rgba(8,17,31,0.85); backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: 3px;
+      padding: 16px 20px; z-index: 2;
+    }
+    .portrait-badge-name {
+      font-family: var(--font-display); font-size: clamp(14px,1.8vw,18px);
+      color: var(--cream); font-weight: 600; margin-bottom: 4px;
+    }
+    .portrait-badge-title { font-size: 11px; color: var(--gold); letter-spacing: 0.06em; line-height: 1.5; }
+
+    /* Breadcrumb */
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+    .breadcrumb a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb-sep { color: var(--gold-dim); }
+    .page-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .page-eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+    .page-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .page-title { font-family: var(--font-display); font-size: clamp(28px,4.5vw,58px); font-weight: 600; color: var(--white); line-height: 1.1; letter-spacing: 0.01em; margin-bottom: 8px; }
+    .page-title em { font-style: normal; color: var(--gold); }
+    .hero-subtitle { font-size: clamp(13px,1.4vw,16px); color: var(--muted); line-height: 1.75; margin-bottom: 32px; max-width: 480px; }
+    .hero-title-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 10px 18px; border: 1px solid var(--border);
+      border-radius: 2px; font-size: 11px; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .hero-title-tag span { color: var(--gold); }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: clamp(56px,8vw,100px) clamp(20px,6vw,100px); }
+    .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .section-eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+    .section-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .section-heading { font-family: var(--font-display); font-size: clamp(24px,3.5vw,44px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+    .section-body { font-size: clamp(14px,1.3vw,16px); line-height: 1.9; color: #7D93AA; }
+
+    /* ── MESSAGE ── */
+    .message { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .message-layout { display: grid; grid-template-columns: 1fr 360px; gap: clamp(40px,6vw,80px); align-items: start; }
+    .message-body { display: flex; flex-direction: column; gap: 20px; }
+    .message-body p { font-size: clamp(14px,1.3vw,16px); line-height: 1.95; color: #7D93AA; }
+    .message-opening {
+      font-family: var(--font-display);
+      font-size: clamp(16px,2vw,22px);
+      color: var(--cream); line-height: 1.6;
+      border-left: 3px solid var(--gold);
+      padding-left: 24px; margin-bottom: 8px;
+      font-style: italic; font-weight: 400;
+    }
+    .message-signature {
+      margin-top: 36px; padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .message-signature-name {
+      font-family: var(--font-display);
+      font-size: clamp(16px,1.8vw,20px);
+      color: var(--gold); font-weight: 600;
+      margin-bottom: 6px; letter-spacing: 0.02em;
+    }
+    .message-signature-title { font-size: 12px; color: var(--muted); line-height: 1.8; letter-spacing: 0.03em; }
+
+    /* Sidebar card */
+    .founder-sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .sidebar-card {
+      background: var(--navy-light); border: 1px solid var(--border);
+      border-radius: 3px; padding: 24px;
+    }
+    .sidebar-card-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .sidebar-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12px; }
+    .sidebar-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .sidebar-item-label { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 4px; }
+    .sidebar-item-value { color: var(--cream); font-weight: 500; line-height: 1.5; }
+    .sidebar-item-value.muted { color: var(--muted); font-weight: 400; }
+
+    /* ── TITLES SECTION ── */
+    .titles { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .titles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+    .title-card { background: var(--navy); padding: clamp(24px,3vw,40px); position: relative; transition: background 0.3s; }
+    .title-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.35s; }
+    .title-card:hover { background: var(--navy-light); }
+    .title-card:hover::after { transform: scaleX(1); }
+    .title-card-num { font-family: var(--font-display); font-size: 11px; color: var(--gold-dim); letter-spacing: 0.15em; margin-bottom: 16px; }
+    .title-card-icon { width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 2px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .title-card-icon svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .title-card-name { font-family: var(--font-display); font-size: clamp(13px,1.4vw,16px); color: var(--cream); font-weight: 600; margin-bottom: 10px; letter-spacing: 0.02em; line-height: 1.3; }
+    .title-card-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ── VISION PILLARS ── */
+    .vision { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,80px); align-items: center; margin-top: 40px; }
+    .vision-quote {
+      font-family: var(--font-display);
+      font-size: clamp(18px,2.5vw,30px);
+      color: var(--cream); line-height: 1.55;
+      font-weight: 500; letter-spacing: 0.01em;
+    }
+    .vision-quote em { font-style: normal; color: var(--gold); }
+    .vision-source { margin-top: 24px; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dim); }
+    .vision-pillars { display: flex; flex-direction: column; gap: 14px; }
+    .vision-pillar {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 18px 20px; border: 1px solid var(--border);
+      border-radius: 3px; background: var(--navy);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .vision-pillar:hover { border-color: var(--gold-dim); transform: translateX(4px); }
+    .vision-pillar-num { font-family: var(--font-display); font-size: 11px; color: var(--gold); font-weight: 600; min-width: 24px; margin-top: 2px; }
+    .vision-pillar-text strong { display: block; font-size: 13px; color: var(--cream); font-weight: 500; margin-bottom: 3px; }
+    .vision-pillar-text span { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* ── DOCTRINE EXCERPT ── */
+    .doctrine-excerpt { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .doctrine-excerpt-inner { max-width: 800px; }
+    .doctrine-pull {
+      font-family: var(--font-display);
+      font-size: clamp(20px,3vw,36px);
+      color: var(--cream); line-height: 1.45;
+      font-weight: 400; margin: 40px 0;
+      padding: 40px;
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--gold);
+      border-radius: 3px;
+      position: relative;
+    }
+    .doctrine-pull::before {
+      content: '"';
+      position: absolute; top: 16px; left: 24px;
+      font-size: 80px; color: var(--gold); opacity: 0.15;
+      font-family: serif; line-height: 1;
+    }
+    .doctrine-pull-source {
+      margin-top: 20px; font-size: 11px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--gold-dim);
+    }
+
+    /* ── CONTACT STRIP ── */
+    .founder-contact { background: var(--navy-mid); }
+    .contact-strip { background: var(--navy-light); border: 1px solid var(--border); border-radius: 4px; padding: clamp(32px,4vw,56px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+    .contact-strip h3 { font-family: var(--font-display); font-size: clamp(18px,2.5vw,28px); color: var(--white); margin-bottom: 10px; }
+    .contact-strip p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .contact-strip-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+    /* ── MOTTO ── */
+    .motto-banner { background: var(--gold); padding: clamp(32px,4vw,56px) clamp(20px,6vw,100px); text-align: center; }
+    .motto-banner h2 { font-family: var(--font-display); font-size: clamp(15px,2.6vw,32px); color: var(--navy); letter-spacing: 0.12em; font-weight: 600; }
+    .motto-banner p { font-size: 11px; letter-spacing: 0.2em; color: var(--navy); opacity: 0.65; margin-top: 8px; text-transform: uppercase; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-mid); border-top: 1px solid var(--border); padding: clamp(48px,6vw,80px) clamp(20px,6vw,100px) 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(32px,4vw,60px); margin-bottom: 48px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { width: 38px; height: 38px; border-radius: 50%; object-fit: contain; }
+    .footer-logo-name { font-family: var(--font-display); font-size: 10px; color: var(--cream); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5; }
+    .footer-desc { font-size: 12px; line-height: 1.75; color: var(--muted); max-width: 280px; margin-bottom: 20px; }
+    .footer-contact { font-size: 11px; color: var(--muted); line-height: 1.9; }
+    .footer-contact a { color: var(--gold-dim); text-decoration: none; }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-col h4 { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 11px; color: var(--muted); }
+    .footer-bottom-right { font-size: 10px; color: var(--gold-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+
+    /* Buttons */
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 30px; background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 12px 30px; border: 1px solid rgba(201,168,76,0.35); color: var(--cream); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: border-color 0.25s, color 0.25s, transform 0.2s; white-space: nowrap; }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* Responsive */
+    @media(max-width:1024px){
+      .page-hero { grid-template-columns: 1fr; }
+      .hero-right { min-height: 420px; }
+      .message-layout { grid-template-columns: 1fr; }
+      .titles-grid { grid-template-columns: repeat(2,1fr); }
+      .vision-grid { grid-template-columns: 1fr; }
+      .contact-strip { grid-template-columns: 1fr; }
+      .contact-strip-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:640px){
+      .titles-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Global Compact Seal" />
+    <div class="nav-logo-text">
+      <span>Global Compact</span>
+      <span>Peace · Human Security · Cooperation</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">Institution <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-4">
+        <div><div class="mega-col-label">About</div><div class="mega-links"><a href="about.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>About the Compact</strong><span>History, identity & legal status</span></div></a><a href="about.html#declaration" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Founding Declaration</strong><span>The foundational statement of purpose</span></div></a><a href="founder.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>The Founder</strong><span>H.E. Tunde Atayeshe D. Owolabi</span></div></a></div></div>
+        <div><div class="mega-col-label">Framework</div><div class="mega-links"><a href="doctrine.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Doctrine of Divine Diplomacy</strong><span>Constitutional morality of global order</span></div></a><a href="about.html#charter" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Charter of Principles</strong><span>Foundational values & ethical framework</span></div></a><a href="about.html#vision" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Vision & Mission</strong><span>Strategic direction & objectives</span></div></a></div></div>
+        <div><div class="mega-col-label">Governance</div><div class="mega-links"><a href="governance.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Governance Structure</strong><span>Leadership offices & institutional bodies</span></div></a><a href="governance.html#secretariat" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Secretariat</strong><span>Administration & coordination</span></div></a><a href="governance.html#council" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Council</strong><span>Advisory & thematic guidance</span></div></a></div></div>
+        <div><div class="mega-col-label">Membership</div><div class="mega-links"><a href="membership.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Membership Framework</strong><span>Categories, rights & responsibilities</span></div></a><a href="membership.html#join" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>How to Join</strong><span>Eligibility & application process</span></div></a><a href="membership.html#fellows" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Diplomatic Fellows</strong><span>Ambassadors of goodwill & dialogue</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Initiatives <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-5">
+        <div><div class="mega-col-label">Environment</div><div class="mega-links"><a href="initiatives.html#imppera" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>IMPPERA</strong><span>Marine plastic pollution prevention</span></div></a></div></div>
+        <div><div class="mega-col-label">Security</div><div class="mega-links"><a href="initiatives.html#ncti" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>NCTI</strong><span>Nuclear civilization transition</span></div></a><a href="initiatives.html#gsei" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSEI</strong><span>Global security employment</span></div></a></div></div>
+        <div><div class="mega-col-label">Development</div><div class="mega-links"><a href="initiatives.html#ungfsaii" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>UNGFSAII</strong><span>Food security & agricultural investment</span></div></a></div></div>
+        <div><div class="mega-col-label">Peace</div><div class="mega-links"><a href="initiatives.html#gspf" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSPF</strong><span>Global security & peace stabilization</span></div></a></div></div>
+        <div><div class="mega-col-label">Overview</div><div class="mega-links"><a href="initiatives.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>All Initiatives</strong><span>Full policy portfolio</span></div></a><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Policy Documents</strong><span>Official registry</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Engage <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-3">
+        <div><div class="mega-col-label">Partnership</div><div class="mega-links"><a href="partnerships.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Partnerships & Endorsement</strong><span>All engagement modalities</span></div></a><a href="partnerships.html#endorse" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Moral Endorsement</strong><span>Voluntary expression of alignment</span></div></a><a href="partnerships.html#strategic" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Strategic Partnership</strong><span>Structured programme collaboration</span></div></a></div></div>
+        <div><div class="mega-col-label">Participation</div><div class="mega-links"><a href="partnerships.html#observer" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Observer Status</strong><span>Forum & dialogue participation</span></div></a><a href="partnerships.html#investment" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Investment Alignment</strong><span>ESG-aligned cooperation</span></div></a><a href="forum.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Annual Global Forum</strong><span>Principal convening platform</span></div></a></div></div>
+        <div><div class="mega-col-label">Resources</div><div class="mega-links"><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Publications & Documents</strong><span>Official registry & instruments</span></div></a><a href="contact.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Contact the Secretariat</strong><span>Diplomatic correspondence</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item"><a href="forum.html">Forum</a></li>
+    <li class="nav-item"><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="partnerships.html" class="nav-cta-btn">Endorse &amp; Engage</a>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mob-section"><div class="mob-label">Institution</div><a href="about.html">About the Compact</a><a href="founder.html">The Founder</a><a href="doctrine.html">Doctrine of Divine Diplomacy</a><a href="governance.html">Governance Structure</a><a href="membership.html">Membership</a></div>
+  <div class="mob-section"><div class="mob-label">Initiatives</div><a href="initiatives.html#imppera">IMPPERA</a><a href="initiatives.html#ncti">NCTI</a><a href="initiatives.html#gsei">GSEI</a><a href="initiatives.html#ungfsaii">UNGFSAII</a><a href="initiatives.html#gspf">GSPF</a></div>
+  <div class="mob-section"><div class="mob-label">Engage</div><a href="partnerships.html">Partnerships & Endorsement</a><a href="forum.html">Annual Global Forum</a><a href="publications.html">Publications</a><a href="contact.html">Contact</a></div>
+  <div class="mob-engage"><a href="partnerships.html">Endorse &amp; Engage</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-left">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span class="breadcrumb-sep">/</span>
+      <a href="about.html">Institution</a><span class="breadcrumb-sep">/</span>
+      <span>The Founder</span>
+    </div>
+    <div class="page-eyebrow">
+      <div class="page-eyebrow-line"></div>
+      <span class="page-eyebrow-text">Founding Leadership</span>
+    </div>
+    <h1 class="page-title">His Excellency<br/><em>Tunde Atayeshe<br/>D. Owolabi</em></h1>
+    <p class="hero-subtitle">Founding Chair, President &amp; Global Convener of the Global Compact for Peace, Human Security and Responsible International Cooperation.</p>
+    <div class="hero-title-tag"><span>REIGN I</span> &nbsp;·&nbsp; Guardian of the Charter</div>
+    <div class="hero-title-tag">Founding Chair &nbsp;·&nbsp; President &nbsp;·&nbsp; Global Convener</div>
+  </div>
+  <div class="hero-right">
+    <!-- Replace this block with <img src="founder-photo.jpg"> when photo is available -->
+    <div class="portrait-placeholder">
+      <div class="portrait-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="portrait-placeholder-text">Portrait photograph<br/>to be placed here</div>
+    </div>
+    <div class="portrait-badge">
+      <div class="portrait-badge-name">H.E. Tunde Atayeshe D. Owolabi (Reign I)</div>
+      <div class="portrait-badge-title">
+        Founding Chair, President &amp; Global Convener<br/>
+        Guardian of the Charter · Global Compact
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOUNDER'S MESSAGE -->
+<section class="message" id="message">
+  <div class="message-layout">
+    <div class="message-body">
+      <div class="section-eyebrow reveal">
+        <div class="section-eyebrow-line"></div>
+        <span class="section-eyebrow-text">Message from the Founder &amp; Global Convener</span>
+      </div>
+      <h2 class="section-heading reveal reveal-delay-1">A Call to Shared<br/>Responsibility &amp; Cooperation</h2>
+
+      <div class="message-opening reveal reveal-delay-2">
+        "The Global Compact for Peace, Human Security and Responsible International Cooperation was conceived from a simple yet profound conviction: that humanity's shared challenges require shared responsibility, principled leadership, and constructive cooperation across nations, cultures, institutions, and generations."
+      </div>
+
+      <p class="reveal reveal-delay-2" style="font-size:clamp(14px,1.3vw,16px);line-height:1.95;color:#7D93AA;">At a time when the world faces growing geopolitical tensions, humanitarian crises, environmental challenges, technological transformation, and increasing uncertainty, there is an urgent need for frameworks that encourage dialogue, promote human security, strengthen ethical governance, and inspire collective action.</p>
+
+      <p class="reveal reveal-delay-3" style="font-size:clamp(14px,1.3vw,16px);line-height:1.95;color:#7D93AA;">This Compact is offered as a voluntary multipolar framework for cooperation and partnership. It is founded upon the belief that peace is not merely the absence of conflict, but the presence of justice, dignity, opportunity, responsibility, and mutual respect among peoples and nations.</p>
+
+      <p class="reveal reveal-delay-3" style="font-size:clamp(14px,1.3vw,16px);line-height:1.95;color:#7D93AA;">The vision of this Compact is not to replace existing institutions, but to complement and strengthen efforts that advance peace, sustainable development, human security, and responsible international cooperation. It seeks to provide a platform through which governments, international organizations, academic institutions, civil society, faith communities, youth leaders, private sector partners, and global citizens may work together toward common objectives.</p>
+
+      <p class="reveal reveal-delay-3" style="font-size:clamp(14px,1.3vw,16px);line-height:1.95;color:#7D93AA;">Through the Doctrine of Divine Diplomacy, this initiative further encourages conscience-minded leadership, ethical statecraft, and principled decision-making in public life and international affairs. The doctrine serves not as a political ideology or legal obligation, but as a philosophical call to integrity, wisdom, compassion, restraint, and responsibility.</p>
+
+      <p class="reveal reveal-delay-3" style="font-size:clamp(14px,1.3vw,16px);line-height:1.95;color:#7D93AA;">We live in an era increasingly defined by interdependence and multipolarity. The challenges confronting humanity transcend borders and require cooperation that respects sovereignty, diversity, and the legitimate aspirations of all peoples and nations. This Compact seeks to contribute to a more balanced, inclusive, and cooperative international order grounded in dialogue, mutual respect, shared responsibility, and the common good.</p>
+
+      <p class="reveal reveal-delay-3" style="font-size:clamp(14px,1.3vw,16px);line-height:1.95;color:#7D93AA;">I invite all stakeholders who share these aspirations to engage with this Compact in a spirit of partnership, goodwill, and constructive cooperation. Together, we can contribute to building a more peaceful, secure, just, resilient, and sustainable future for present and future generations.</p>
+
+      <p class="reveal reveal-delay-3" style="font-size:clamp(14px,1.3vw,16px);line-height:1.95;color:#7D93AA;">May this Compact serve as a platform for understanding where there is division, cooperation where there is uncertainty, and hope where there are challenges. Let it stand as a testament to our collective commitment to peace, human dignity, responsible governance, and the shared future of humanity.</p>
+
+      <div class="message-signature reveal">
+        <div class="message-signature-name">H.E. Tunde Atayeshe D. Owolabi (Reign I)</div>
+        <div class="message-signature-title">
+          Founding Chair, President &amp; Global Convener<br/>
+          Guardian of the Charter<br/>
+          Global Compact for Peace, Human Security and Responsible International Cooperation
+        </div>
+      </div>
+    </div>
+
+    <div class="founder-sidebar reveal reveal-delay-2">
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Official Titles</div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Primary Title</div>
+          <div class="sidebar-item-value">Founding Chair, President &amp; Global Convener</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Institutional Role</div>
+          <div class="sidebar-item-value">Guardian of the Charter</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Constitutional Title</div>
+          <div class="sidebar-item-value">First Servant of Humanity</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Honorific</div>
+          <div class="sidebar-item-value">His Excellency (H.E.)</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Designation</div>
+          <div class="sidebar-item-value">Reign I</div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Institutional Location</div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Headquarters</div>
+          <div class="sidebar-item-value">Lagos &amp; Abuja, Nigeria</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Year Established</div>
+          <div class="sidebar-item-value">2026</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Document Reference</div>
+          <div class="sidebar-item-value muted">GC/FOUNDER/2026</div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Correspondence</div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Primary Email</div>
+          <div class="sidebar-item-value muted">globalcompactinitiative@gmail.com</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Secondary Email</div>
+          <div class="sidebar-item-value muted">diplomacydivine@gmail.com</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Telephone</div>
+          <div class="sidebar-item-value muted">+234 806 705 6348</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TITLES & RESPONSIBILITIES -->
+<section class="titles">
+  <div class="section-eyebrow reveal">
+    <div class="section-eyebrow-line"></div>
+    <span class="section-eyebrow-text">Office &amp; Responsibilities</span>
+  </div>
+  <h2 class="section-heading reveal reveal-delay-1">The Office of the Founding Chair,<br/>President &amp; Global Convener</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">The supreme constitutional leadership office and principal custodial authority of the Global Compact, established to provide strategic direction, constitutional oversight, and diplomatic stewardship.</p>
+
+  <div class="titles-grid">
+    <div class="title-card reveal">
+      <div class="title-card-num">01</div>
+      <div class="title-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="title-card-name">Guardian of the Charter</div>
+      <p class="title-card-desc">Entrusted with protecting the constitutional integrity, doctrine, institutional values, and strategic continuity of the Global Compact in perpetuity.</p>
+    </div>
+    <div class="title-card reveal reveal-delay-1">
+      <div class="title-card-num">02</div>
+      <div class="title-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <div class="title-card-name">Chief Diplomatic Steward</div>
+      <p class="title-card-desc">Providing strategic leadership and global representation of the Global Compact in all official international diplomatic engagements.</p>
+    </div>
+    <div class="title-card reveal reveal-delay-2">
+      <div class="title-card-num">03</div>
+      <div class="title-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="title-card-name">Global Convener</div>
+      <p class="title-card-desc">Convening official institutional meetings, the Annual Global Forum, and diplomatic engagements across governments and international institutions.</p>
+    </div>
+    <div class="title-card reveal reveal-delay-1">
+      <div class="title-card-num">04</div>
+      <div class="title-card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div class="title-card-name">Constitutional Custodian</div>
+      <p class="title-card-desc">Overseeing institutional continuity, constitutional governance, and the long-term strategic direction of the Global Compact's vision and mission.</p>
+    </div>
+    <div class="title-card reveal reveal-delay-2">
+      <div class="title-card-num">05</div>
+      <div class="title-card-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <div class="title-card-name">Supreme Institutional Representative</div>
+      <p class="title-card-desc">Serving as the principal face and voice of the Global Compact in all diplomatic, media, and public institutional engagements globally.</p>
+    </div>
+    <div class="title-card reveal reveal-delay-3">
+      <div class="title-card-num">06</div>
+      <div class="title-card-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <div class="title-card-name">First Servant of Humanity</div>
+      <p class="title-card-desc">Embodying the Compact's commitment to service, peace, human dignity, and responsible international cooperation in all institutional conduct.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VISION PILLARS -->
+<section class="vision">
+  <div class="section-eyebrow reveal">
+    <div class="section-eyebrow-line"></div>
+    <span class="section-eyebrow-text">Founding Vision</span>
+  </div>
+  <h2 class="section-heading reveal reveal-delay-1">The Convictions That<br/>Shaped the Compact</h2>
+  <div class="vision-grid">
+    <div>
+      <div class="vision-quote reveal reveal-delay-1">
+        "Peace is not merely the <em>absence of conflict</em>, but the presence of justice, dignity, opportunity, responsibility, and mutual respect among peoples and nations."
+      </div>
+      <div class="vision-source reveal reveal-delay-2">— H.E. Tunde Atayeshe D. Owolabi (Reign I)</div>
+    </div>
+    <div class="vision-pillars reveal reveal-delay-2">
+      <div class="vision-pillar">
+        <div class="vision-pillar-num">I</div>
+        <div class="vision-pillar-text"><strong>Shared Responsibility</strong><span>Humanity's shared challenges require shared leadership and constructive cooperation across generations.</span></div>
+      </div>
+      <div class="vision-pillar">
+        <div class="vision-pillar-num">II</div>
+        <div class="vision-pillar-text"><strong>Complementary Architecture</strong><span>The Compact strengthens — not replaces — existing international systems and the United Nations.</span></div>
+      </div>
+      <div class="vision-pillar">
+        <div class="vision-pillar-num">III</div>
+        <div class="vision-pillar-text"><strong>Conscience-Led Leadership</strong><span>Ethical statecraft and principled decision-making as the foundation of all international engagement.</span></div>
+      </div>
+      <div class="vision-pillar">
+        <div class="vision-pillar-num">IV</div>
+        <div class="vision-pillar-text"><strong>Multipolar Cooperation</strong><span>A balanced, inclusive international order grounded in dialogue, mutual respect, and the common good.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTRINE EXCERPT -->
+<section class="doctrine-excerpt">
+  <div class="doctrine-excerpt-inner">
+    <div class="section-eyebrow reveal">
+      <div class="section-eyebrow-line"></div>
+      <span class="section-eyebrow-text">The Doctrine of Divine Diplomacy</span>
+    </div>
+    <h2 class="section-heading reveal reveal-delay-1">A Philosophical Legacy<br/>for Global Order</h2>
+    <p class="section-body reveal reveal-delay-2">Conceived by the Founder as the constitutional morality of the Global Compact, the Doctrine of Divine Diplomacy serves as an ethical and philosophical framework for responsible international engagement in an increasingly interconnected and multipolar world.</p>
+
+    <div class="doctrine-pull reveal reveal-delay-2">
+      Diplomacy is not merely the management of relations among states; it is the universal architecture of coexistence through which humanity negotiates order, balance, justice, and peaceful continuity.
+      <div class="doctrine-pull-source">Doctrine of Divine Diplomacy — H.E. Tunde Atayeshe D. Owolabi (Reign I)</div>
+    </div>
+
+    <p class="section-body reveal reveal-delay-3">The Doctrine is not a political ideology, partisan programme, treaty authority, or coercive institutional doctrine. Rather, it functions as a constitutional morality framework for cooperative global order, ethical diplomacy, responsible sovereignty, balanced international engagement, and constructive multilateral cooperation.</p>
+    <div style="margin-top:32px;" class="reveal reveal-delay-3">
+      <a href="doctrine.html" class="btn-primary">Explore the Full Doctrine <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<section class="founder-contact">
+  <div class="contact-strip reveal">
+    <div>
+      <h3>Engage with the Office of the Founder</h3>
+      <p>Diplomatic correspondence, high-level partnership enquiries, and official communications for the Office of the Founding Chair, President &amp; Global Convener may be directed through the Global Secretariat.</p>
+    </div>
+    <div class="contact-strip-actions">
+      <a href="contact.html" class="btn-primary">Contact Secretariat</a>
+      <a href="partnerships.html" class="btn-ghost">Endorse &amp; Engage</a>
+    </div>
+  </div>
+</section>
+
+<!-- MOTTO -->
+<div class="motto-banner reveal">
+  <h2>ONE HUMANITY &bull; ONE FUTURE &bull; ONE GLOBAL COMPACT</h2>
+  <p>Divine Diplomacy — The Constitutional Morality of Global Order</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><img src="logo.jpg" alt="Global Compact Seal" /><div class="footer-logo-name">Global Compact<br/>for Peace &amp; Human Security</div></div>
+      <p class="footer-desc">A voluntary, non-binding, multipolar and multi-stakeholder international cooperation framework advancing peace, human dignity, and responsible international cooperation.</p>
+      <div class="footer-contact">
+        <div>Email: <a href="mailto:globalcompactinitiative@gmail.com">globalcompactinitiative@gmail.com</a></div>
+        <div>Tel: <a href="tel:+2348067056348">+234 806 705 6348</a></div>
+        <div>Lagos &amp; Abuja, Nigeria</div>
+        <div style="margin-top:6px;color:var(--gold-dim);">Ref. Registry: GC/REG/2026</div>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About the Compact</a></li><li><a href="founder.html">The Founder</a></li><li><a href="doctrine.html">Divine Diplomacy</a></li><li><a href="governance.html">Governance</a></li><li><a href="membership.html">Membership</a></li></ul></div>
+    <div class="footer-col"><h4>Programmes</h4><ul><li><a href="initiatives.html#imppera">IMPPERA</a></li><li><a href="initiatives.html#ncti">Nuclear Civilization</a></li><li><a href="initiatives.html#gsei">Security Employment</a></li><li><a href="initiatives.html#ungfsaii">Food Security</a></li><li><a href="initiatives.html#gspf">Peace Stabilization</a></li></ul></div>
+    <div class="footer-col"><h4>Engage</h4><ul><li><a href="partnerships.html">Endorsement</a></li><li><a href="partnerships.html#strategic">Strategic Partnership</a></li><li><a href="forum.html">Annual Global Forum</a></li><li><a href="publications.html">Document Registry</a></li><li><a href="contact.html">Contact Secretariat</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright &copy; 2026 Global Compact for Peace, Human Security and Responsible International Cooperation. All Rights Reserved.</p>
+    <div class="footer-bottom-right">One Humanity &middot; One Future &middot; One Global Compact</div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('mobile-drawer');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); drawer.classList.remove('open'); document.body.style.overflow = '';
+  }));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
