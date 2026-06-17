@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Governance — Global Compact for Peace, Human Security and Responsible International Cooperation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #08111F; --navy-mid: #0D1B2E; --navy-light: #152235;
+      --gold: #C9A84C; --gold-light: #E2C87A; --gold-dim: #8A6E30;
+      --cream: #F4EFE4; --white: #FFFFFF; --muted: #8A9BB0;
+      --border: rgba(201,168,76,0.18);
+      --font-display: 'Cinzel', serif; --font-body: 'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: var(--font-body); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 clamp(20px,5vw,80px); height: 72px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,17,31,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: contain; }
+    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: clamp(9px,1.1vw,11px); letter-spacing: 0.1em; color: var(--cream); text-transform: uppercase; font-weight: 600; }
+    .nav-logo-text span:last-child { font-size: 9px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; list-style: none; height: 72px; }
+    .nav-item { position: relative; height: 100%; display: flex; align-items: center; }
+    .nav-item > a, .nav-trigger { font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); text-decoration: none; font-weight: 500; padding: 0 14px; height: 100%; display: flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-family: var(--font-body); transition: color 0.2s; white-space: nowrap; }
+    .nav-item > a:hover, .nav-trigger:hover, .nav-item:hover > a, .nav-item:hover > .nav-trigger { color: var(--gold); }
+    .nav-trigger svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.25s; }
+    .nav-item:hover .nav-trigger svg { transform: rotate(180deg); }
+    .mega-panel { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(8,17,31,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px clamp(20px,5vw,80px) 40px; z-index: 199; animation: megaFade 0.22s ease forwards; }
+    .nav-item:hover .mega-panel { display: block; }
+    @keyframes megaFade { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+    .mega-inner { display: grid; gap: 36px; }
+    .mega-inner.cols-4 { grid-template-columns: repeat(4,1fr); }
+    .mega-inner.cols-3 { grid-template-columns: repeat(3,1fr); }
+    .mega-inner.cols-5 { grid-template-columns: repeat(5,1fr); }
+    .mega-col-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .mega-links { display: flex; flex-direction: column; gap: 1px; }
+    .mega-link { display: flex; align-items: flex-start; gap: 11px; padding: 8px 10px; border-radius: 3px; text-decoration: none; transition: background 0.2s; }
+    .mega-link:hover { background: rgba(201,168,76,0.06); }
+    .mega-link-dot { width: 5px; height: 5px; border: 1px solid var(--gold-dim); border-radius: 50%; flex-shrink: 0; margin-top: 5px; transition: background 0.2s; }
+    .mega-link:hover .mega-link-dot { background: var(--gold); border-color: var(--gold); }
+    .mega-link-text strong { display: block; font-size: 12px; color: var(--cream); font-weight: 500; margin-bottom: 2px; }
+    .mega-link-text span { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .nav-cta-btn { padding: 9px 22px; border: 1px solid var(--gold-dim); color: var(--gold); border-radius: 2px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 10px; transition: background 0.25s, color 0.25s; }
+    .nav-cta-btn:hover { background: var(--gold); color: var(--navy); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-burger span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: all 0.3s ease; }
+    .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+    .mobile-drawer { display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0; background: rgba(8,17,31,0.99); backdrop-filter: blur(20px); z-index: 198; overflow-y: auto; padding: 0 clamp(20px,5vw,48px) 48px; }
+    .mobile-drawer.open { display: block; }
+    .mob-section { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 18px 0 4px; }
+    .mob-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; padding: 0 4px; }
+    .mob-section a { display: block; font-size: 13px; color: var(--muted); text-decoration: none; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.03); transition: color 0.2s; }
+    .mob-section a:hover { color: var(--cream); }
+    .mob-section a:last-child { border-bottom: none; }
+    .mob-engage { padding: 28px 0; }
+    .mob-engage a { display: inline-flex; padding: 12px 28px; border: 1px solid var(--gold-dim); color: var(--gold); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 2px; }
+    @media(max-width:1100px){ .nav-links,.nav-cta-btn{display:none} .nav-burger{display:flex} }
+
+    /* ── PAGE HERO ── */
+    .page-hero { padding: 140px clamp(20px,6vw,100px) 80px; background: var(--navy-mid); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .page-hero::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 100% at 80% 50%,rgba(201,168,76,0.04) 0%,transparent 70%); pointer-events:none; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb-sep { color: var(--gold-dim); }
+    .page-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .page-eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+    .page-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .page-title { font-family: var(--font-display); font-size: clamp(32px,5vw,64px); font-weight: 600; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .page-title em { font-style: normal; color: var(--gold); }
+    .page-subtitle { font-size: clamp(15px,1.6vw,18px); color: var(--muted); line-height: 1.7; max-width: 620px; }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: clamp(56px,8vw,100px) clamp(20px,6vw,100px); }
+    .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .section-eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+    .section-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .section-heading { font-family: var(--font-display); font-size: clamp(24px,3.5vw,44px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+    .section-body { font-size: clamp(14px,1.3vw,16px); line-height: 1.9; color: #7D93AA; }
+
+    /* ── ORG CHART ── */
+    .org-chart { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .chart-wrap { margin-top: 56px; display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+    /* Tier 1 — Supreme */
+    .tier { width: 100%; display: flex; justify-content: center; position: relative; padding: 20px 0; }
+    .tier::before { content:''; position:absolute; top:0; left:50%; width:1px; height:20px; background:var(--gold-dim); }
+    .tier:first-child::before { display:none; }
+
+    .org-node {
+      background: var(--navy-light); border: 1px solid var(--border);
+      border-radius: 3px; padding: 18px 24px; text-align: center;
+      position: relative; transition: border-color 0.25s, transform 0.25s;
+      min-width: 200px; max-width: 280px;
+    }
+    .org-node:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+    .org-node.gold-border { border-color: var(--gold-dim); }
+    .org-node-badge { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .org-node-title { font-family: var(--font-display); font-size: clamp(11px,1.1vw,13px); color: var(--cream); font-weight: 600; line-height: 1.3; letter-spacing: 0.02em; }
+    .org-node-sub { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+    /* Connector lines */
+    .tier-connector { width: 100%; display: flex; justify-content: center; }
+    .connector-line { width: 1px; height: 28px; background: var(--gold-dim); opacity: 0.5; }
+    .connector-h { height: 1px; background: var(--gold-dim); opacity: 0.3; }
+
+    /* Multi-node tiers */
+    .tier-multi { width: 100%; padding: 0 clamp(20px,4vw,60px); }
+    .tier-multi-inner { display: grid; gap: 16px; position: relative; }
+    .tier-multi-inner::before { content:''; position:absolute; top:-28px; left:50%; width:1px; height:28px; background:var(--gold-dim); opacity:.5; }
+    .tier-multi-inner.cols-2 { grid-template-columns: repeat(2,1fr); }
+    .tier-multi-inner.cols-3 { grid-template-columns: repeat(3,1fr); }
+    .tier-multi-inner.cols-4 { grid-template-columns: repeat(4,1fr); }
+    .tier-multi-inner.cols-5 { grid-template-columns: repeat(5,1fr); }
+
+    /* ── LEADERSHIP OFFICES ── */
+    .leadership { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .leadership-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
+    .leader-card { background: var(--navy); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+    .leader-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .leader-card-top { padding: 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; }
+    .leader-icon { width: 44px; height: 44px; border: 1px solid var(--gold-dim); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .leader-icon svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .leader-rank { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 4px; }
+    .leader-title { font-family: var(--font-display); font-size: clamp(11px,1.1vw,13px); color: var(--cream); font-weight: 600; line-height: 1.3; }
+    .leader-card-body { padding: 20px 24px; }
+    .leader-desc { font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+    .leader-responsibilities { display: flex; flex-direction: column; gap: 6px; }
+    .leader-resp { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; color: var(--muted); line-height: 1.5; }
+    .leader-resp::before { content:'→'; color: var(--gold-dim); flex-shrink: 0; font-size: 10px; margin-top: 1px; }
+
+    /* ── INSTITUTIONAL BODIES ── */
+    .bodies { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .bodies-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-top: 48px; }
+    .body-card { background: var(--navy-light); border: 1px solid var(--border); border-radius: 3px; padding: clamp(24px,3vw,36px); transition: border-color 0.25s; position: relative; overflow: hidden; }
+    .body-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.35s; }
+    .body-card:hover { border-color: var(--gold-dim); }
+    .body-card:hover::after { transform: scaleX(1); }
+    .body-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .body-title { font-family: var(--font-display); font-size: clamp(14px,1.5vw,18px); color: var(--cream); font-weight: 600; margin-bottom: 12px; line-height: 1.3; }
+    .body-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+    .body-functions { display: flex; flex-direction: column; gap: 7px; }
+    .body-function { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .body-function::before { content:''; width:5px; height:5px; border:1px solid var(--gold); border-radius:50%; flex-shrink:0; margin-top:5px; }
+
+    /* ── WORKING GROUPS ── */
+    .working-groups { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .wg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+    .wg-card { background: var(--navy-mid); padding: clamp(20px,2.5vw,28px); transition: background 0.3s; position: relative; }
+    .wg-card::after { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--gold); transform:scaleY(0); transform-origin:top; transition:transform 0.35s; }
+    .wg-card:hover { background: var(--navy-light); }
+    .wg-card:hover::after { transform: scaleY(1); }
+    .wg-num { font-family: var(--font-display); font-size: 11px; color: var(--gold-dim); letter-spacing: 0.15em; margin-bottom: 10px; }
+    .wg-title { font-family: var(--font-display); font-size: clamp(12px,1.2vw,14px); color: var(--cream); font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+    .wg-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    /* ── GOVERNANCE PRINCIPLES ── */
+    .gov-principles { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .principles-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,80px); align-items: start; }
+    .principles-list { display: flex; flex-direction: column; gap: 12px; }
+    .principle-row { display: flex; align-items: flex-start; gap: 16px; padding: 16px 20px; border: 1px solid var(--border); border-radius: 3px; background: var(--navy-mid); transition: border-color 0.25s, transform 0.2s; }
+    .principle-row:hover { border-color: var(--gold-dim); transform: translateX(4px); }
+    .principle-row-num { font-family: var(--font-display); font-size: 12px; color: var(--gold); font-weight: 600; min-width: 24px; }
+    .principle-row-text strong { display: block; font-size: 13px; color: var(--cream); font-weight: 500; margin-bottom: 3px; }
+    .principle-row-text span { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .gov-note { background: var(--navy-light); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 3px; padding: 28px; margin-top: 32px; }
+    .gov-note p { font-size: 14px; color: var(--muted); line-height: 1.8; }
+    .gov-note p + p { margin-top: 14px; }
+
+    /* ── TIERS ── */
+    .tiers { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .tiers-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+    .tier-card { background: var(--navy-mid); padding: clamp(20px,2.5vw,28px); transition: background 0.3s; }
+    .tier-card:hover { background: var(--navy-light); }
+    .tier-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .tier-title { font-family: var(--font-display); font-size: clamp(12px,1.2vw,14px); color: var(--cream); font-weight: 600; margin-bottom: 10px; }
+    .tier-roles { display: flex; flex-direction: column; gap: 6px; }
+    .tier-role { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .tier-role::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--gold-dim); flex-shrink:0; }
+
+    /* ── MOTTO / FOOTER / BUTTONS ── */
+    .motto-banner { background: var(--gold); padding: clamp(32px,4vw,56px) clamp(20px,6vw,100px); text-align: center; }
+    .motto-banner h2 { font-family: var(--font-display); font-size: clamp(15px,2.6vw,32px); color: var(--navy); letter-spacing: 0.12em; font-weight: 600; }
+    .motto-banner p { font-size: 11px; letter-spacing: 0.2em; color: var(--navy); opacity: 0.65; margin-top: 8px; text-transform: uppercase; }
+    footer { background: var(--navy-mid); border-top: 1px solid var(--border); padding: clamp(48px,6vw,80px) clamp(20px,6vw,100px) 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(32px,4vw,60px); margin-bottom: 48px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { width: 38px; height: 38px; border-radius: 50%; object-fit: contain; }
+    .footer-logo-name { font-family: var(--font-display); font-size: 10px; color: var(--cream); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5; }
+    .footer-desc { font-size: 12px; line-height: 1.75; color: var(--muted); max-width: 280px; margin-bottom: 20px; }
+    .footer-contact { font-size: 11px; color: var(--muted); line-height: 1.9; }
+    .footer-contact a { color: var(--gold-dim); text-decoration: none; }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-col h4 { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 11px; color: var(--muted); }
+    .footer-bottom-right { font-size: 10px; color: var(--gold-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 30px; background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 12px 30px; border: 1px solid rgba(201,168,76,0.35); color: var(--cream); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: border-color 0.25s, color 0.25s, transform 0.2s; }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* Responsive */
+    @media(max-width:1024px) {
+      .leadership-grid { grid-template-columns: repeat(2,1fr); }
+      .bodies-grid { grid-template-columns: 1fr; }
+      .wg-grid { grid-template-columns: repeat(2,1fr); }
+      .principles-layout { grid-template-columns: 1fr; }
+      .tiers-grid { grid-template-columns: repeat(2,1fr); }
+      .tier-multi-inner.cols-5 { grid-template-columns: repeat(3,1fr); }
+      .tier-multi-inner.cols-4 { grid-template-columns: repeat(2,1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:640px) {
+      .leadership-grid { grid-template-columns: 1fr; }
+      .wg-grid { grid-template-columns: 1fr; }
+      .tiers-grid { grid-template-columns: 1fr; }
+      .tier-multi-inner { grid-template-columns: 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Global Compact Seal" />
+    <div class="nav-logo-text"><span>Global Compact</span><span>Peace · Human Security · Cooperation</span></div>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">Institution <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-4">
+        <div><div class="mega-col-label">About</div><div class="mega-links"><a href="about.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>About the Compact</strong><span>History, identity & legal status</span></div></a><a href="about.html#declaration" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Founding Declaration</strong><span>Foundational statement of purpose</span></div></a><a href="founder.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>The Founder</strong><span>H.E. Tunde Atayeshe D. Owolabi</span></div></a></div></div>
+        <div><div class="mega-col-label">Framework</div><div class="mega-links"><a href="doctrine.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Doctrine of Divine Diplomacy</strong><span>Constitutional morality of global order</span></div></a><a href="about.html#charter" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Charter of Principles</strong><span>Foundational values & ethical framework</span></div></a><a href="about.html#vision" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Vision & Mission</strong><span>Strategic direction & objectives</span></div></a></div></div>
+        <div><div class="mega-col-label">Governance</div><div class="mega-links"><a href="governance.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Governance Structure</strong><span>Leadership offices & bodies</span></div></a><a href="governance.html#secretariat" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Secretariat</strong><span>Administration & coordination</span></div></a><a href="governance.html#council" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Council</strong><span>Advisory & thematic guidance</span></div></a></div></div>
+        <div><div class="mega-col-label">Membership</div><div class="mega-links"><a href="membership.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Membership Framework</strong><span>Categories, rights & responsibilities</span></div></a><a href="membership.html#join" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>How to Join</strong><span>Eligibility & process</span></div></a><a href="membership.html#fellows" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Diplomatic Fellows</strong><span>Ambassadors of goodwill</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Initiatives <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-5">
+        <div><div class="mega-col-label">Environment</div><div class="mega-links"><a href="initiatives.html#imppera" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>IMPPERA</strong><span>Marine plastic pollution prevention</span></div></a></div></div>
+        <div><div class="mega-col-label">Security</div><div class="mega-links"><a href="initiatives.html#ncti" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>NCTI</strong><span>Nuclear civilization transition</span></div></a><a href="initiatives.html#gsei" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSEI</strong><span>Global security employment</span></div></a></div></div>
+        <div><div class="mega-col-label">Development</div><div class="mega-links"><a href="initiatives.html#ungfsaii" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>UNGFSAII</strong><span>Food security & agricultural investment</span></div></a></div></div>
+        <div><div class="mega-col-label">Peace</div><div class="mega-links"><a href="initiatives.html#gspf" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSPF</strong><span>Global security & peace stabilization</span></div></a></div></div>
+        <div><div class="mega-col-label">Overview</div><div class="mega-links"><a href="initiatives.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>All Initiatives</strong><span>Full policy portfolio</span></div></a><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Policy Documents</strong><span>Official registry</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Engage <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-3">
+        <div><div class="mega-col-label">Partnership</div><div class="mega-links"><a href="partnerships.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Partnerships & Endorsement</strong><span>All engagement modalities</span></div></a><a href="partnerships.html#endorse" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Moral Endorsement</strong><span>Voluntary expression of alignment</span></div></a><a href="partnerships.html#strategic" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Strategic Partnership</strong><span>Structured programme collaboration</span></div></a></div></div>
+        <div><div class="mega-col-label">Participation</div><div class="mega-links"><a href="partnerships.html#observer" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Observer Status</strong><span>Forum & dialogue participation</span></div></a><a href="forum.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Annual Global Forum</strong><span>Principal convening platform</span></div></a></div></div>
+        <div><div class="mega-col-label">Resources</div><div class="mega-links"><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Publications & Documents</strong><span>Official registry & instruments</span></div></a><a href="contact.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Contact the Secretariat</strong><span>Diplomatic correspondence</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item"><a href="forum.html">Forum</a></li>
+    <li class="nav-item"><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="partnerships.html" class="nav-cta-btn">Endorse &amp; Engage</a>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mob-section"><div class="mob-label">Institution</div><a href="about.html">About the Compact</a><a href="founder.html">The Founder</a><a href="doctrine.html">Doctrine of Divine Diplomacy</a><a href="governance.html">Governance Structure</a><a href="membership.html">Membership</a></div>
+  <div class="mob-section"><div class="mob-label">Initiatives</div><a href="initiatives.html#imppera">IMPPERA</a><a href="initiatives.html#ncti">NCTI</a><a href="initiatives.html#gsei">GSEI</a><a href="initiatives.html#ungfsaii">UNGFSAII</a><a href="initiatives.html#gspf">GSPF</a></div>
+  <div class="mob-section"><div class="mob-label">Engage</div><a href="partnerships.html">Partnerships & Endorsement</a><a href="forum.html">Annual Global Forum</a><a href="publications.html">Publications</a><a href="contact.html">Contact</a></div>
+  <div class="mob-engage"><a href="partnerships.html">Endorse &amp; Engage</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep">/</span><a href="about.html">Institution</a><span class="breadcrumb-sep">/</span><span>Governance</span></div>
+  <div class="page-eyebrow"><div class="page-eyebrow-line"></div><span class="page-eyebrow-text">Institutional Architecture</span></div>
+  <h1 class="page-title">Governance<br/><em>Structure</em></h1>
+  <p class="page-subtitle">The institutional architecture, leadership offices, coordination mechanisms, advisory structures, and operational principles of the Global Compact — all non-sovereign and non-binding in nature.</p>
+</div>
+
+<!-- ORG CHART -->
+<section class="org-chart">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Institutional Architecture</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Organizational Structure</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">The Global Compact operates through a layered governance architecture — from supreme constitutional leadership through to continental, regional, national, and chapter-level engagement. All structures are non-sovereign and non-binding.</p>
+
+  <div class="chart-wrap reveal reveal-delay-2">
+    <!-- Tier 1 -->
+    <div class="tier">
+      <div class="org-node gold-border">
+        <div class="org-node-badge">Supreme Leadership</div>
+        <div class="org-node-title">Founding Chair, President &amp; Global Convener</div>
+        <div class="org-node-sub">H.E. Tunde Atayeshe D. Owolabi (Reign I)</div>
+      </div>
+    </div>
+    <div class="tier-connector"><div class="connector-line"></div></div>
+
+    <!-- Tier 2: Deputy + Grand Chancellor -->
+    <div class="tier-multi">
+      <div class="tier-multi-inner cols-2">
+        <div class="org-node">
+          <div class="org-node-badge">Deputy President</div>
+          <div class="org-node-title">Global Chairperson</div>
+          <div class="org-node-sub">Deputy President & Deputy Global Convener</div>
+        </div>
+        <div class="org-node">
+          <div class="org-node-badge">Chief Diplomatic Officer</div>
+          <div class="org-node-title">Grand Chancellor</div>
+          <div class="org-node-sub">Chief Diplomatic & Strategic Officer</div>
+        </div>
+      </div>
+    </div>
+    <div class="tier-connector"><div class="connector-line"></div></div>
+
+    <!-- Tier 3: Exec -->
+    <div class="tier-multi">
+      <div class="tier-multi-inner cols-2">
+        <div class="org-node">
+          <div class="org-node-badge">Chief Executive</div>
+          <div class="org-node-title">Secretary-General</div>
+          <div class="org-node-sub">Chief Executive & Administrative Officer</div>
+        </div>
+        <div class="org-node">
+          <div class="org-node-badge">Chief Programmatic Officer</div>
+          <div class="org-node-title">Commissioner-General</div>
+          <div class="org-node-sub">Chief Programmatic & Operational Officer</div>
+        </div>
+      </div>
+    </div>
+    <div class="tier-connector"><div class="connector-line"></div></div>
+
+    <!-- Tier 4: Bodies -->
+    <div class="tier-multi">
+      <div class="tier-multi-inner cols-3">
+        <div class="org-node">
+          <div class="org-node-badge">Principal Forum</div>
+          <div class="org-node-title">Global General Assembly</div>
+          <div class="org-node-sub">Consultative & deliberative forum</div>
+        </div>
+        <div class="org-node" id="council">
+          <div class="org-node-badge">Executive Governance</div>
+          <div class="org-node-title">Global Council</div>
+          <div class="org-node-sub">Strategic coordination & oversight</div>
+        </div>
+        <div class="org-node" id="secretariat">
+          <div class="org-node-badge">Permanent Administration</div>
+          <div class="org-node-title">Global Secretariat</div>
+          <div class="org-node-sub">Records, comms & coordination</div>
+        </div>
+      </div>
+    </div>
+    <div class="tier-connector"><div class="connector-line"></div></div>
+
+    <!-- Tier 5: Advisory -->
+    <div class="tier-multi">
+      <div class="tier-multi-inner cols-3">
+        <div class="org-node">
+          <div class="org-node-badge">Expert Guidance</div>
+          <div class="org-node-title">Strategic Advisory Council</div>
+          <div class="org-node-sub">Diplomacy, governance & development expertise</div>
+        </div>
+        <div class="org-node">
+          <div class="org-node-badge">Institutional Integrity</div>
+          <div class="org-node-title">Ethics &amp; Integrity Commission</div>
+          <div class="org-node-sub">Ethics oversight & accountability</div>
+        </div>
+        <div class="org-node">
+          <div class="org-node-badge">Future Leadership</div>
+          <div class="org-node-title">Youth Leadership Council</div>
+          <div class="org-node-sub">Youth participation & intergenerational engagement</div>
+        </div>
+      </div>
+    </div>
+    <div class="tier-connector"><div class="connector-line"></div></div>
+
+    <!-- Tier 6: Field -->
+    <div class="tier-multi">
+      <div class="tier-multi-inner cols-4">
+        <div class="org-node">
+          <div class="org-node-badge">Sector Leadership</div>
+          <div class="org-node-title">High Commissioners</div>
+          <div class="org-node-sub">Strategic sectors & major initiatives</div>
+        </div>
+        <div class="org-node">
+          <div class="org-node-badge">Departmental</div>
+          <div class="org-node-title">Commissioners</div>
+          <div class="org-node-sub">Specialized departments & policy portfolios</div>
+        </div>
+        <div class="org-node">
+          <div class="org-node-badge">Continental</div>
+          <div class="org-node-title">Continental Chancellors</div>
+          <div class="org-node-sub">Principal continental representatives</div>
+        </div>
+        <div class="org-node">
+          <div class="org-node-badge">Regional</div>
+          <div class="org-node-title">Regional Chancellors</div>
+          <div class="org-node-sub">Geopolitical & regional coordination</div>
+        </div>
+      </div>
+    </div>
+    <div class="tier-connector"><div class="connector-line"></div></div>
+
+    <!-- Tier 7: Ground -->
+    <div class="tier-multi">
+      <div class="tier-multi-inner cols-3">
+        <div class="org-node">
+          <div class="org-node-badge">National</div>
+          <div class="org-node-title">National Chancellors</div>
+          <div class="org-node-sub">Principal representatives within sovereign states</div>
+        </div>
+        <div class="org-node">
+          <div class="org-node-badge">Sub-national</div>
+          <div class="org-node-title">State &amp; District Commissioners</div>
+          <div class="org-node-sub">State & district-level engagement</div>
+        </div>
+        <div class="org-node">
+          <div class="org-node-badge">Community</div>
+          <div class="org-node-title">Chapter Conveners &amp; Fellows</div>
+          <div class="org-node-sub">Local chapters & diplomatic fellows</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTIVE LEADERSHIP -->
+<section class="leadership">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Executive Leadership</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Principal Leadership Offices</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">The five principal executive offices providing strategic leadership, diplomatic stewardship, administrative coordination, and programmatic oversight of the Global Compact.</p>
+
+  <div class="leadership-grid">
+    <div class="leader-card reveal">
+      <div class="leader-card-top">
+        <div class="leader-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="leader-rank">Article XVI</div><div class="leader-title">Founding Chair, President &amp; Global Convener</div></div>
+      </div>
+      <div class="leader-card-body">
+        <p class="leader-desc">Supreme constitutional leadership office and principal custodial authority of the Global Compact. Guardian of the Charter and First Servant of Humanity.</p>
+        <div class="leader-responsibilities">
+          <div class="leader-resp">Safeguard the Charter and Founding Declaration</div>
+          <div class="leader-resp">Provide strategic leadership and global representation</div>
+          <div class="leader-resp">Convene official meetings and diplomatic engagements</div>
+          <div class="leader-resp">Oversee institutional continuity and long-term direction</div>
+        </div>
+      </div>
+    </div>
+    <div class="leader-card reveal reveal-delay-1">
+      <div class="leader-card-top">
+        <div class="leader-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div><div class="leader-rank">Article XIX</div><div class="leader-title">Global Chairperson</div></div>
+      </div>
+      <div class="leader-card-body">
+        <p class="leader-desc">Principal deputy leadership office. Assists in executive leadership, governance coordination, and institutional representation as authorized.</p>
+        <div class="leader-responsibilities">
+          <div class="leader-resp">Assist in executive leadership and governance coordination</div>
+          <div class="leader-resp">Support implementation of strategic priorities</div>
+          <div class="leader-resp">Preside over meetings and functions as delegated</div>
+          <div class="leader-resp">Support institutional coordination and continuity</div>
+        </div>
+      </div>
+    </div>
+    <div class="leader-card reveal reveal-delay-2">
+      <div class="leader-card-top">
+        <div class="leader-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div><div class="leader-rank">Article XX</div><div class="leader-title">Grand Chancellor</div></div>
+      </div>
+      <div class="leader-card-body">
+        <p class="leader-desc">Principal diplomatic and strategic office. Responsible for international engagement, strategic partnerships, and multilateral coordination.</p>
+        <div class="leader-responsibilities">
+          <div class="leader-resp">Diplomacy and international engagement</div>
+          <div class="leader-resp">Strategic partnerships and cooperation frameworks</div>
+          <div class="leader-resp">Multilateral dialogue and diplomatic coordination</div>
+          <div class="leader-resp">Strategic counsel to Compact leadership</div>
+        </div>
+      </div>
+    </div>
+    <div class="leader-card reveal reveal-delay-1">
+      <div class="leader-card-top">
+        <div class="leader-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <div><div class="leader-rank">Article XXI</div><div class="leader-title">Secretary-General</div></div>
+      </div>
+      <div class="leader-card-body">
+        <p class="leader-desc">Principal executive and administrative office. Responsible for the Global Secretariat, institutional coordination, and operational effectiveness.</p>
+        <div class="leader-responsibilities">
+          <div class="leader-resp">Administration of the Global Secretariat</div>
+          <div class="leader-resp">Institutional coordination and administration</div>
+          <div class="leader-resp">Supervision of programmes and communications</div>
+          <div class="leader-resp">Implementation support and organizational effectiveness</div>
+        </div>
+      </div>
+    </div>
+    <div class="leader-card reveal reveal-delay-2">
+      <div class="leader-card-top">
+        <div class="leader-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div><div class="leader-rank">Article XXII</div><div class="leader-title">Commissioner-General</div></div>
+      </div>
+      <div class="leader-card-body">
+        <p class="leader-desc">Principal authority for institutional programmes, initiatives, and operational structures. Oversees commissions, directorates, and delivery units.</p>
+        <div class="leader-responsibilities">
+          <div class="leader-resp">Programme coordination and implementation</div>
+          <div class="leader-resp">Supervision of commissions and directorates</div>
+          <div class="leader-resp">Institutional initiatives and programme delivery</div>
+          <div class="leader-resp">Operational systems and implementation frameworks</div>
+        </div>
+      </div>
+    </div>
+    <div class="leader-card reveal reveal-delay-3">
+      <div class="leader-card-top">
+        <div class="leader-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div><div class="leader-rank">Article XXXVIII</div><div class="leader-title">Diplomatic Fellows</div></div>
+      </div>
+      <div class="leader-card-body">
+        <p class="leader-desc">Accredited ambassadors of goodwill committed to diplomacy, peacebuilding, dialogue, education, advocacy, and responsible international cooperation.</p>
+        <div class="leader-responsibilities">
+          <div class="leader-resp">Represent the Compact's values and principles</div>
+          <div class="leader-resp">Advance peacebuilding and diplomatic dialogue</div>
+          <div class="leader-resp">Support education, advocacy and partnership</div>
+          <div class="leader-resp">Engage communities in constructive cooperation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTITUTIONAL BODIES -->
+<section class="bodies">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Institutional Bodies</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Principal Governance<br/>Institutions</h2>
+  <div class="bodies-grid">
+    <div class="body-card reveal">
+      <div class="body-label">Article XXIII</div>
+      <div class="body-title">Global General Assembly</div>
+      <p class="body-desc">The principal consultative, participatory, and deliberative forum of the Global Compact. Convenes an Annual Global Meeting or Annual General Session as its principal institutional platform.</p>
+      <div class="body-functions">
+        <div class="body-function">Provide a platform for strategic dialogue and review</div>
+        <div class="body-function">Consider institutional recommendations and priorities</div>
+        <div class="body-function">Strengthen cooperation and engagement among stakeholders</div>
+        <div class="body-function">Contribute to strategic planning and institutional development</div>
+      </div>
+    </div>
+    <div class="body-card reveal reveal-delay-1">
+      <div class="body-label">Article XXV</div>
+      <div class="body-title">Global Council</div>
+      <p class="body-desc">The principal executive governance and strategic coordination body of the Global Compact, supporting institutional governance, strategic implementation, and governance oversight.</p>
+      <div class="body-functions">
+        <div class="body-function">Support institutional governance and coordination</div>
+        <div class="body-function">Coordinate strategic implementation and review</div>
+        <div class="body-function">Provide governance oversight and executive coordination</div>
+        <div class="body-function">Strengthen review of institutional priorities</div>
+      </div>
+    </div>
+    <div class="body-card reveal reveal-delay-2">
+      <div class="body-label">Article XXVI</div>
+      <div class="body-title">Global Secretariat</div>
+      <p class="body-desc">The permanent administrative institution of the Global Compact, responsible for institutional administration, records management, communications, coordination, and implementation support.</p>
+      <div class="body-functions">
+        <div class="body-function">Institutional administration and records management</div>
+        <div class="body-function">Communications and operational coordination</div>
+        <div class="body-function">Implementation support and logistics</div>
+        <div class="body-function">Primary contact point for all institutional correspondence</div>
+      </div>
+    </div>
+    <div class="body-card reveal reveal-delay-1">
+      <div class="body-label">Article XXVII</div>
+      <div class="body-title">Strategic Advisory Council</div>
+      <p class="body-desc">Provides expert strategic guidance to the Global Compact across diplomacy, peacebuilding, governance, sustainable development, innovation, and international cooperation.</p>
+      <div class="body-functions">
+        <div class="body-function">Expert guidance on diplomacy and peacebuilding</div>
+        <div class="body-function">Strategic affairs and governance expertise</div>
+        <div class="body-function">Sustainable development and innovation counsel</div>
+        <div class="body-function">International cooperation advisory support</div>
+      </div>
+    </div>
+    <div class="body-card reveal reveal-delay-2">
+      <div class="body-label">Article XXVIII</div>
+      <div class="body-title">Ethics &amp; Integrity Commission</div>
+      <p class="body-desc">Upholds ethical governance and institutional integrity across all activities, supporting ethics oversight, accountability mechanisms, and standards of conduct.</p>
+      <div class="body-functions">
+        <div class="body-function">Ethics oversight and accountability review</div>
+        <div class="body-function">Transparency standards and institutional integrity</div>
+        <div class="body-function">Standards of conduct and compliance</div>
+        <div class="body-function">Institutional integrity assessment and review</div>
+      </div>
+    </div>
+    <div class="body-card reveal reveal-delay-3">
+      <div class="body-label">Article XXIX</div>
+      <div class="body-title">Youth Leadership Council</div>
+      <p class="body-desc">Strengthens youth participation in the Global Compact, supporting youth leadership, innovation, capacity building, diplomacy, peacebuilding, and intergenerational cooperation.</p>
+      <div class="body-functions">
+        <div class="body-function">Youth leadership and capacity development</div>
+        <div class="body-function">Innovation and entrepreneurship support</div>
+        <div class="body-function">Diplomacy and peacebuilding for young leaders</div>
+        <div class="body-function">Intergenerational cooperation and governance participation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THEMATIC WORKING GROUPS -->
+<section class="working-groups">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Implementation Bodies</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Thematic Working Groups</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">Sector-specific implementation bodies coordinating programme delivery, policy dialogue, and cooperative engagement across the Global Compact's strategic priority areas.</p>
+  <div class="wg-grid">
+    <div class="wg-card reveal"><div class="wg-num">WG — 01</div><div class="wg-title">Peace &amp; Security Working Group</div><p class="wg-desc">Coordinates peacebuilding, preventive diplomacy, conflict prevention, and responsible security governance programmes.</p></div>
+    <div class="wg-card reveal reveal-delay-1"><div class="wg-num">WG — 02</div><div class="wg-title">Human Security Working Group</div><p class="wg-desc">Focuses on humanitarian responsibility, resilience, community wellbeing, and human security systems strengthening.</p></div>
+    <div class="wg-card reveal reveal-delay-2"><div class="wg-num">WG — 03</div><div class="wg-title">Environmental Stewardship Working Group</div><p class="wg-desc">Advances climate resilience, environmental protection, marine conservation, and sustainable resource management.</p></div>
+    <div class="wg-card reveal"><div class="wg-num">WG — 04</div><div class="wg-title">Economic Cooperation Working Group</div><p class="wg-desc">Promotes economic diplomacy, shared prosperity, investment alignment, and sustainable development partnerships.</p></div>
+    <div class="wg-card reveal reveal-delay-1"><div class="wg-num">WG — 05</div><div class="wg-title">Digital Governance Working Group</div><p class="wg-desc">Advances responsible AI governance, digital inclusion, cybersecurity cooperation, and technology ethics frameworks.</p></div>
+    <div class="wg-card reveal reveal-delay-2"><div class="wg-num">WG — 06</div><div class="wg-title">Youth &amp; Future Generations Group</div><p class="wg-desc">Supports youth leadership, education, skills development, and intergenerational policy engagement programmes.</p></div>
+    <div class="wg-card reveal"><div class="wg-num">WG — 07</div><div class="wg-title">Strategic Stability &amp; Risk Reduction</div><p class="wg-desc">Coordinates strategic stability dialogue, nuclear risk reduction initiatives, and confidence-building engagement.</p></div>
+    <div class="wg-card reveal reveal-delay-1"><div class="wg-num">WG — 08</div><div class="wg-title">Intercultural &amp; Interfaith Cooperation</div><p class="wg-desc">Promotes cultural dialogue, faith-led international relations, and civilizational cooperation among diverse stakeholders.</p></div>
+    <div class="wg-card reveal reveal-delay-2"><div class="wg-num">WG — 09</div><div class="wg-title">Governance &amp; Institutional Integrity</div><p class="wg-desc">Advances ethical governance, accountability, transparency, and institutional capacity building across all programmes.</p></div>
+  </div>
+</section>
+
+<!-- GOVERNANCE PRINCIPLES -->
+<section class="gov-principles">
+  <div class="principles-layout">
+    <div>
+      <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Governance Principles</span></div>
+      <h2 class="section-heading reveal reveal-delay-1">How the Compact<br/>Governs Itself</h2>
+      <p class="section-body reveal reveal-delay-2">All governance decisions, institutional coordination, and operational activities of the Global Compact are guided by these core principles — ensuring ethical leadership, institutional transparency, and cooperative effectiveness.</p>
+      <div class="gov-note reveal reveal-delay-3">
+        <p>The Global Compact possesses no legislative, regulatory, judicial, enforcement, or coercive powers. It operates solely through voluntary cooperation, consensus-building, partnership, and good-faith engagement among all participating entities.</p>
+        <p>Nothing within the Governance Constitution shall be construed as creating governmental authority, sovereign powers, treaty obligations, legal jurisdiction, or binding authority over States, governments, institutions, organizations, communities, or individuals.</p>
+      </div>
+    </div>
+    <div class="principles-list reveal reveal-delay-2">
+      <div class="principle-row"><div class="principle-row-num">01</div><div class="principle-row-text"><strong>Ethical Leadership</strong><span>All governance guided by integrity, accountability, and service to humanity</span></div></div>
+      <div class="principle-row"><div class="principle-row-num">02</div><div class="principle-row-text"><strong>Accountability</strong><span>Transparent reporting, oversight mechanisms, and responsible stewardship</span></div></div>
+      <div class="principle-row"><div class="principle-row-num">03</div><div class="principle-row-text"><strong>Transparency</strong><span>Open communication, accessible documentation, and institutional clarity</span></div></div>
+      <div class="principle-row"><div class="principle-row-num">04</div><div class="principle-row-text"><strong>Cooperation</strong><span>Consensus-based decision-making and collaborative governance</span></div></div>
+      <div class="principle-row"><div class="principle-row-num">05</div><div class="principle-row-text"><strong>Subsidiarity</strong><span>Decisions taken at the most appropriate and effective level</span></div></div>
+      <div class="principle-row"><div class="principle-row-num">06</div><div class="principle-row-text"><strong>Strategic Effectiveness</strong><span>Results-oriented implementation aligned with institutional objectives</span></div></div>
+      <div class="principle-row"><div class="principle-row-num">07</div><div class="principle-row-text"><strong>Institutional Continuity</strong><span>Mechanisms ensuring stability, succession, and long-term mission</span></div></div>
+      <div class="principle-row"><div class="principle-row-num">08</div><div class="principle-row-text"><strong>Service to Humanity</strong><span>All authority and governance in service of peace and human dignity</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GEOGRAPHIC TIERS -->
+<section class="tiers">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Geographic Architecture</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Tiered Geographic<br/>Representation</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">The Global Compact's geographic architecture ensures representation and engagement at every level — from global to continental, regional, national, sub-national, and community.</p>
+  <div class="tiers-grid reveal reveal-delay-2">
+    <div class="tier-card">
+      <div class="tier-label">Tier I — Global</div>
+      <div class="tier-title">Supreme Leadership</div>
+      <div class="tier-roles">
+        <div class="tier-role">Founding Chair, President & Global Convener</div>
+        <div class="tier-role">Global Chairperson (Deputy)</div>
+        <div class="tier-role">Grand Chancellor</div>
+        <div class="tier-role">Secretary-General</div>
+        <div class="tier-role">Commissioner-General</div>
+      </div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-label">Tier II — Continental</div>
+      <div class="tier-title">Continental Chancellors</div>
+      <div class="tier-roles">
+        <div class="tier-role">Africa</div>
+        <div class="tier-role">Asia-Pacific</div>
+        <div class="tier-role">Europe</div>
+        <div class="tier-role">Americas</div>
+        <div class="tier-role">Middle East & North Africa</div>
+      </div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-label">Tier III — Regional</div>
+      <div class="tier-title">Regional Chancellors</div>
+      <div class="tier-roles">
+        <div class="tier-role">Coordinate within geopolitical regions</div>
+        <div class="tier-role">Facilitate regional partnerships</div>
+        <div class="tier-role">Support regional forum participation</div>
+        <div class="tier-role">Represent Compact in regional institutions</div>
+      </div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-label">Tier IV — National & Local</div>
+      <div class="tier-title">National to Chapter Level</div>
+      <div class="tier-roles">
+        <div class="tier-role">National Chancellors</div>
+        <div class="tier-role">State Commissioners</div>
+        <div class="tier-role">District Commissioners</div>
+        <div class="tier-role">Chapter Conveners</div>
+        <div class="tier-role">Diplomatic Fellows</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:48px;display:flex;gap:16px;flex-wrap:wrap;" class="reveal">
+    <a href="membership.html" class="btn-primary">Join as a Member</a>
+    <a href="contact.html" class="btn-ghost">Contact Secretariat</a>
+  </div>
+</section>
+
+<!-- MOTTO -->
+<div class="motto-banner reveal">
+  <h2>ONE HUMANITY &bull; ONE FUTURE &bull; ONE GLOBAL COMPACT</h2>
+  <p>Divine Diplomacy — The Constitutional Morality of Global Order</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><img src="logo.jpg" alt="Global Compact Seal" /><div class="footer-logo-name">Global Compact<br/>for Peace &amp; Human Security</div></div>
+      <p class="footer-desc">A voluntary, non-binding, multipolar and multi-stakeholder international cooperation framework advancing peace, human dignity, and responsible international cooperation.</p>
+      <div class="footer-contact">
+        <div>Email: <a href="mailto:globalcompactinitiative@gmail.com">globalcompactinitiative@gmail.com</a></div>
+        <div>Tel: <a href="tel:+2348067056348">+234 806 705 6348</a></div>
+        <div>Lagos &amp; Abuja, Nigeria</div>
+        <div style="margin-top:6px;color:var(--gold-dim);">Ref. Registry: GC/REG/2026</div>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About the Compact</a></li><li><a href="founder.html">The Founder</a></li><li><a href="doctrine.html">Divine Diplomacy</a></li><li><a href="governance.html">Governance</a></li><li><a href="membership.html">Membership</a></li></ul></div>
+    <div class="footer-col"><h4>Programmes</h4><ul><li><a href="initiatives.html#imppera">IMPPERA</a></li><li><a href="initiatives.html#ncti">Nuclear Civilization</a></li><li><a href="initiatives.html#gsei">Security Employment</a></li><li><a href="initiatives.html#ungfsaii">Food Security</a></li><li><a href="initiatives.html#gspf">Peace Stabilization</a></li></ul></div>
+    <div class="footer-col"><h4>Engage</h4><ul><li><a href="partnerships.html">Endorsement</a></li><li><a href="partnerships.html#strategic">Strategic Partnership</a></li><li><a href="forum.html">Annual Global Forum</a></li><li><a href="publications.html">Document Registry</a></li><li><a href="contact.html">Contact Secretariat</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright &copy; 2026 Global Compact for Peace, Human Security and Responsible International Cooperation. All Rights Reserved.</p>
+    <div class="footer-bottom-right">One Humanity &middot; One Future &middot; One Global Compact</div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('mobile-drawer');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); drawer.classList.remove('open'); document.body.style.overflow = '';
+  }));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
