@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Initiatives & Policy — Global Compact for Peace, Human Security and Responsible International Cooperation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #08111F; --navy-mid: #0D1B2E; --navy-light: #152235;
+      --gold: #C9A84C; --gold-light: #E2C87A; --gold-dim: #8A6E30;
+      --cream: #F4EFE4; --white: #FFFFFF; --muted: #8A9BB0;
+      --border: rgba(201,168,76,0.18);
+      --font-display: 'Cinzel', serif; --font-body: 'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: var(--font-body); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 clamp(20px,5vw,80px); height: 72px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,17,31,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: contain; }
+    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: clamp(9px,1.1vw,11px); letter-spacing: 0.1em; color: var(--cream); text-transform: uppercase; font-weight: 600; }
+    .nav-logo-text span:last-child { font-size: 9px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; list-style: none; height: 72px; }
+    .nav-item { position: relative; height: 100%; display: flex; align-items: center; }
+    .nav-item > a, .nav-trigger { font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); text-decoration: none; font-weight: 500; padding: 0 14px; height: 100%; display: flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-family: var(--font-body); transition: color 0.2s; white-space: nowrap; }
+    .nav-item > a:hover, .nav-trigger:hover, .nav-item:hover > a, .nav-item:hover > .nav-trigger { color: var(--gold); }
+    .nav-trigger svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.25s; }
+    .nav-item:hover .nav-trigger svg { transform: rotate(180deg); }
+    .mega-panel { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(8,17,31,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px clamp(20px,5vw,80px) 40px; z-index: 199; animation: megaFade 0.22s ease forwards; }
+    .nav-item:hover .mega-panel { display: block; }
+    @keyframes megaFade { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+    .mega-inner { display: grid; gap: 36px; }
+    .mega-inner.cols-4 { grid-template-columns: repeat(4,1fr); }
+    .mega-inner.cols-3 { grid-template-columns: repeat(3,1fr); }
+    .mega-inner.cols-5 { grid-template-columns: repeat(5,1fr); }
+    .mega-col-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .mega-links { display: flex; flex-direction: column; gap: 1px; }
+    .mega-link { display: flex; align-items: flex-start; gap: 11px; padding: 8px 10px; border-radius: 3px; text-decoration: none; transition: background 0.2s; }
+    .mega-link:hover { background: rgba(201,168,76,0.06); }
+    .mega-link-dot { width: 5px; height: 5px; border: 1px solid var(--gold-dim); border-radius: 50%; flex-shrink: 0; margin-top: 5px; transition: background 0.2s; }
+    .mega-link:hover .mega-link-dot { background: var(--gold); border-color: var(--gold); }
+    .mega-link-text strong { display: block; font-size: 12px; color: var(--cream); font-weight: 500; margin-bottom: 2px; }
+    .mega-link-text span { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .nav-cta-btn { padding: 9px 22px; border: 1px solid var(--gold-dim); color: var(--gold); border-radius: 2px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 10px; transition: background 0.25s, color 0.25s; }
+    .nav-cta-btn:hover { background: var(--gold); color: var(--navy); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-burger span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: all 0.3s ease; }
+    .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+    .mobile-drawer { display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0; background: rgba(8,17,31,0.99); backdrop-filter: blur(20px); z-index: 198; overflow-y: auto; padding: 0 clamp(20px,5vw,48px) 48px; }
+    .mobile-drawer.open { display: block; }
+    .mob-section { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 18px 0 4px; }
+    .mob-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; padding: 0 4px; }
+    .mob-section a { display: block; font-size: 13px; color: var(--muted); text-decoration: none; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.03); transition: color 0.2s; }
+    .mob-section a:hover { color: var(--cream); }
+    .mob-section a:last-child { border-bottom: none; }
+    .mob-engage { padding: 28px 0; }
+    .mob-engage a { display: inline-flex; padding: 12px 28px; border: 1px solid var(--gold-dim); color: var(--gold); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 2px; }
+    @media(max-width:1100px){ .nav-links,.nav-cta-btn{display:none} .nav-burger{display:flex} }
+
+    /* ── PAGE HERO ── */
+    .page-hero { padding: 140px clamp(20px,6vw,100px) 80px; background: var(--navy-mid); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .page-hero::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 100% at 80% 50%,rgba(201,168,76,0.04) 0%,transparent 70%); pointer-events:none; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb-sep { color: var(--gold-dim); }
+    .page-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .page-eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+    .page-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .page-title { font-family: var(--font-display); font-size: clamp(32px,5vw,64px); font-weight: 600; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .page-title em { font-style: normal; color: var(--gold); }
+    .page-subtitle { font-size: clamp(15px,1.6vw,18px); color: var(--muted); line-height: 1.7; max-width: 620px; margin-bottom: 36px; }
+
+    /* Initiative quick nav */
+    .init-quick-nav { display: flex; flex-wrap: wrap; gap: 10px; }
+    .init-pill { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid var(--border); border-radius: 2px; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+    .init-pill:hover { border-color: var(--gold-dim); background: rgba(201,168,76,0.04); }
+    .init-pill-num { font-family: var(--font-display); font-size: 9px; color: var(--gold-dim); letter-spacing: 0.1em; }
+    .init-pill-name { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: clamp(56px,8vw,100px) clamp(20px,6vw,100px); }
+    .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .section-eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+    .section-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .section-heading { font-family: var(--font-display); font-size: clamp(24px,3.5vw,44px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+    .section-body { font-size: clamp(14px,1.3vw,16px); line-height: 1.9; color: #7D93AA; }
+
+    /* ── OVERVIEW STRIP ── */
+    .overview { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .overview-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+    .overview-card { background: var(--navy); padding: 24px 20px; text-align: center; cursor: pointer; transition: background 0.25s; text-decoration: none; display: block; }
+    .overview-card:hover { background: var(--navy-light); }
+    .overview-num { font-family: var(--font-display); font-size: 28px; color: var(--gold); font-weight: 600; opacity: 0.4; margin-bottom: 8px; }
+    .overview-abbr { font-size: 11px; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
+    .overview-name { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+    /* ── INITIATIVE DEEP SECTIONS ── */
+    .initiative-section { border-bottom: 1px solid var(--border); }
+    .initiative-section:nth-child(odd) { background: var(--navy); }
+    .initiative-section:nth-child(even) { background: var(--navy-mid); }
+
+    .init-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,100px); align-items: start; }
+    .init-layout.reverse { direction: rtl; }
+    .init-layout.reverse > * { direction: ltr; }
+
+    .init-header { margin-bottom: 32px; }
+    .init-code { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .init-badge { padding: 6px 14px; border: 1px solid var(--gold-dim); border-radius: 2px; font-family: var(--font-display); font-size: 11px; color: var(--gold); letter-spacing: 0.1em; }
+    .init-domain { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .init-title-large { font-family: var(--font-display); font-size: clamp(20px,2.8vw,34px); font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 8px; letter-spacing: 0.01em; }
+    .init-subtitle { font-size: 13px; color: var(--gold-dim); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 24px; }
+    .init-desc-full { font-size: clamp(14px,1.3vw,16px); line-height: 1.9; color: #7D93AA; margin-bottom: 20px; }
+
+    .init-objectives { margin-top: 28px; }
+    .init-obj-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .init-obj-list { display: flex; flex-direction: column; gap: 10px; }
+    .init-obj-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 3px; font-size: 13px; color: var(--muted); line-height: 1.6; transition: border-color 0.2s, color 0.2s; }
+    .init-obj-item:hover { border-color: var(--gold-dim); color: var(--cream); }
+    .init-obj-item::before { content:''; width:5px; height:5px; border:1px solid var(--gold); border-radius:50%; flex-shrink:0; margin-top:5px; }
+
+    /* Visual card */
+    .init-visual-card { background: var(--navy-light); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .init-visual-top { padding: 32px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; min-height: 200px; position: relative; }
+    .init-visual-top::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(201,168,76,0.06) 0%,transparent 70%); }
+    .init-big-icon { width: 80px; height: 80px; border: 1px solid var(--gold-dim); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+    .init-big-icon svg { width: 40px; height: 40px; stroke: var(--gold); fill: none; stroke-width: 1.2; }
+    .init-visual-body { padding: 28px; }
+    .init-meta-row { display: flex; flex-direction: column; gap: 14px; }
+    .init-meta { display: flex; flex-direction: column; gap: 3px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .init-meta:last-child { border-bottom: none; padding-bottom: 0; }
+    .init-meta-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); }
+    .init-meta-value { font-size: 13px; color: var(--cream); font-weight: 500; line-height: 1.5; }
+    .init-meta-value.muted { color: var(--muted); font-weight: 400; }
+
+    /* ── POLICY INSTRUMENTS ── */
+    .policy { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .policy-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
+    .policy-card { border: 1px solid var(--border); border-radius: 3px; padding: 28px; background: var(--navy-light); transition: border-color 0.3s, transform 0.3s; }
+    .policy-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .policy-card-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .policy-card h4 { font-family: var(--font-display); font-size: clamp(13px,1.3vw,15px); color: var(--cream); margin-bottom: 10px; letter-spacing: 0.02em; line-height: 1.3; }
+    .policy-card p { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+    /* ── FOCUS AREAS ── */
+    .focus { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .focus-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 48px; }
+    .focus-item { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 3px; font-size: 13px; color: var(--muted); transition: border-color 0.25s, color 0.25s; }
+    .focus-item:hover { border-color: var(--gold-dim); color: var(--cream); }
+    .focus-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; opacity: 0.6; }
+
+    /* ── CTA ── */
+    .initiatives-cta { background: var(--navy); }
+    .cta-strip { background: var(--navy-light); border: 1px solid var(--border); border-radius: 4px; padding: clamp(32px,4vw,56px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+    .cta-strip h3 { font-family: var(--font-display); font-size: clamp(18px,2.5vw,28px); color: var(--white); margin-bottom: 10px; }
+    .cta-strip p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .cta-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+    /* ── MOTTO ── */
+    .motto-banner { background: var(--gold); padding: clamp(32px,4vw,56px) clamp(20px,6vw,100px); text-align: center; }
+    .motto-banner h2 { font-family: var(--font-display); font-size: clamp(15px,2.6vw,32px); color: var(--navy); letter-spacing: 0.12em; font-weight: 600; }
+    .motto-banner p { font-size: 11px; letter-spacing: 0.2em; color: var(--navy); opacity: 0.65; margin-top: 8px; text-transform: uppercase; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-mid); border-top: 1px solid var(--border); padding: clamp(48px,6vw,80px) clamp(20px,6vw,100px) 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(32px,4vw,60px); margin-bottom: 48px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { width: 38px; height: 38px; border-radius: 50%; object-fit: contain; }
+    .footer-logo-name { font-family: var(--font-display); font-size: 10px; color: var(--cream); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5; }
+    .footer-desc { font-size: 12px; line-height: 1.75; color: var(--muted); max-width: 280px; margin-bottom: 20px; }
+    .footer-contact { font-size: 11px; color: var(--muted); line-height: 1.9; }
+    .footer-contact a { color: var(--gold-dim); text-decoration: none; }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-col h4 { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 11px; color: var(--muted); }
+    .footer-bottom-right { font-size: 10px; color: var(--gold-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+
+    /* Buttons */
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 30px; background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 12px 30px; border: 1px solid rgba(201,168,76,0.35); color: var(--cream); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: border-color 0.25s, color 0.25s, transform 0.2s; white-space: nowrap; }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* Responsive */
+    @media(max-width:1024px) {
+      .overview-grid { grid-template-columns: repeat(3,1fr); }
+      .init-layout, .init-layout.reverse { grid-template-columns: 1fr; direction: ltr; }
+      .policy-grid { grid-template-columns: repeat(2,1fr); }
+      .focus-grid { grid-template-columns: repeat(2,1fr); }
+      .cta-strip { grid-template-columns: 1fr; }
+      .cta-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:640px) {
+      .overview-grid { grid-template-columns: repeat(2,1fr); }
+      .policy-grid { grid-template-columns: 1fr; }
+      .focus-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Global Compact Seal" />
+    <div class="nav-logo-text"><span>Global Compact</span><span>Peace · Human Security · Cooperation</span></div>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">Institution <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-4">
+        <div><div class="mega-col-label">About</div><div class="mega-links"><a href="about.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>About the Compact</strong><span>History, identity & legal status</span></div></a><a href="about.html#declaration" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Founding Declaration</strong><span>Foundational statement of purpose</span></div></a><a href="founder.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>The Founder</strong><span>H.E. Tunde Atayeshe D. Owolabi</span></div></a></div></div>
+        <div><div class="mega-col-label">Framework</div><div class="mega-links"><a href="doctrine.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Doctrine of Divine Diplomacy</strong><span>Constitutional morality of global order</span></div></a><a href="about.html#charter" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Charter of Principles</strong><span>Foundational values & ethical framework</span></div></a><a href="about.html#vision" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Vision & Mission</strong><span>Strategic direction & objectives</span></div></a></div></div>
+        <div><div class="mega-col-label">Governance</div><div class="mega-links"><a href="governance.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Governance Structure</strong><span>Leadership offices & bodies</span></div></a><a href="governance.html#secretariat" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Secretariat</strong><span>Administration & coordination</span></div></a><a href="governance.html#council" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Council</strong><span>Advisory & thematic guidance</span></div></a></div></div>
+        <div><div class="mega-col-label">Membership</div><div class="mega-links"><a href="membership.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Membership Framework</strong><span>Categories, rights & responsibilities</span></div></a><a href="membership.html#join" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>How to Join</strong><span>Eligibility & process</span></div></a><a href="membership.html#fellows" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Diplomatic Fellows</strong><span>Ambassadors of goodwill</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Initiatives <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-5">
+        <div><div class="mega-col-label">Environment</div><div class="mega-links"><a href="initiatives.html#imppera" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>IMPPERA</strong><span>Marine plastic pollution prevention</span></div></a></div></div>
+        <div><div class="mega-col-label">Security</div><div class="mega-links"><a href="initiatives.html#ncti" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>NCTI</strong><span>Nuclear civilization transition</span></div></a><a href="initiatives.html#gsei" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSEI</strong><span>Global security employment</span></div></a></div></div>
+        <div><div class="mega-col-label">Development</div><div class="mega-links"><a href="initiatives.html#ungfsaii" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>UNGFSAII</strong><span>Food security & agricultural investment</span></div></a></div></div>
+        <div><div class="mega-col-label">Peace</div><div class="mega-links"><a href="initiatives.html#gspf" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSPF</strong><span>Global security & peace stabilization</span></div></a></div></div>
+        <div><div class="mega-col-label">Overview</div><div class="mega-links"><a href="initiatives.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>All Initiatives</strong><span>Full policy portfolio</span></div></a><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Policy Documents</strong><span>Official registry</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Engage <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-3">
+        <div><div class="mega-col-label">Partnership</div><div class="mega-links"><a href="partnerships.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Partnerships & Endorsement</strong><span>All engagement modalities</span></div></a><a href="partnerships.html#endorse" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Moral Endorsement</strong><span>Voluntary expression of alignment</span></div></a><a href="partnerships.html#strategic" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Strategic Partnership</strong><span>Structured programme collaboration</span></div></a></div></div>
+        <div><div class="mega-col-label">Participation</div><div class="mega-links"><a href="partnerships.html#observer" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Observer Status</strong><span>Forum & dialogue participation</span></div></a><a href="forum.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Annual Global Forum</strong><span>Principal convening platform</span></div></a></div></div>
+        <div><div class="mega-col-label">Resources</div><div class="mega-links"><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Publications & Documents</strong><span>Official registry & instruments</span></div></a><a href="contact.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Contact the Secretariat</strong><span>Diplomatic correspondence</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item"><a href="forum.html">Forum</a></li>
+    <li class="nav-item"><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="partnerships.html" class="nav-cta-btn">Endorse &amp; Engage</a>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mob-section"><div class="mob-label">Institution</div><a href="about.html">About the Compact</a><a href="founder.html">The Founder</a><a href="doctrine.html">Doctrine of Divine Diplomacy</a><a href="governance.html">Governance</a><a href="membership.html">Membership</a></div>
+  <div class="mob-section"><div class="mob-label">Initiatives</div><a href="#imppera">IMPPERA</a><a href="#ncti">NCTI</a><a href="#gsei">GSEI</a><a href="#ungfsaii">UNGFSAII</a><a href="#gspf">GSPF</a></div>
+  <div class="mob-section"><div class="mob-label">Engage</div><a href="partnerships.html">Partnerships & Endorsement</a><a href="forum.html">Annual Global Forum</a><a href="publications.html">Publications</a><a href="contact.html">Contact</a></div>
+  <div class="mob-engage"><a href="partnerships.html">Endorse &amp; Engage</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep">/</span><span>Initiatives & Policy</span></div>
+  <div class="page-eyebrow"><div class="page-eyebrow-line"></div><span class="page-eyebrow-text">Flagship Initiatives</span></div>
+  <h1 class="page-title">Core International<br/><em>Policy Domains</em></h1>
+  <p class="page-subtitle">Five strategic programmes addressing humanity's most pressing global challenges through structured international cooperation, voluntary engagement, and shared responsibility.</p>
+  <div class="init-quick-nav">
+    <a href="#imppera" class="init-pill"><span class="init-pill-num">01</span><span class="init-pill-name">IMPPERA</span></a>
+    <a href="#ncti" class="init-pill"><span class="init-pill-num">02</span><span class="init-pill-name">NCTI</span></a>
+    <a href="#gsei" class="init-pill"><span class="init-pill-num">03</span><span class="init-pill-name">GSEI</span></a>
+    <a href="#ungfsaii" class="init-pill"><span class="init-pill-num">04</span><span class="init-pill-name">UNGFSAII</span></a>
+    <a href="#gspf" class="init-pill"><span class="init-pill-num">05</span><span class="init-pill-name">GSPF</span></a>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section class="overview">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">At a Glance</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Five Flagship Initiatives</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">Each initiative represents a structured policy framework — open for endorsement, technical cooperation, strategic partnership, and engagement by eligible stakeholders worldwide.</p>
+  <div class="overview-grid reveal reveal-delay-2">
+    <a href="#imppera" class="overview-card"><div class="overview-num">01</div><div class="overview-abbr">IMPPERA</div><div class="overview-name">Marine Plastic Pollution Prevention</div></a>
+    <a href="#ncti" class="overview-card"><div class="overview-num">02</div><div class="overview-abbr">NCTI</div><div class="overview-name">Nuclear Civilization Transition</div></a>
+    <a href="#gsei" class="overview-card"><div class="overview-num">03</div><div class="overview-abbr">GSEI</div><div class="overview-name">Global Security Employment</div></a>
+    <a href="#ungfsaii" class="overview-card"><div class="overview-num">04</div><div class="overview-abbr">UNGFSAII</div><div class="overview-name">Food Security & Agricultural Investment</div></a>
+    <a href="#gspf" class="overview-card"><div class="overview-num">05</div><div class="overview-abbr">GSPF</div><div class="overview-name">Peace Stabilization Framework</div></a>
+  </div>
+</section>
+
+<!-- INITIATIVE 1: IMPPERA -->
+<section class="initiative-section" id="imppera">
+  <div class="init-layout">
+    <div>
+      <div class="init-header">
+        <div class="init-code">
+          <span class="init-badge">IMPPERA</span>
+          <span class="init-domain">Environmental Affairs & Climate Policy</span>
+        </div>
+        <div class="init-title-large">International Marine Plastic Pollution Prevention, Enforcement &amp; Environmental Restoration Framework</div>
+        <div class="init-subtitle">Environmental Protection · Marine Conservation · Sustainable Development</div>
+      </div>
+      <p class="init-desc-full">An international environmental policy proposal advocating strengthened cooperation, environmental enforcement mechanisms, marine pollution prevention measures, ecological restoration initiatives, and sustainable environmental governance to address the global challenge of marine plastic pollution.</p>
+      <p class="init-desc-full">IMPPERA recognizes that marine plastic pollution represents one of the most urgent environmental crises of our time — threatening ocean ecosystems, marine biodiversity, food security, and human health worldwide. It calls for coordinated international action grounded in shared responsibility and sustainable governance.</p>
+      <div class="init-objectives">
+        <div class="init-obj-label">Policy Objectives</div>
+        <div class="init-obj-list">
+          <div class="init-obj-item">Strengthened international cooperation on marine pollution prevention</div>
+          <div class="init-obj-item">Development and enforcement of environmental protection mechanisms</div>
+          <div class="init-obj-item">Ecological restoration initiatives for degraded marine ecosystems</div>
+          <div class="init-obj-item">Sustainable environmental governance frameworks for ocean stewardship</div>
+          <div class="init-obj-item">International research and knowledge-sharing on marine conservation</div>
+          <div class="init-obj-item">Community and stakeholder engagement in environmental protection</div>
+        </div>
+      </div>
+    </div>
+    <div class="init-visual-card reveal reveal-delay-1">
+      <div class="init-visual-top">
+        <div class="init-big-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M8 12a20 20 0 0 0 4-8 20 20 0 0 1 4 8"/></svg>
+        </div>
+      </div>
+      <div class="init-visual-body">
+        <div class="init-meta-row">
+          <div class="init-meta"><div class="init-meta-label">Initiative Code</div><div class="init-meta-value">IMPPERA</div></div>
+          <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Environmental Affairs & Climate Policy</div></div>
+          <div class="init-meta"><div class="init-meta-label">Focus Area</div><div class="init-meta-value">Marine Conservation & Sustainable Development</div></div>
+          <div class="init-meta"><div class="init-meta-label">Nature</div><div class="init-meta-value muted">Non-binding international policy proposal</div></div>
+          <div class="init-meta"><div class="init-meta-label">Engagement</div><div class="init-meta-value muted">Open to governments, institutions & organizations</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INITIATIVE 2: NCTI -->
+<section class="initiative-section" id="ncti">
+  <div class="init-layout reverse">
+    <div>
+      <div class="init-header">
+        <div class="init-code">
+          <span class="init-badge">NCTI</span>
+          <span class="init-domain">Peace, Strategic Stability & Global Cooperation</span>
+        </div>
+        <div class="init-title-large">Nuclear Civilization Transition Initiative</div>
+        <div class="init-subtitle">From Deterrence to Cooperation · From Fear to Future</div>
+      </div>
+      <p class="init-desc-full">A strategic policy initiative encouraging progressive international dialogue on nuclear risk reduction, strategic stability, peaceful coexistence, confidence-building measures, responsible security governance, and the long-term transition from doctrines of mutual deterrence toward frameworks of cooperation, shared security, human survival, and sustainable global peace.</p>
+      <p class="init-desc-full">NCTI holds that human civilization should progressively reduce its dependence upon doctrines rooted in existential fear and mutual destruction, and advance toward a cooperative model grounded in trust, shared security, and responsible stewardship of global peace.</p>
+      <div class="init-objectives">
+        <div class="init-obj-label">Policy Objectives</div>
+        <div class="init-obj-list">
+          <div class="init-obj-item">Progressive international dialogue on nuclear risk reduction</div>
+          <div class="init-obj-item">Confidence-building measures among nuclear and non-nuclear states</div>
+          <div class="init-obj-item">Strategic stability frameworks grounded in cooperation not deterrence</div>
+          <div class="init-obj-item">Responsible security governance and arms-control cooperation</div>
+          <div class="init-obj-item">Long-term transition toward frameworks of shared security</div>
+          <div class="init-obj-item">Support for international disarmament dialogue and trust-building</div>
+        </div>
+      </div>
+    </div>
+    <div class="init-visual-card reveal reveal-delay-1">
+      <div class="init-visual-top">
+        <div class="init-big-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/><circle cx="12" cy="12" r="8" fill="none" stroke-dasharray="3 3"/></svg>
+        </div>
+      </div>
+      <div class="init-visual-body">
+        <div class="init-meta-row">
+          <div class="init-meta"><div class="init-meta-label">Initiative Code</div><div class="init-meta-value">NCTI</div></div>
+          <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Strategic Stability & Global Cooperation</div></div>
+          <div class="init-meta"><div class="init-meta-label">Tagline</div><div class="init-meta-value">From Deterrence to Cooperation, From Fear to Future</div></div>
+          <div class="init-meta"><div class="init-meta-label">Nature</div><div class="init-meta-value muted">Strategic policy initiative — non-binding</div></div>
+          <div class="init-meta"><div class="init-meta-label">Engagement</div><div class="init-meta-value muted">States, security institutions & international organizations</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INITIATIVE 3: GSEI -->
+<section class="initiative-section" id="gsei">
+  <div class="init-layout">
+    <div>
+      <div class="init-header">
+        <div class="init-code">
+          <span class="init-badge">GSEI</span>
+          <span class="init-domain">Peace, Security & Human Development</span>
+        </div>
+        <div class="init-title-large">Global Security Employment Initiative</div>
+        <div class="init-subtitle">Public Safety · Employment Generation · Human Security</div>
+      </div>
+      <p class="init-desc-full">A policy recommendation encouraging governments, regional organizations, and international institutions to explore accountable, community-oriented security-sector development as a means of strengthening public safety, generating employment opportunities, promoting social stability, and advancing human development.</p>
+      <p class="init-desc-full">GSEI recognizes the intersection between security and human development — that communities which are safer, more employed, and more stable are also more peaceful. It promotes security-sector growth as a sustainable engine for employment and social cohesion.</p>
+      <div class="init-objectives">
+        <div class="init-obj-label">Policy Objectives</div>
+        <div class="init-obj-list">
+          <div class="init-obj-item">Community-oriented security-sector development frameworks</div>
+          <div class="init-obj-item">Employment generation through accountable security institutions</div>
+          <div class="init-obj-item">Strengthening public safety and community resilience</div>
+          <div class="init-obj-item">Promoting social stability through human security investment</div>
+          <div class="init-obj-item">Advancing human development alongside security governance</div>
+          <div class="init-obj-item">Regional and international cooperation on security-development nexus</div>
+        </div>
+      </div>
+    </div>
+    <div class="init-visual-card reveal reveal-delay-1">
+      <div class="init-visual-top">
+        <div class="init-big-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+      </div>
+      <div class="init-visual-body">
+        <div class="init-meta-row">
+          <div class="init-meta"><div class="init-meta-label">Initiative Code</div><div class="init-meta-value">GSEI</div></div>
+          <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Peace, Security & Human Development</div></div>
+          <div class="init-meta"><div class="init-meta-label">Focus Area</div><div class="init-meta-value">Public Safety, Employment & Human Security</div></div>
+          <div class="init-meta"><div class="init-meta-label">Nature</div><div class="init-meta-value muted">Policy recommendation — non-binding</div></div>
+          <div class="init-meta"><div class="init-meta-label">Engagement</div><div class="init-meta-value muted">Governments, regional organizations & institutions</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INITIATIVE 4: UNGFSAII -->
+<section class="initiative-section" id="ungfsaii">
+  <div class="init-layout reverse">
+    <div>
+      <div class="init-header">
+        <div class="init-code">
+          <span class="init-badge">UNGFSAII</span>
+          <span class="init-domain">Food Security, Agriculture & Sustainable Development</span>
+        </div>
+        <div class="init-title-large">United Nations Global Food Security &amp; Agricultural Investment Initiative</div>
+        <div class="init-subtitle">Food Security · Agricultural Development · Economic Resilience</div>
+      </div>
+      <p class="init-desc-full">A cooperative international policy proposal designed to strengthen global food security, agricultural investment, rural transformation, climate-resilient farming systems, and sustainable economic development. The Initiative encourages enhanced national and international collaboration to promote food sovereignty, agricultural innovation, employment creation, and environmental stewardship.</p>
+      <p class="init-desc-full">UNGFSAII recognizes resilient food systems as essential foundations for peace, human security, and long-term global stability — affirming that hunger and food insecurity are not only humanitarian crises but also drivers of conflict, displacement, and social fragmentation.</p>
+      <div class="init-objectives">
+        <div class="init-obj-label">Policy Objectives</div>
+        <div class="init-obj-list">
+          <div class="init-obj-item">Strengthening global food security through international cooperation</div>
+          <div class="init-obj-item">Agricultural investment, innovation and rural transformation</div>
+          <div class="init-obj-item">Climate-resilient farming systems and sustainable practices</div>
+          <div class="init-obj-item">Food sovereignty and agricultural self-sufficiency</div>
+          <div class="init-obj-item">Employment creation through agricultural development</div>
+          <div class="init-obj-item">Environmental stewardship in food production systems</div>
+        </div>
+      </div>
+    </div>
+    <div class="init-visual-card reveal reveal-delay-1">
+      <div class="init-visual-top">
+        <div class="init-big-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/><path d="M12 2v5M7 7l5-5 5 5"/></svg>
+        </div>
+      </div>
+      <div class="init-visual-body">
+        <div class="init-meta-row">
+          <div class="init-meta"><div class="init-meta-label">Initiative Code</div><div class="init-meta-value">UNGFSAII</div></div>
+          <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Food Security, Agriculture & Sustainable Development</div></div>
+          <div class="init-meta"><div class="init-meta-label">Focus Area</div><div class="init-meta-value">Food Security, Agricultural Development & Economic Resilience</div></div>
+          <div class="init-meta"><div class="init-meta-label">Nature</div><div class="init-meta-value muted">Cooperative international policy proposal</div></div>
+          <div class="init-meta"><div class="init-meta-label">Engagement</div><div class="init-meta-value muted">Governments, UN system, development banks & NGOs</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INITIATIVE 5: GSPF -->
+<section class="initiative-section" id="gspf">
+  <div class="init-layout">
+    <div>
+      <div class="init-header">
+        <div class="init-code">
+          <span class="init-badge">GSPF</span>
+          <span class="init-domain">Peacebuilding & Responsible Security Governance</span>
+        </div>
+        <div class="init-title-large">Global Security &amp; Peace Stabilization Framework</div>
+        <div class="init-subtitle">Peacebuilding · Conflict Prevention · Responsible Security Governance</div>
+      </div>
+      <p class="init-desc-full">A comprehensive peacebuilding and conflict prevention framework promoting structured pathways toward sustainable international peace, responsible security governance, and constructive engagement among governments, regional organizations, and international institutions.</p>
+      <p class="init-desc-full">GSPF recognizes that sustainable peace requires more than the absence of armed conflict — it demands accountable governance, inclusive political processes, community resilience, and sustained international cooperation. It provides policy guidance for conflict prevention, early warning, mediation, and post-conflict stabilization.</p>
+      <div class="init-objectives">
+        <div class="init-obj-label">Policy Objectives</div>
+        <div class="init-obj-list">
+          <div class="init-obj-item">Peacebuilding and sustainable conflict prevention frameworks</div>
+          <div class="init-obj-item">Responsible security governance and institutional accountability</div>
+          <div class="init-obj-item">Early warning systems and preventive diplomacy mechanisms</div>
+          <div class="init-obj-item">Mediation, dialogue, and conflict resolution support</div>
+          <div class="init-obj-item">Post-conflict stabilization and community resilience</div>
+          <div class="init-obj-item">International cooperation on peace and security challenges</div>
+        </div>
+      </div>
+    </div>
+    <div class="init-visual-card reveal reveal-delay-1">
+      <div class="init-visual-top">
+        <div class="init-big-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 0 0 1.946-.806 3.42 3.42 0 0 1 4.438 0 3.42 3.42 0 0 0 1.946.806 3.42 3.42 0 0 1 3.138 3.138 3.42 3.42 0 0 0 .806 1.946 3.42 3.42 0 0 1 0 4.438 3.42 3.42 0 0 0-.806 1.946 3.42 3.42 0 0 1-3.138 3.138 3.42 3.42 0 0 0-1.946.806 3.42 3.42 0 0 1-4.438 0 3.42 3.42 0 0 0-1.946-.806 3.42 3.42 0 0 1-3.138-3.138 3.42 3.42 0 0 0-.806-1.946 3.42 3.42 0 0 1 0-4.438 3.42 3.42 0 0 0 .806-1.946 3.42 3.42 0 0 1 3.138-3.138z"/></svg>
+        </div>
+      </div>
+      <div class="init-visual-body">
+        <div class="init-meta-row">
+          <div class="init-meta"><div class="init-meta-label">Initiative Code</div><div class="init-meta-value">GSPF</div></div>
+          <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Peacebuilding & Responsible Security Governance</div></div>
+          <div class="init-meta"><div class="init-meta-label">Focus Area</div><div class="init-meta-value">Conflict Prevention & Peace Stabilization</div></div>
+          <div class="init-meta"><div class="init-meta-label">Nature</div><div class="init-meta-value muted">Policy framework — non-binding</div></div>
+          <div class="init-meta"><div class="init-meta-label">Engagement</div><div class="init-meta-value muted">Governments, regional organizations & peacebuilding bodies</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIPLOMATIC INSTRUMENTS -->
+<section class="policy">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Diplomatic Instruments</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Policy Proposals &amp;<br/>International Instruments</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">In addition to the five flagship initiatives, the Global Compact has established formal diplomatic instruments to facilitate voluntary state and institutional engagement.</p>
+  <div class="policy-grid">
+    <div class="policy-card reveal">
+      <div class="policy-card-label">Diplomatic Instrument A</div>
+      <h4>Member State Nomination Instrument</h4>
+      <p>A voluntary diplomatic instrument through which sovereign states may be formally invited to engage with the Global Compact in a spirit of dialogue, partnership, and constructive international engagement.</p>
+    </div>
+    <div class="policy-card reveal reveal-delay-1">
+      <div class="policy-card-label">Diplomatic Instrument B</div>
+      <h4>Member State Endorsement Instrument</h4>
+      <p>A voluntary instrument enabling sovereign states to express support for the principles and objectives of the Global Compact without creating legal obligations, treaty commitments, or transfer of sovereign authority.</p>
+    </div>
+    <div class="policy-card reveal reveal-delay-2">
+      <div class="policy-card-label">Publication & IP</div>
+      <h4>Authorship, Copyright &amp; Publication Notice</h4>
+      <p>Official authorship, intellectual property, citation, and usage guidance governing policy recommendations, diplomatic instruments, and institutional publications issued under the auspices of the Global Compact.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGIC FOCUS AREAS -->
+<section class="focus">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Strategic Focus Areas</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Thematic Areas of<br/>International Cooperation</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">All five initiatives operate within the broader strategic focus areas of the Global Compact, ensuring coherence and alignment across the full policy portfolio.</p>
+  <div class="focus-grid reveal reveal-delay-2">
+    <div class="focus-item"><span class="focus-dot"></span>Global Peace and Stability</div>
+    <div class="focus-item"><span class="focus-dot"></span>Human Security and Human Dignity</div>
+    <div class="focus-item"><span class="focus-dot"></span>Responsible International Cooperation</div>
+    <div class="focus-item"><span class="focus-dot"></span>Environmental Stewardship</div>
+    <div class="focus-item"><span class="focus-dot"></span>Food Security and Agricultural Development</div>
+    <div class="focus-item"><span class="focus-dot"></span>Ethical Governance and Rule of Law</div>
+    <div class="focus-item"><span class="focus-dot"></span>Youth Empowerment and Future Leadership</div>
+    <div class="focus-item"><span class="focus-dot"></span>Strategic Stability and Nuclear Disarmament</div>
+    <div class="focus-item"><span class="focus-dot"></span>Sustainable Development and Shared Prosperity</div>
+    <div class="focus-item"><span class="focus-dot"></span>Responsible Digital and Technological Governance</div>
+    <div class="focus-item"><span class="focus-dot"></span>Intercultural and Interfaith Cooperation</div>
+    <div class="focus-item"><span class="focus-dot"></span>Economic Diplomacy and Investment Cooperation</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="initiatives-cta">
+  <div class="cta-strip reveal">
+    <div>
+      <h3>Engage with the Initiatives</h3>
+      <p>All five flagship initiatives are open for endorsement, technical cooperation, strategic partnership, and collaborative engagement by governments, international organizations, academic institutions, civil society, and the private sector.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="partnerships.html" class="btn-primary">Endorse &amp; Engage</a>
+      <a href="publications.html" class="btn-ghost">View Policy Documents</a>
+    </div>
+  </div>
+</section>
+
+<!-- MOTTO -->
+<div class="motto-banner reveal">
+  <h2>ONE HUMANITY &bull; ONE FUTURE &bull; ONE GLOBAL COMPACT</h2>
+  <p>Divine Diplomacy — The Constitutional Morality of Global Order</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><img src="logo.jpg" alt="Global Compact Seal" /><div class="footer-logo-name">Global Compact<br/>for Peace &amp; Human Security</div></div>
+      <p class="footer-desc">A voluntary, non-binding, multipolar and multi-stakeholder international cooperation framework advancing peace, human dignity, and responsible international cooperation.</p>
+      <div class="footer-contact">
+        <div>Email: <a href="mailto:globalcompactinitiative@gmail.com">globalcompactinitiative@gmail.com</a></div>
+        <div>Tel: <a href="tel:+2348067056348">+234 806 705 6348</a></div>
+        <div>Lagos &amp; Abuja, Nigeria</div>
+        <div style="margin-top:6px;color:var(--gold-dim);">Ref. Registry: GC/REG/2026</div>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About the Compact</a></li><li><a href="founder.html">The Founder</a></li><li><a href="doctrine.html">Divine Diplomacy</a></li><li><a href="governance.html">Governance</a></li><li><a href="membership.html">Membership</a></li></ul></div>
+    <div class="footer-col"><h4>Programmes</h4><ul><li><a href="#imppera">IMPPERA</a></li><li><a href="#ncti">Nuclear Civilization</a></li><li><a href="#gsei">Security Employment</a></li><li><a href="#ungfsaii">Food Security</a></li><li><a href="#gspf">Peace Stabilization</a></li></ul></div>
+    <div class="footer-col"><h4>Engage</h4><ul><li><a href="partnerships.html">Endorsement</a></li><li><a href="partnerships.html#strategic">Strategic Partnership</a></li><li><a href="forum.html">Annual Global Forum</a></li><li><a href="publications.html">Document Registry</a></li><li><a href="contact.html">Contact Secretariat</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright &copy; 2026 Global Compact for Peace, Human Security and Responsible International Cooperation. All Rights Reserved.</p>
+    <div class="footer-bottom-right">One Humanity &middot; One Future &middot; One Global Compact</div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('mobile-drawer');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); drawer.classList.remove('open'); document.body.style.overflow = '';
+  }));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
