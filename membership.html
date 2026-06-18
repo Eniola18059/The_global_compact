@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Membership — Global Compact for Peace, Human Security and Responsible International Cooperation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #08111F; --navy-mid: #0D1B2E; --navy-light: #152235;
+      --gold: #C9A84C; --gold-light: #E2C87A; --gold-dim: #8A6E30;
+      --cream: #F4EFE4; --white: #FFFFFF; --muted: #8A9BB0;
+      --border: rgba(201,168,76,0.18);
+      --font-display: 'Cinzel', serif; --font-body: 'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: var(--font-body); overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 clamp(20px,5vw,80px); height: 72px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,17,31,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: contain; }
+    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: clamp(9px,1.1vw,11px); letter-spacing: 0.1em; color: var(--cream); text-transform: uppercase; font-weight: 600; }
+    .nav-logo-text span:last-child { font-size: 9px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; list-style: none; height: 72px; }
+    .nav-item { position: relative; height: 100%; display: flex; align-items: center; }
+    .nav-item > a, .nav-trigger { font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); text-decoration: none; font-weight: 500; padding: 0 14px; height: 100%; display: flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-family: var(--font-body); transition: color 0.2s; white-space: nowrap; }
+    .nav-item > a:hover, .nav-trigger:hover, .nav-item:hover > a, .nav-item:hover > .nav-trigger { color: var(--gold); }
+    .nav-trigger svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.25s; }
+    .nav-item:hover .nav-trigger svg { transform: rotate(180deg); }
+    .mega-panel { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(8,17,31,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px clamp(20px,5vw,80px) 40px; z-index: 199; animation: megaFade 0.22s ease; }
+    .nav-item:hover .mega-panel { display: block; }
+    @keyframes megaFade { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+    .mega-inner { display: grid; gap: 36px; }
+    .mega-inner.cols-4 { grid-template-columns: repeat(4,1fr); }
+    .mega-inner.cols-3 { grid-template-columns: repeat(3,1fr); }
+    .mega-inner.cols-5 { grid-template-columns: repeat(5,1fr); }
+    .mega-col-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .mega-links { display: flex; flex-direction: column; gap: 1px; }
+    .mega-link { display: flex; align-items: flex-start; gap: 11px; padding: 8px 10px; border-radius: 3px; text-decoration: none; transition: background 0.2s; }
+    .mega-link:hover { background: rgba(201,168,76,0.06); }
+    .mega-link-dot { width: 5px; height: 5px; border: 1px solid var(--gold-dim); border-radius: 50%; flex-shrink: 0; margin-top: 5px; transition: background 0.2s; }
+    .mega-link:hover .mega-link-dot { background: var(--gold); border-color: var(--gold); }
+    .mega-link-text strong { display: block; font-size: 12px; color: var(--cream); font-weight: 500; margin-bottom: 2px; }
+    .mega-link-text span { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .nav-cta-btn { padding: 9px 22px; border: 1px solid var(--gold-dim); color: var(--gold); border-radius: 2px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 10px; transition: background 0.25s, color 0.25s; }
+    .nav-cta-btn:hover { background: var(--gold); color: var(--navy); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-burger span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: all 0.3s ease; }
+    .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+    .mobile-drawer { display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0; background: rgba(8,17,31,0.99); backdrop-filter: blur(20px); z-index: 198; overflow-y: auto; padding: 0 clamp(20px,5vw,48px) 48px; }
+    .mobile-drawer.open { display: block; }
+    .mob-section { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 18px 0 4px; }
+    .mob-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; padding: 0 4px; }
+    .mob-section a { display: block; font-size: 13px; color: var(--muted); text-decoration: none; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.03); transition: color 0.2s; }
+    .mob-section a:hover { color: var(--cream); }
+    .mob-section a:last-child { border-bottom: none; }
+    .mob-engage { padding: 28px 0; }
+    .mob-engage a { display: inline-flex; padding: 12px 28px; border: 1px solid var(--gold-dim); color: var(--gold); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 2px; }
+    @media(max-width:1100px){ .nav-links,.nav-cta-btn{display:none} .nav-burger{display:flex} }
+
+    /* PAGE HERO */
+    .page-hero { padding: 140px clamp(20px,6vw,100px) 80px; background: var(--navy-mid); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .page-hero::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 100% at 80% 50%,rgba(201,168,76,0.04) 0%,transparent 70%); pointer-events:none; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb-sep { color: var(--gold-dim); }
+    .page-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .page-eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+    .page-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .page-title { font-family: var(--font-display); font-size: clamp(32px,5vw,64px); font-weight: 600; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .page-title em { font-style: normal; color: var(--gold); }
+    .page-subtitle { font-size: clamp(15px,1.6vw,18px); color: var(--muted); line-height: 1.7; max-width: 620px; }
+
+    /* SECTION COMMONS */
+    section { padding: clamp(56px,8vw,100px) clamp(20px,6vw,100px); }
+    .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .section-eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+    .section-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .section-heading { font-family: var(--font-display); font-size: clamp(24px,3.5vw,44px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+    .section-body { font-size: clamp(14px,1.3vw,16px); line-height: 1.9; color: #7D93AA; }
+
+    /* PRINCIPLES */
+    .principles { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .principles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 48px; }
+    .principle-chip { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid var(--border); border-radius: 3px; font-size: 13px; color: var(--muted); transition: border-color 0.25s, color 0.25s; }
+    .principle-chip:hover { border-color: var(--gold-dim); color: var(--cream); }
+    .principle-chip::before { content:''; width:5px; height:5px; border:1px solid var(--gold); border-radius:50%; flex-shrink:0; }
+
+    /* CATEGORIES */
+    .categories { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .cat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
+    .cat-card { background: var(--navy); border: 1px solid var(--border); border-radius: 3px; padding: clamp(20px,2.5vw,32px); transition: border-color 0.3s, transform 0.3s; position: relative; overflow: hidden; }
+    .cat-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.35s; }
+    .cat-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .cat-card:hover::after { transform: scaleX(1); }
+    .cat-icon { width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .cat-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .cat-badge { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .cat-title { font-family: var(--font-display); font-size: clamp(13px,1.3vw,15px); color: var(--cream); font-weight: 600; margin-bottom: 10px; letter-spacing: 0.02em; }
+    .cat-desc { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+    /* RIGHTS & RESPONSIBILITIES */
+    .rights { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .rights-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,80px); }
+    .rights-col h3 { font-family: var(--font-display); font-size: clamp(18px,2vw,24px); color: var(--cream); font-weight: 600; margin-bottom: 24px; letter-spacing: 0.02em; }
+    .rights-list { display: flex; flex-direction: column; gap: 10px; }
+    .rights-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 3px; font-size: 13px; color: var(--muted); line-height: 1.6; transition: border-color 0.2s, color 0.2s; }
+    .rights-item:hover { border-color: var(--gold-dim); color: var(--cream); }
+    .rights-item.green::before { content:'✓'; color: #4CAF8A; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+    .rights-item.amber::before { content:'●'; color: var(--gold); font-size: 8px; flex-shrink: 0; margin-top: 5px; }
+
+    /* FELLOWS */
+    .fellows { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .fellows-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,80px); align-items: center; }
+    .fellows-visual { background: var(--navy-light); border: 1px solid var(--border); border-radius: 4px; padding: 40px; display: flex; flex-direction: column; gap: 20px; }
+    .fellows-visual-title { font-family: var(--font-display); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .fellows-quote { font-family: var(--font-display); font-size: clamp(16px,2vw,22px); color: var(--cream); line-height: 1.5; font-weight: 500; border-left: 2px solid var(--gold); padding-left: 20px; }
+    .fellows-meta { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+    .fellows-meta-item { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); }
+    .fellows-meta-item::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--gold-dim); flex-shrink:0; }
+    .fellows-content {}
+    .fellows-content .section-body { margin-bottom: 20px; }
+    .fellows-roles { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+    .fellows-role { display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px; border: 1px solid var(--border); border-radius: 3px; background: var(--navy); transition: border-color 0.25s; }
+    .fellows-role:hover { border-color: var(--gold-dim); }
+    .fellows-role-arrow { color: var(--gold); flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+    .fellows-role-text strong { display: block; font-size: 13px; color: var(--cream); font-weight: 500; margin-bottom: 2px; }
+    .fellows-role-text span { font-size: 12px; color: var(--muted); }
+
+    /* HOW TO JOIN */
+    .join { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .join-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+    .join-step { background: var(--navy); padding: clamp(24px,3vw,36px); position: relative; transition: background 0.3s; }
+    .join-step:hover { background: var(--navy-light); }
+    .join-step-num { font-family: var(--font-display); font-size: 36px; color: var(--gold); font-weight: 600; opacity: 0.2; margin-bottom: 12px; line-height: 1; }
+    .join-step-title { font-family: var(--font-display); font-size: clamp(13px,1.3vw,15px); color: var(--cream); font-weight: 600; margin-bottom: 10px; letter-spacing: 0.02em; }
+    .join-step-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+    .join-step-arrow { position: absolute; top: 50%; right: -1px; transform: translateY(-50%); width: 20px; height: 20px; background: var(--navy); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1; font-size: 10px; color: var(--gold); }
+    .join-step:last-child .join-step-arrow { display: none; }
+
+    /* ETHICS */
+    .ethics { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .ethics-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
+    .ethics-card { background: var(--navy); border: 1px solid var(--border); border-radius: 3px; padding: 24px; transition: border-color 0.25s, transform 0.25s; }
+    .ethics-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .ethics-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .ethics-title { font-family: var(--font-display); font-size: 13px; color: var(--cream); margin-bottom: 8px; }
+    .ethics-desc { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+    /* CTA */
+    .mem-cta { background: var(--navy); }
+    .cta-strip { background: var(--navy-light); border: 1px solid var(--border); border-radius: 4px; padding: clamp(32px,4vw,56px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+    .cta-strip h3 { font-family: var(--font-display); font-size: clamp(18px,2.5vw,28px); color: var(--white); margin-bottom: 10px; }
+    .cta-strip p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .cta-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+    /* MOTTO / FOOTER */
+    .motto-banner { background: var(--gold); padding: clamp(32px,4vw,56px) clamp(20px,6vw,100px); text-align: center; }
+    .motto-banner h2 { font-family: var(--font-display); font-size: clamp(15px,2.6vw,32px); color: var(--navy); letter-spacing: 0.12em; font-weight: 600; }
+    .motto-banner p { font-size: 11px; letter-spacing: 0.2em; color: var(--navy); opacity: 0.65; margin-top: 8px; text-transform: uppercase; }
+    footer { background: var(--navy-mid); border-top: 1px solid var(--border); padding: clamp(48px,6vw,80px) clamp(20px,6vw,100px) 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(32px,4vw,60px); margin-bottom: 48px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { width: 38px; height: 38px; border-radius: 50%; object-fit: contain; }
+    .footer-logo-name { font-family: var(--font-display); font-size: 10px; color: var(--cream); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5; }
+    .footer-desc { font-size: 12px; line-height: 1.75; color: var(--muted); max-width: 280px; margin-bottom: 20px; }
+    .footer-contact { font-size: 11px; color: var(--muted); line-height: 1.9; }
+    .footer-contact a { color: var(--gold-dim); text-decoration: none; }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-col h4 { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 11px; color: var(--muted); }
+    .footer-bottom-right { font-size: 10px; color: var(--gold-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 30px; background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 12px 30px; border: 1px solid rgba(201,168,76,0.35); color: var(--cream); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: border-color 0.25s, color 0.25s, transform 0.2s; }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    @media(max-width:1024px) {
+      .cat-grid { grid-template-columns: repeat(2,1fr); }
+      .rights-layout { grid-template-columns: 1fr; }
+      .fellows-layout { grid-template-columns: 1fr; }
+      .join-steps { grid-template-columns: repeat(2,1fr); }
+      .ethics-grid { grid-template-columns: repeat(2,1fr); }
+      .cta-strip { grid-template-columns: 1fr; }
+      .cta-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:640px) {
+      .cat-grid { grid-template-columns: 1fr; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .ethics-grid { grid-template-columns: 1fr; }
+      .join-steps { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Global Compact Seal" />
+    <div class="nav-logo-text"><span>Global Compact</span><span>Peace · Human Security · Cooperation</span></div>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">Institution <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-4">
+        <div><div class="mega-col-label">About</div><div class="mega-links"><a href="about.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>About the Compact</strong><span>History, identity & legal status</span></div></a><a href="about.html#declaration" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Founding Declaration</strong><span>Foundational statement of purpose</span></div></a><a href="founder.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>The Founder</strong><span>H.E. Tunde Atayeshe D. Owolabi</span></div></a></div></div>
+        <div><div class="mega-col-label">Framework</div><div class="mega-links"><a href="doctrine.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Doctrine of Divine Diplomacy</strong><span>Constitutional morality of global order</span></div></a><a href="about.html#charter" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Charter of Principles</strong><span>Foundational values & ethical framework</span></div></a><a href="about.html#vision" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Vision & Mission</strong><span>Strategic direction & objectives</span></div></a></div></div>
+        <div><div class="mega-col-label">Governance</div><div class="mega-links"><a href="governance.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Governance Structure</strong><span>Leadership offices & bodies</span></div></a><a href="governance.html#secretariat" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Secretariat</strong><span>Administration & coordination</span></div></a><a href="governance.html#council" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Council</strong><span>Advisory & thematic guidance</span></div></a></div></div>
+        <div><div class="mega-col-label">Membership</div><div class="mega-links"><a href="membership.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Membership Framework</strong><span>Categories, rights & responsibilities</span></div></a><a href="membership.html#join" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>How to Join</strong><span>Eligibility & process</span></div></a><a href="membership.html#fellows" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Diplomatic Fellows</strong><span>Ambassadors of goodwill</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Initiatives <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-5">
+        <div><div class="mega-col-label">Environment</div><div class="mega-links"><a href="initiatives.html#imppera" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>IMPPERA</strong><span>Marine plastic pollution prevention</span></div></a></div></div>
+        <div><div class="mega-col-label">Security</div><div class="mega-links"><a href="initiatives.html#ncti" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>NCTI</strong><span>Nuclear civilization transition</span></div></a><a href="initiatives.html#gsei" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSEI</strong><span>Global security employment</span></div></a></div></div>
+        <div><div class="mega-col-label">Development</div><div class="mega-links"><a href="initiatives.html#ungfsaii" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>UNGFSAII</strong><span>Food security & agricultural investment</span></div></a></div></div>
+        <div><div class="mega-col-label">Peace</div><div class="mega-links"><a href="initiatives.html#gspf" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSPF</strong><span>Global security & peace stabilization</span></div></a></div></div>
+        <div><div class="mega-col-label">Overview</div><div class="mega-links"><a href="initiatives.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>All Initiatives</strong><span>Full policy portfolio</span></div></a><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Policy Documents</strong><span>Official registry</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Engage <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-3">
+        <div><div class="mega-col-label">Partnership</div><div class="mega-links"><a href="partnerships.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Partnerships & Endorsement</strong><span>All engagement modalities</span></div></a><a href="partnerships.html#endorse" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Moral Endorsement</strong><span>Voluntary expression of alignment</span></div></a><a href="partnerships.html#strategic" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Strategic Partnership</strong><span>Structured programme collaboration</span></div></a></div></div>
+        <div><div class="mega-col-label">Participation</div><div class="mega-links"><a href="partnerships.html#observer" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Observer Status</strong><span>Forum & dialogue participation</span></div></a><a href="forum.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Annual Global Forum</strong><span>Principal convening platform</span></div></a></div></div>
+        <div><div class="mega-col-label">Resources</div><div class="mega-links"><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Publications & Documents</strong><span>Official registry & instruments</span></div></a><a href="contact.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Contact the Secretariat</strong><span>Diplomatic correspondence</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item"><a href="forum.html">Forum</a></li>
+    <li class="nav-item"><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="partnerships.html" class="nav-cta-btn">Endorse &amp; Engage</a>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mob-section"><div class="mob-label">Institution</div><a href="about.html">About the Compact</a><a href="founder.html">The Founder</a><a href="doctrine.html">Doctrine of Divine Diplomacy</a><a href="governance.html">Governance</a><a href="membership.html">Membership</a></div>
+  <div class="mob-section"><div class="mob-label">Initiatives</div><a href="initiatives.html#imppera">IMPPERA</a><a href="initiatives.html#ncti">NCTI</a><a href="initiatives.html#gsei">GSEI</a><a href="initiatives.html#ungfsaii">UNGFSAII</a><a href="initiatives.html#gspf">GSPF</a></div>
+  <div class="mob-section"><div class="mob-label">Engage</div><a href="partnerships.html">Partnerships & Endorsement</a><a href="forum.html">Annual Global Forum</a><a href="publications.html">Publications</a><a href="contact.html">Contact</a></div>
+  <div class="mob-engage"><a href="partnerships.html">Endorse &amp; Engage</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep">/</span><a href="about.html">Institution</a><span class="breadcrumb-sep">/</span><span>Membership</span></div>
+  <div class="page-eyebrow"><div class="page-eyebrow-line"></div><span class="page-eyebrow-text">Join the Compact</span></div>
+  <h1 class="page-title">Membership<br/><em>Framework</em></h1>
+  <p class="page-subtitle">A voluntary, inclusive, and non-discriminatory framework through which individuals, institutions, organizations, and stakeholders may engage with and contribute to the mission and objectives of the Global Compact.</p>
+</div>
+
+<!-- PRINCIPLES -->
+<section class="principles">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Foundational Principles</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Membership Is Guided By</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">All membership participation is voluntary, inclusive, and grounded in the values and constitutional foundations of the Global Compact.</p>
+  <div class="principles-grid reveal reveal-delay-2">
+    <div class="principle-chip">Peace and human dignity</div>
+    <div class="principle-chip">Ethical leadership</div>
+    <div class="principle-chip">Responsible international cooperation</div>
+    <div class="principle-chip">Mutual respect</div>
+    <div class="principle-chip">Sovereign equality of nations</div>
+    <div class="principle-chip">Dialogue and constructive engagement</div>
+    <div class="principle-chip">Inclusivity and diversity</div>
+    <div class="principle-chip">Transparency and accountability</div>
+    <div class="principle-chip">Service to humanity</div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="join">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Membership Categories</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Who May Participate</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">Membership shall not be conditioned upon nationality, ethnicity, race, religion, political affiliation, or geographic origin. The Global Compact welcomes all who support its objectives.</p>
+  <div class="cat-grid">
+    <div class="cat-card reveal">
+      <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="cat-badge">Category I</div>
+      <div class="cat-title">Founding Members</div>
+      <p class="cat-desc">Original participants in the establishment of the Global Compact who have contributed to the founding vision, declaration, and institutional framework.</p>
+    </div>
+    <div class="cat-card reveal reveal-delay-1">
+      <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div class="cat-badge">Category II</div>
+      <div class="cat-title">Individual Members</div>
+      <p class="cat-desc">Individuals supportive of the Global Compact's objectives who wish to contribute to peacebuilding, ethical governance, and responsible international cooperation.</p>
+    </div>
+    <div class="cat-card reveal reveal-delay-2">
+      <div class="cat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><path d="M18 14l2 2 4-4"/></svg></div>
+      <div class="cat-badge">Category III</div>
+      <div class="cat-title">Youth Members</div>
+      <p class="cat-desc">Young people committed to youth leadership, innovation, civic participation, and intergenerational responsibility in advancing global peace and development.</p>
+    </div>
+    <div class="cat-card reveal">
+      <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="cat-badge">Category IV</div>
+      <div class="cat-title">Institutional Members</div>
+      <p class="cat-desc">Organizations, institutions, and entities supportive of the Global Compact's mission, including governmental bodies, IGOs, and international institutions.</p>
+    </div>
+    <div class="cat-card reveal reveal-delay-1">
+      <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <div class="cat-badge">Category V</div>
+      <div class="cat-title">Academic Members</div>
+      <p class="cat-desc">Universities, research centers, think tanks, and academic institutions contributing knowledge, research, and intellectual engagement to the Compact's objectives.</p>
+    </div>
+    <div class="cat-card reveal reveal-delay-2">
+      <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="cat-badge">Category VI</div>
+      <div class="cat-title">Civil Society Members</div>
+      <p class="cat-desc">NGOs, INGOs, community development organizations, human rights bodies, humanitarian organizations, and social development institutions.</p>
+    </div>
+    <div class="cat-card reveal">
+      <div class="cat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <div class="cat-badge">Category VII</div>
+      <div class="cat-title">Diplomatic Fellows</div>
+      <p class="cat-desc">Accredited ambassadors of goodwill committed to diplomacy, peacebuilding, dialogue, education, advocacy, and responsible international cooperation.</p>
+    </div>
+    <div class="cat-card reveal reveal-delay-1">
+      <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <div class="cat-badge">Category VIII</div>
+      <div class="cat-title">Honorary Members</div>
+      <p class="cat-desc">Distinguished individuals, leaders, and entities recognized for exceptional contribution to peace, human dignity, governance, and international cooperation.</p>
+    </div>
+    <div class="cat-card reveal reveal-delay-2">
+      <div class="cat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+      <div class="cat-badge">Category IX</div>
+      <div class="cat-title">Observer Participants</div>
+      <p class="cat-desc">Entities participating in forums and dialogues without formal membership status, for the purpose of consultation, learning, and constructive exchange.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RIGHTS & RESPONSIBILITIES -->
+<section class="rights">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Rights & Responsibilities</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Member Rights &amp;<br/>Responsibilities</h2>
+  <div class="rights-layout" style="margin-top:48px;">
+    <div class="rights-col reveal reveal-delay-1">
+      <h3>Member Rights</h3>
+      <div class="rights-list">
+        <div class="rights-item green">Participate in approved activities and programmes</div>
+        <div class="rights-item green">Contribute ideas, proposals, and recommendations</div>
+        <div class="rights-item green">Attend eligible meetings, forums, and events</div>
+        <div class="rights-item green">Access institutional information and publications</div>
+        <div class="rights-item green">Support and collaborate on institutional initiatives</div>
+        <div class="rights-item green">Participate in consultations and policy dialogue</div>
+        <div class="rights-item green">Receive recognition in institutional communications</div>
+        <div class="rights-item green">Engage in the Annual Global Forum</div>
+      </div>
+    </div>
+    <div class="rights-col reveal reveal-delay-2">
+      <h3>Member Responsibilities</h3>
+      <div class="rights-list">
+        <div class="rights-item amber">Uphold the Charter and Governance Constitution</div>
+        <div class="rights-item amber">Support the principles of the Global Compact</div>
+        <div class="rights-item amber">Act with integrity and professionalism at all times</div>
+        <div class="rights-item amber">Respect diversity, dignity, and cultural differences</div>
+        <div class="rights-item amber">Promote peaceful cooperation and constructive dialogue</div>
+        <div class="rights-item amber">Avoid reputational harm to the institution</div>
+        <div class="rights-item amber">Comply with institutional standards and guidelines</div>
+        <div class="rights-item amber">Disclose and manage any conflicts of interest</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIPLOMATIC FELLOWS -->
+<section class="fellows" id="fellows">
+  <div class="fellows-layout">
+    <div class="fellows-visual reveal">
+      <div class="fellows-visual-title">Diplomatic Fellows</div>
+      <div class="fellows-quote">"Ambassadors of goodwill supporting diplomacy, peacebuilding, education, dialogue, and responsible international cooperation."</div>
+      <div class="fellows-meta">
+        <div class="fellows-meta-item">Article XXXVIII — Governance Constitution</div>
+        <div class="fellows-meta-item">Accredited by the Global Secretariat</div>
+        <div class="fellows-meta-item">Non-governing, non-binding engagement</div>
+        <div class="fellows-meta-item">Open to distinguished individuals worldwide</div>
+      </div>
+    </div>
+    <div class="fellows-content">
+      <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Article XXXVIII</span></div>
+      <h2 class="section-heading reveal reveal-delay-1">Diplomatic Fellows</h2>
+      <p class="section-body reveal reveal-delay-2">Diplomatic Fellows are accredited representatives of the Global Compact — committed to advancing diplomacy, peacebuilding, dialogue, education, advocacy, and responsible international cooperation as ambassadors of goodwill.</p>
+      <p class="section-body reveal reveal-delay-2" style="margin-top:16px;">Fellowship is open to distinguished individuals, leaders, academics, professionals, and advocates who share the Compact's values and wish to contribute meaningfully to its mission across nations, cultures, and institutions.</p>
+      <div class="fellows-roles reveal reveal-delay-3">
+        <div class="fellows-role"><div class="fellows-role-arrow">→</div><div class="fellows-role-text"><strong>Diplomacy & Peacebuilding</strong><span>Advancing dialogue, mediation, and peace advocacy in their communities and regions</span></div></div>
+        <div class="fellows-role"><div class="fellows-role-arrow">→</div><div class="fellows-role-text"><strong>Education & Awareness</strong><span>Promoting the values and objectives of the Global Compact through education and public engagement</span></div></div>
+        <div class="fellows-role"><div class="fellows-role-arrow">→</div><div class="fellows-role-text"><strong>Partnership Development</strong><span>Facilitating connections, partnerships, and cooperative engagement with eligible stakeholders</span></div></div>
+        <div class="fellows-role"><div class="fellows-role-arrow">→</div><div class="fellows-role-text"><strong>Responsible Cooperation</strong><span>Embodying the Doctrine of Divine Diplomacy in all professional and public engagements</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO JOIN -->
+<section class="join">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Application Process</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">How to Join the<br/>Global Compact</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">Membership is open to all eligible individuals and institutions. The process is straightforward, voluntary, and guided by the principles of the Global Compact.</p>
+  <div class="join-steps">
+    <div class="join-step reveal">
+      <div class="join-step-num">01</div>
+      <div class="join-step-title">Express Interest</div>
+      <p class="join-step-desc">Contact the Global Secretariat to express your interest in membership, specifying your preferred membership category and institutional background.</p>
+      <div class="join-step-arrow">→</div>
+    </div>
+    <div class="join-step reveal reveal-delay-1">
+      <div class="join-step-num">02</div>
+      <div class="join-step-title">Review & Alignment</div>
+      <p class="join-step-desc">The Secretariat will review your expression of interest and assess alignment with the Compact's principles, values, and institutional objectives.</p>
+      <div class="join-step-arrow">→</div>
+    </div>
+    <div class="join-step reveal reveal-delay-2">
+      <div class="join-step-num">03</div>
+      <div class="join-step-title">Engagement Classification</div>
+      <p class="join-step-desc">A mutually agreed membership category and engagement level will be determined, consistent with your institutional capacity and objectives.</p>
+      <div class="join-step-arrow">→</div>
+    </div>
+    <div class="join-step reveal reveal-delay-3">
+      <div class="join-step-num">04</div>
+      <div class="join-step-title">Recognition & Welcome</div>
+      <p class="join-step-desc">Upon confirmation, a formal acknowledgment letter or membership instrument will be issued and you will be welcomed into the Global Compact community.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ETHICS FRAMEWORK -->
+<section class="ethics">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Ethics Framework</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Standards of Conduct<br/>for All Members</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">All members are expected to uphold the highest standards of ethical conduct consistent with the Global Compact's values, institutional integrity, and service to humanity.</p>
+  <div class="ethics-grid">
+    <div class="ethics-card reveal"><div class="ethics-label">Article I</div><div class="ethics-title">Good Faith</div><p class="ethics-desc">All members shall act in good faith, honesty, and with genuine commitment to the Compact's objectives and principles.</p></div>
+    <div class="ethics-card reveal reveal-delay-1"><div class="ethics-label">Article II</div><div class="ethics-title">Non-Discrimination</div><p class="ethics-desc">Equal dignity and full participation without discrimination of any kind — nationality, ethnicity, race, religion, gender, or political affiliation.</p></div>
+    <div class="ethics-card reveal reveal-delay-2"><div class="ethics-label">Article III</div><div class="ethics-title">Anti-Corruption</div><p class="ethics-desc">Zero tolerance for corruption, fraud, bribery, or abuse of authority in any form across all institutional activities and engagements.</p></div>
+    <div class="ethics-card reveal"><div class="ethics-label">Article IV</div><div class="ethics-title">Transparency</div><p class="ethics-desc">All activities shall be transparent, accountable, and subject to review in accordance with institutional standards and governance principles.</p></div>
+    <div class="ethics-card reveal reveal-delay-1"><div class="ethics-label">Article V</div><div class="ethics-title">Confidentiality</div><p class="ethics-desc">Sensitive institutional information shall be responsibly managed and protected in accordance with confidentiality guidelines.</p></div>
+    <div class="ethics-card reveal reveal-delay-2"><div class="ethics-label">Article VI</div><div class="ethics-title">Ethical Leadership</div><p class="ethics-desc">Leadership within the Compact is service-based, requiring integrity, moral responsibility, and commitment to the common good.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="mem-cta">
+  <div class="cta-strip reveal">
+    <div>
+      <h3>Ready to Join the Global Compact?</h3>
+      <p>Contact the Global Secretariat to begin your membership journey. All participation is voluntary, inclusive, and grounded in shared commitment to peace, human dignity, and responsible international cooperation.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn-primary">Contact Secretariat</a>
+      <a href="partnerships.html" class="btn-ghost">Explore Partnerships</a>
+    </div>
+  </div>
+</section>
+
+<!-- MOTTO -->
+<div class="motto-banner reveal">
+  <h2>ONE HUMANITY &bull; ONE FUTURE &bull; ONE GLOBAL COMPACT</h2>
+  <p>Divine Diplomacy — The Constitutional Morality of Global Order</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><img src="logo.jpg" alt="Global Compact Seal" /><div class="footer-logo-name">Global Compact<br/>for Peace &amp; Human Security</div></div>
+      <p class="footer-desc">A voluntary, non-binding, multipolar and multi-stakeholder international cooperation framework advancing peace, human dignity, and responsible international cooperation.</p>
+      <div class="footer-contact">
+        <div>Email: <a href="mailto:globalcompactinitiative@gmail.com">globalcompactinitiative@gmail.com</a></div>
+        <div>Tel: <a href="tel:+2348067056348">+234 806 705 6348</a></div>
+        <div>Lagos &amp; Abuja, Nigeria</div>
+        <div style="margin-top:6px;color:var(--gold-dim);">Ref. Registry: GC/REG/2026</div>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About the Compact</a></li><li><a href="founder.html">The Founder</a></li><li><a href="doctrine.html">Divine Diplomacy</a></li><li><a href="governance.html">Governance</a></li><li><a href="membership.html">Membership</a></li></ul></div>
+    <div class="footer-col"><h4>Programmes</h4><ul><li><a href="initiatives.html#imppera">IMPPERA</a></li><li><a href="initiatives.html#ncti">Nuclear Civilization</a></li><li><a href="initiatives.html#gsei">Security Employment</a></li><li><a href="initiatives.html#ungfsaii">Food Security</a></li><li><a href="initiatives.html#gspf">Peace Stabilization</a></li></ul></div>
+    <div class="footer-col"><h4>Engage</h4><ul><li><a href="partnerships.html">Endorsement</a></li><li><a href="partnerships.html#strategic">Strategic Partnership</a></li><li><a href="forum.html">Annual Global Forum</a></li><li><a href="publications.html">Document Registry</a></li><li><a href="contact.html">Contact Secretariat</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright &copy; 2026 Global Compact for Peace, Human Security and Responsible International Cooperation. All Rights Reserved.</p>
+    <div class="footer-bottom-right">One Humanity &middot; One Future &middot; One Global Compact</div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('mobile-drawer');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); drawer.classList.remove('open'); document.body.style.overflow = '';
+  }));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
