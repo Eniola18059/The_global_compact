@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publications & Documents — Global Compact for Peace, Human Security and Responsible International Cooperation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #08111F; --navy-mid: #0D1B2E; --navy-light: #152235;
+      --gold: #C9A84C; --gold-light: #E2C87A; --gold-dim: #8A6E30;
+      --cream: #F4EFE4; --white: #FFFFFF; --muted: #8A9BB0;
+      --border: rgba(201,168,76,0.18);
+      --font-display: 'Cinzel', serif; --font-body: 'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: var(--font-body); overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 clamp(20px,5vw,80px); height: 72px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,17,31,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: contain; }
+    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: clamp(9px,1.1vw,11px); letter-spacing: 0.1em; color: var(--cream); text-transform: uppercase; font-weight: 600; }
+    .nav-logo-text span:last-child { font-size: 9px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; list-style: none; height: 72px; }
+    .nav-item { position: relative; height: 100%; display: flex; align-items: center; }
+    .nav-item > a, .nav-trigger { font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); text-decoration: none; font-weight: 500; padding: 0 14px; height: 100%; display: flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-family: var(--font-body); transition: color 0.2s; white-space: nowrap; }
+    .nav-item > a:hover, .nav-trigger:hover, .nav-item:hover > a, .nav-item:hover > .nav-trigger { color: var(--gold); }
+    .nav-trigger svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.25s; }
+    .nav-item:hover .nav-trigger svg { transform: rotate(180deg); }
+    .mega-panel { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(8,17,31,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px clamp(20px,5vw,80px) 40px; z-index: 199; animation: megaFade 0.22s ease; }
+    .nav-item:hover .mega-panel { display: block; }
+    @keyframes megaFade { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+    .mega-inner { display: grid; gap: 36px; }
+    .mega-inner.cols-4 { grid-template-columns: repeat(4,1fr); }
+    .mega-inner.cols-3 { grid-template-columns: repeat(3,1fr); }
+    .mega-inner.cols-5 { grid-template-columns: repeat(5,1fr); }
+    .mega-col-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .mega-links { display: flex; flex-direction: column; gap: 1px; }
+    .mega-link { display: flex; align-items: flex-start; gap: 11px; padding: 8px 10px; border-radius: 3px; text-decoration: none; transition: background 0.2s; }
+    .mega-link:hover { background: rgba(201,168,76,0.06); }
+    .mega-link-dot { width: 5px; height: 5px; border: 1px solid var(--gold-dim); border-radius: 50%; flex-shrink: 0; margin-top: 5px; transition: background 0.2s; }
+    .mega-link:hover .mega-link-dot { background: var(--gold); border-color: var(--gold); }
+    .mega-link-text strong { display: block; font-size: 12px; color: var(--cream); font-weight: 500; margin-bottom: 2px; }
+    .mega-link-text span { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .nav-cta-btn { padding: 9px 22px; border: 1px solid var(--gold-dim); color: var(--gold); border-radius: 2px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 10px; transition: background 0.25s, color 0.25s; }
+    .nav-cta-btn:hover { background: var(--gold); color: var(--navy); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-burger span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: all 0.3s ease; }
+    .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+    .mobile-drawer { display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0; background: rgba(8,17,31,0.99); backdrop-filter: blur(20px); z-index: 198; overflow-y: auto; padding: 0 clamp(20px,5vw,48px) 48px; }
+    .mobile-drawer.open { display: block; }
+    .mob-section { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 18px 0 4px; }
+    .mob-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; padding: 0 4px; }
+    .mob-section a { display: block; font-size: 13px; color: var(--muted); text-decoration: none; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.03); transition: color 0.2s; }
+    .mob-section a:hover { color: var(--cream); }
+    .mob-section a:last-child { border-bottom: none; }
+    .mob-engage { padding: 28px 0; }
+    .mob-engage a { display: inline-flex; padding: 12px 28px; border: 1px solid var(--gold-dim); color: var(--gold); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 2px; }
+    @media(max-width:1100px){ .nav-links,.nav-cta-btn{display:none} .nav-burger{display:flex} }
+
+    /* PAGE HERO */
+    .page-hero { padding: 140px clamp(20px,6vw,100px) 80px; background: var(--navy-mid); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .page-hero::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 100% at 80% 50%,rgba(201,168,76,0.04) 0%,transparent 70%); pointer-events:none; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb-sep { color: var(--gold-dim); }
+    .page-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .page-eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+    .page-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .page-title { font-family: var(--font-display); font-size: clamp(32px,5vw,64px); font-weight: 600; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .page-title em { font-style: normal; color: var(--gold); }
+    .page-subtitle { font-size: clamp(15px,1.6vw,18px); color: var(--muted); line-height: 1.7; max-width: 620px; margin-bottom: 32px; }
+
+    /* Search bar */
+    .doc-search { display: flex; gap: 12px; max-width: 560px; flex-wrap: wrap; }
+    .doc-search-input { flex: 1; min-width: 200px; background: var(--navy); border: 1px solid var(--border); border-radius: 2px; padding: 14px 18px; color: var(--cream); font-size: 13px; font-family: var(--font-body); }
+    .doc-search-input::placeholder { color: var(--muted); }
+    .doc-search-input:focus { outline: none; border-color: var(--gold-dim); }
+    .doc-search-btn { padding: 14px 28px; background: var(--gold); color: var(--navy); border: none; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 2px; cursor: pointer; font-family: var(--font-body); transition: background 0.2s; }
+    .doc-search-btn:hover { background: var(--gold-light); }
+
+    /* SECTION COMMONS */
+    section { padding: clamp(56px,8vw,100px) clamp(20px,6vw,100px); }
+    .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .section-eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+    .section-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .section-heading { font-family: var(--font-display); font-size: clamp(24px,3.5vw,44px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+    .section-body { font-size: clamp(14px,1.3vw,16px); line-height: 1.9; color: #7D93AA; }
+
+    /* FILTER TABS */
+    .doc-filters { background: var(--navy); border-bottom: 1px solid var(--border); padding: 24px clamp(20px,6vw,100px); display: flex; gap: 10px; flex-wrap: wrap; position: sticky; top: 72px; z-index: 50; backdrop-filter: blur(10px); background: rgba(8,17,31,0.95); }
+    .filter-tab { padding: 9px 18px; border: 1px solid var(--border); border-radius: 2px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: none; cursor: pointer; font-family: var(--font-body); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+    .filter-tab.active, .filter-tab:hover { border-color: var(--gold-dim); color: var(--gold); background: rgba(201,168,76,0.06); }
+
+    /* DOCUMENT REGISTRY */
+    .registry { background: var(--navy-mid); }
+    .registry-table-wrap { margin-top: 40px; overflow-x: auto; }
+    .registry-table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    .registry-table thead th { text-align: left; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); padding: 14px 16px; border-bottom: 1px solid var(--border); }
+    .registry-row { transition: background 0.2s; }
+    .registry-row[data-cat] { cursor: default; }
+    .registry-row:hover { background: rgba(201,168,76,0.04); }
+    .registry-row td { padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; vertical-align: top; }
+    .reg-ref { font-family: var(--font-display); font-size: 11px; color: var(--gold-dim); white-space: nowrap; }
+    .reg-title { color: var(--cream); font-weight: 500; line-height: 1.4; }
+    .reg-desc { color: var(--muted); font-size: 12px; line-height: 1.5; margin-top: 3px; }
+    .reg-tag { display: inline-block; padding: 4px 10px; border: 1px solid var(--border); border-radius: 2px; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    .reg-status { font-size: 11px; color: var(--gold); white-space: nowrap; }
+
+    /* ANNEXES */
+    .annexes { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .annex-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+    .annex-card { background: var(--navy); padding: clamp(18px,2.2vw,26px); transition: background 0.3s; position: relative; }
+    .annex-card[data-cat] { display: block; }
+    .annex-card::after { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--gold); transform:scaleY(0); transform-origin:top; transition:transform 0.3s; }
+    .annex-card:hover { background: var(--navy-light); }
+    .annex-card:hover::after { transform: scaleY(1); }
+    .annex-letter { font-family: var(--font-display); font-size: 18px; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
+    .annex-title { font-size: 12px; color: var(--cream); font-weight: 500; line-height: 1.4; margin-bottom: 6px; }
+    .annex-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+    /* CORE DOCUMENTS */
+    .core-docs { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .core-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
+    .core-card { background: var(--navy); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+    .core-card[data-cat] { display: block; }
+    .core-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .core-card-top { padding: 24px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 16px; }
+    .core-icon { width: 40px; height: 40px; border: 1px solid var(--gold-dim); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .core-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .core-ref { font-size: 9px; letter-spacing: 0.15em; color: var(--gold-dim); margin-bottom: 4px; }
+    .core-title { font-family: var(--font-display); font-size: clamp(12px,1.2vw,14px); color: var(--cream); font-weight: 600; line-height: 1.3; }
+    .core-card-body { padding: 20px 24px; }
+    .core-desc { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+    /* EDITORIAL STANDARDS */
+    .editorial { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .editorial-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 48px; }
+    .editorial-item { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 3px; font-size: 13px; color: var(--muted); transition: border-color 0.25s, color 0.25s; }
+    .editorial-item:hover { border-color: var(--gold-dim); color: var(--cream); }
+    .editorial-item::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; opacity:.6; }
+
+    /* CITATION FORMAT */
+    .citation { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .citation-card { background: var(--navy); border: 1px solid var(--border); border-radius: 4px; padding: clamp(28px,3vw,44px); margin-top: 40px; max-width: 760px; }
+    .citation-format { font-family: var(--font-display); font-size: clamp(16px,2vw,22px); color: var(--gold); text-align: center; padding: 24px; background: var(--navy-light); border-radius: 3px; margin-bottom: 24px; letter-spacing: 0.06em; }
+    .citation-example { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; color: var(--muted); }
+    .citation-example strong { color: var(--cream); }
+
+    /* CTA */
+    .pub-cta { background: var(--navy); }
+    .cta-strip { background: var(--navy-light); border: 1px solid var(--border); border-radius: 4px; padding: clamp(32px,4vw,56px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+    .cta-strip h3 { font-family: var(--font-display); font-size: clamp(18px,2.5vw,28px); color: var(--white); margin-bottom: 10px; }
+    .cta-strip p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .cta-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+    /* MOTTO / FOOTER */
+    .motto-banner { background: var(--gold); padding: clamp(32px,4vw,56px) clamp(20px,6vw,100px); text-align: center; }
+    .motto-banner h2 { font-family: var(--font-display); font-size: clamp(15px,2.6vw,32px); color: var(--navy); letter-spacing: 0.12em; font-weight: 600; }
+    .motto-banner p { font-size: 11px; letter-spacing: 0.2em; color: var(--navy); opacity: 0.65; margin-top: 8px; text-transform: uppercase; }
+    footer { background: var(--navy-mid); border-top: 1px solid var(--border); padding: clamp(48px,6vw,80px) clamp(20px,6vw,100px) 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(32px,4vw,60px); margin-bottom: 48px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { width: 38px; height: 38px; border-radius: 50%; object-fit: contain; }
+    .footer-logo-name { font-family: var(--font-display); font-size: 10px; color: var(--cream); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5; }
+    .footer-desc { font-size: 12px; line-height: 1.75; color: var(--muted); max-width: 280px; margin-bottom: 20px; }
+    .footer-contact { font-size: 11px; color: var(--muted); line-height: 1.9; }
+    .footer-contact a { color: var(--gold-dim); text-decoration: none; }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-col h4 { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 11px; color: var(--muted); }
+    .footer-bottom-right { font-size: 10px; color: var(--gold-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 30px; background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 12px 30px; border: 1px solid rgba(201,168,76,0.35); color: var(--cream); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: border-color 0.25s, color 0.25s, transform 0.2s; }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    @media(max-width:1024px) {
+      .annex-grid { grid-template-columns: repeat(2,1fr); }
+      .core-grid { grid-template-columns: repeat(2,1fr); }
+      .editorial-grid { grid-template-columns: repeat(2,1fr); }
+      .cta-strip { grid-template-columns: 1fr; }
+      .cta-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:640px) {
+      .annex-grid { grid-template-columns: 1fr; }
+      .core-grid { grid-template-columns: 1fr; }
+      .editorial-grid { grid-template-columns: 1fr; }
+      .doc-filters { position: static; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Global Compact Seal" />
+    <div class="nav-logo-text"><span>Global Compact</span><span>Peace · Human Security · Cooperation</span></div>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">Institution <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-4">
+        <div><div class="mega-col-label">About</div><div class="mega-links"><a href="about.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>About the Compact</strong><span>History, identity & legal status</span></div></a><a href="about.html#declaration" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Founding Declaration</strong><span>Foundational statement of purpose</span></div></a><a href="founder.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>The Founder</strong><span>H.E. Tunde Atayeshe D. Owolabi</span></div></a></div></div>
+        <div><div class="mega-col-label">Framework</div><div class="mega-links"><a href="doctrine.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Doctrine of Divine Diplomacy</strong><span>Constitutional morality of global order</span></div></a><a href="about.html#charter" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Charter of Principles</strong><span>Foundational values & ethical framework</span></div></a><a href="about.html#vision" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Vision & Mission</strong><span>Strategic direction & objectives</span></div></a></div></div>
+        <div><div class="mega-col-label">Governance</div><div class="mega-links"><a href="governance.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Governance Structure</strong><span>Leadership offices & bodies</span></div></a><a href="governance.html#secretariat" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Secretariat</strong><span>Administration & coordination</span></div></a><a href="governance.html#council" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Council</strong><span>Advisory & thematic guidance</span></div></a></div></div>
+        <div><div class="mega-col-label">Membership</div><div class="mega-links"><a href="membership.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Membership Framework</strong><span>Categories, rights & responsibilities</span></div></a><a href="membership.html#join" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>How to Join</strong><span>Eligibility & process</span></div></a><a href="membership.html#fellows" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Diplomatic Fellows</strong><span>Ambassadors of goodwill</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Initiatives <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-5">
+        <div><div class="mega-col-label">Environment</div><div class="mega-links"><a href="initiatives.html#imppera" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>IMPPERA</strong><span>Marine plastic pollution prevention</span></div></a></div></div>
+        <div><div class="mega-col-label">Security</div><div class="mega-links"><a href="initiatives.html#ncti" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>NCTI</strong><span>Nuclear civilization transition</span></div></a><a href="initiatives.html#gsei" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSEI</strong><span>Global security employment</span></div></a></div></div>
+        <div><div class="mega-col-label">Development</div><div class="mega-links"><a href="initiatives.html#ungfsaii" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>UNGFSAII</strong><span>Food security & agricultural investment</span></div></a></div></div>
+        <div><div class="mega-col-label">Peace</div><div class="mega-links"><a href="initiatives.html#gspf" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSPF</strong><span>Global security & peace stabilization</span></div></a></div></div>
+        <div><div class="mega-col-label">Overview</div><div class="mega-links"><a href="initiatives.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>All Initiatives</strong><span>Full policy portfolio</span></div></a><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Policy Documents</strong><span>Official registry</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Engage <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-3">
+        <div><div class="mega-col-label">Partnership</div><div class="mega-links"><a href="partnerships.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Partnerships & Endorsement</strong><span>All engagement modalities</span></div></a><a href="partnerships.html#endorse" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Moral Endorsement</strong><span>Voluntary expression of alignment</span></div></a><a href="partnerships.html#strategic" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Strategic Partnership</strong><span>Structured programme collaboration</span></div></a></div></div>
+        <div><div class="mega-col-label">Participation</div><div class="mega-links"><a href="partnerships.html#observer" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Observer Status</strong><span>Forum & dialogue participation</span></div></a><a href="forum.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Annual Global Forum</strong><span>Principal convening platform</span></div></a></div></div>
+        <div><div class="mega-col-label">Resources</div><div class="mega-links"><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Publications & Documents</strong><span>Official registry & instruments</span></div></a><a href="contact.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Contact the Secretariat</strong><span>Diplomatic correspondence</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item"><a href="forum.html">Forum</a></li>
+    <li class="nav-item"><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="partnerships.html" class="nav-cta-btn">Endorse &amp; Engage</a>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mob-section"><div class="mob-label">Institution</div><a href="about.html">About the Compact</a><a href="founder.html">The Founder</a><a href="doctrine.html">Doctrine of Divine Diplomacy</a><a href="governance.html">Governance</a><a href="membership.html">Membership</a></div>
+  <div class="mob-section"><div class="mob-label">Initiatives</div><a href="initiatives.html#imppera">IMPPERA</a><a href="initiatives.html#ncti">NCTI</a><a href="initiatives.html#gsei">GSEI</a><a href="initiatives.html#ungfsaii">UNGFSAII</a><a href="initiatives.html#gspf">GSPF</a></div>
+  <div class="mob-section"><div class="mob-label">Engage</div><a href="partnerships.html">Partnerships & Endorsement</a><a href="forum.html">Annual Global Forum</a><a href="publications.html">Publications</a><a href="contact.html">Contact</a></div>
+  <div class="mob-engage"><a href="partnerships.html">Endorse &amp; Engage</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep">/</span><span>Publications & Documents</span></div>
+  <div class="page-eyebrow"><div class="page-eyebrow-line"></div><span class="page-eyebrow-text">Document Registry</span></div>
+  <h1 class="page-title">Publications &amp;<br/><em>Documents</em></h1>
+  <p class="page-subtitle">The official registry of foundational instruments, governance documents, annexes, and reference materials of the Global Compact for Peace, Human Security and Responsible International Cooperation.</p>
+  <div class="doc-search">
+    <input type="text" class="doc-search-input" id="doc-search-input" placeholder="Search documents by title or reference number..." />
+    <button class="doc-search-btn" onclick="filterDocs()">Search</button>
+  </div>
+</div>
+
+<!-- FILTER TABS -->
+<div class="doc-filters">
+  <button class="filter-tab active" onclick="setFilter('all', this)">All Documents</button>
+  <button class="filter-tab" onclick="setFilter('foundational', this)">Foundational</button>
+  <button class="filter-tab" onclick="setFilter('governance', this)">Governance</button>
+  <button class="filter-tab" onclick="setFilter('diplomatic', this)">Diplomatic</button>
+  <button class="filter-tab" onclick="setFilter('annex', this)">Annexes</button>
+  <button class="filter-tab" onclick="setFilter('reference', this)">Reference</button>
+</div>
+
+<!-- CORE DOCUMENTS -->
+<section class="core-docs">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Core Foundational Documents</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Primary Institutional<br/>Instruments</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">The principal documents establishing the identity, governance, and foundational philosophy of the Global Compact.</p>
+  <div class="core-grid">
+    <div class="core-card reveal" data-cat="foundational">
+      <div class="core-card-top">
+        <div class="core-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="core-ref">GC/FOUND/2026</div><div class="core-title">Founding Declaration</div></div>
+      </div>
+      <div class="core-card-body"><p class="core-desc">The official statement establishing the Global Compact's vision, purpose, and foundational aspirations for peace and cooperation.</p></div>
+    </div>
+    <div class="core-card reveal reveal-delay-1" data-cat="foundational">
+      <div class="core-card-top">
+        <div class="core-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div>
+        <div><div class="core-ref">GC/CHARTER/2026</div><div class="core-title">Charter of Principles &amp; Foundational Values</div></div>
+      </div>
+      <div class="core-card-body"><p class="core-desc">Fifteen articles establishing the ethical and philosophical foundation guiding all Global Compact activities and partnerships.</p></div>
+    </div>
+    <div class="core-card reveal reveal-delay-2" data-cat="foundational">
+      <div class="core-card-top">
+        <div class="core-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div><div class="core-ref">GC/DOCTRINE/2026</div><div class="core-title">Doctrine of Divine Diplomacy</div></div>
+      </div>
+      <div class="core-card-body"><p class="core-desc">The Constitutional Morality of Global Order — the ethical framework guiding the Compact's values and institutional conduct.</p></div>
+    </div>
+    <div class="core-card reveal" data-cat="governance">
+      <div class="core-card-top">
+        <div class="core-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <div><div class="core-ref">GC/GOV-CONST/2026</div><div class="core-title">Institutional Governance Constitution</div></div>
+      </div>
+      <div class="core-card-body"><p class="core-desc">The constitutional governance framework establishing institutional architecture, coordination mechanisms, and operational principles.</p></div>
+    </div>
+    <div class="core-card reveal reveal-delay-1" data-cat="governance">
+      <div class="core-card-top">
+        <div class="core-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <div><div class="core-ref">GC/MCC/2026/001</div><div class="core-title">Master Consolidated Constitutional Compendium</div></div>
+      </div>
+      <div class="core-card-body"><p class="core-desc">The integrated and authoritative compilation of the Global Compact's foundational identity, principles, and institutional positioning.</p></div>
+    </div>
+    <div class="core-card reveal reveal-delay-2" data-cat="diplomatic">
+      <div class="core-card-top">
+        <div class="core-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div><div class="core-ref">GC/UDK/2026/001</div><div class="core-title">UN System &amp; Heads of State Diplomatic Dispatch Kit</div></div>
+      </div>
+      <div class="core-card-body"><p class="core-desc">The standardized diplomatic transmission protocol for circulation of Global Compact materials to international institutions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENT REGISTRY TABLE -->
+<section class="registry">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Reference Registry GC/REG/2026</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Full Document Registry</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">All official publications, communications, endorsements, declarations, and institutional instruments are assigned unique reference numbers through the Global Compact Registry.</p>
+  <div class="registry-table-wrap reveal reveal-delay-2">
+    <table class="registry-table">
+      <thead>
+        <tr><th>Reference</th><th>Document Title</th><th>Category</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr class="registry-row" data-cat="diplomatic"><td class="reg-ref">GC/ESP1P/2026/001</td><td><div class="reg-title">Executive Summary One-Pager</div><div class="reg-desc">Heads of State / UN System / High-Level Decision Makers Version</div></td><td><span class="reg-tag">Diplomatic</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="diplomatic"><td class="reg-ref">GC/DECK/2026/001</td><td><div class="reg-title">Executive Presentation Deck</div><div class="reg-desc">UN / Heads of State / Global Investors Version — 14 slides</div></td><td><span class="reg-tag">Diplomatic</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="diplomatic"><td class="reg-ref">GC/NV/2026/0001</td><td><div class="reg-title">Official Diplomatic Note Verbale</div><div class="reg-desc">Standard communication instrument for missions and institutions</div></td><td><span class="reg-tag">Diplomatic</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="diplomatic"><td class="reg-ref">GC/SUB/2026/001</td><td><div class="reg-title">Official Diplomatic Submission Package</div><div class="reg-desc">UN System / Heads of State / Regional Organizations transmission package</div></td><td><span class="reg-tag">Diplomatic</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="governance"><td class="reg-ref">GC/PFA/2026/001</td><td><div class="reg-title">Partnership Framework Agreement</div><div class="reg-desc">UN / States / Regional Organizations / Investors / Institutions</div></td><td><span class="reg-tag">Governance</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="governance"><td class="reg-ref">GC/IMP/KPI/2026/001</td><td><div class="reg-title">Implementation, Monitoring &amp; KPI Framework</div><div class="reg-desc">Operational impact and results architecture</div></td><td><span class="reg-tag">Governance</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="diplomatic"><td class="reg-ref">GC/END/2026/001</td><td><div class="reg-title">Official Endorsement &amp; Engagement Pack</div><div class="reg-desc">Instruments for endorsement, support, participation and partnership</div></td><td><span class="reg-tag">Diplomatic</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="diplomatic"><td class="reg-ref">GC/INV/2026/001</td><td><div class="reg-title">Invitation for Endorsement &amp; Participation</div><div class="reg-desc">Heads of State / UN System / Regional Organizations Version</div></td><td><span class="reg-tag">Diplomatic</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="reference"><td class="reg-ref">GC/BIS/2026/001</td><td><div class="reg-title">Brand, Diplomatic Identity &amp; Visual Governance System</div><div class="reg-desc">Institutional identity standards manual</div></td><td><span class="reg-tag">Reference</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="reference"><td class="reg-ref">GC/DESIGN/2026/001</td><td><div class="reg-title">Diplomatic Submission Design Specification</div><div class="reg-desc">PDF / Print / UN Dossier formatting standard</div></td><td><span class="reg-tag">Reference</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="annex"><td class="reg-ref">GC/ANN/2026/001</td><td><div class="reg-title">Reference Annexes (A–P)</div><div class="reg-desc">Sixteen supporting instruments, frameworks &amp; reference materials</div></td><td><span class="reg-tag">Annex</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="reference"><td class="reg-ref">GC/CONTACT/2026/001</td><td><div class="reg-title">Institutional Contacts</div><div class="reg-desc">Official communication and coordination information</div></td><td><span class="reg-tag">Reference</span></td><td class="reg-status">Active</td></tr>
+        <tr class="registry-row" data-cat="foundational"><td class="reg-ref">GC/INIT/2026/001</td><td><div class="reg-title">Initiatives, Policy Proposals &amp; International Instruments</div><div class="reg-desc">Full thematic portfolio of flagship initiatives and instruments</div></td><td><span class="reg-tag">Foundational</span></td><td class="reg-status">Active</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ANNEXES A-P -->
+<section class="annexes">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Reference No. GC/ANN/2026/001</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Annexes A&ndash;P</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">Supporting instruments, frameworks, and reference materials forming an integral part of the official documentation package. All Annexes are advisory, explanatory, and non-binding in nature.</p>
+  <div class="annex-grid">
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">A</div><div class="annex-title">Founding Declaration</div><div class="annex-desc">Vision, purpose & foundational aspirations</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">B</div><div class="annex-title">Founder's Message & Vision Statement</div><div class="annex-desc">Philosophical inspiration & direction</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">C</div><div class="annex-title">Executive Summary & One-Page Brief</div><div class="annex-desc">High-level overview for decision-makers</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">D</div><div class="annex-title">Core Positioning Dossier</div><div class="annex-desc">Identity, objectives & governance philosophy</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">E</div><div class="annex-title">Executive Presentation Deck</div><div class="annex-desc">Structured presentation package</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">F</div><div class="annex-title">Foundational Ethical Framework</div><div class="annex-desc">Doctrine of Divine Diplomacy</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">G</div><div class="annex-title">Institutional Governance Constitution</div><div class="annex-desc">Architecture, coordination & advisory structures</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">H</div><div class="annex-title">Master Consolidated Constitutional Compendium</div><div class="annex-desc">Integrated authoritative compilation</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">I</div><div class="annex-title">Endorsement & Partnership Instruments</div><div class="annex-desc">Templates & declarations for engagement</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">J</div><div class="annex-title">Multi-Stakeholder Invitation</div><div class="annex-desc">Official invitation framework for engagement</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">K</div><div class="annex-title">UN System Diplomatic Dispatch Kit</div><div class="annex-desc">Standardized transmission protocol</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">L</div><div class="annex-title">Initiatives & Policy Instruments Portfolio</div><div class="annex-desc">Thematic portfolio of all flagship initiatives</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">M</div><div class="annex-title">Diplomatic Correspondence Templates</div><div class="annex-desc">Cover letters, notes & response templates</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">N</div><div class="annex-title">Official Editorial & Style Guide</div><div class="annex-desc">Terminology, formatting & writing standards</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">O</div><div class="annex-title">Institutional Symbols & Visual Identity</div><div class="annex-desc">Emblem, motto, color palette & typography</div></div>
+    <div class="annex-card reveal" data-cat="annex"><div class="annex-letter">P</div><div class="annex-title">Contact, Registry & Authentication Framework</div><div class="annex-desc">Reference numbering & document control</div></div>
+  </div>
+</section>
+
+<!-- EDITORIAL STANDARDS -->
+<section class="editorial">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Annex N — Official Editorial &amp; Style Guide</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Document Standards<br/>&amp; Conventions</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">All Global Compact documents, publications, and correspondence adhere to the following editorial and formatting standards.</p>
+  <div class="editorial-grid reveal reveal-delay-2">
+    <div class="editorial-item">Terminology standards</div>
+    <div class="editorial-item">Capitalization conventions</div>
+    <div class="editorial-item">Reference numbering</div>
+    <div class="editorial-item">Citation format</div>
+    <div class="editorial-item">Typography and formatting</div>
+    <div class="editorial-item">Diplomatic writing style</div>
+    <div class="editorial-item">Document control procedures</div>
+    <div class="editorial-item">UN-grade formal language</div>
+    <div class="editorial-item">Print & export standards</div>
+  </div>
+</section>
+
+<!-- CITATION FORMAT -->
+<section class="citation">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Citation & Reference Format</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">How Documents Are<br/>Referenced &amp; Cited</h2>
+  <div class="citation-card reveal reveal-delay-2">
+    <div class="citation-format">GC / TYPE / YEAR / NUMBER</div>
+    <div class="citation-example">Example: <strong>GC/BRF/2026/001</strong> &mdash; Briefing document, 2026, first issuance</div>
+  </div>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;margin-top:24px;">Each document is uniquely traceable in the master registry. This consistent referencing system ensures institutional coherence and supports diplomatic archival review across all Global Compact publications.</p>
+</section>
+
+<!-- CTA -->
+<section class="pub-cta">
+  <div class="cta-strip reveal">
+    <div>
+      <h3>Request Official Documents</h3>
+      <p>For copies of any document listed in the registry, or to request the full diplomatic submission package, contact the Global Secretariat through the official communication channels.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn-primary">Request Documents</a>
+      <a href="partnerships.html" class="btn-ghost">Explore Partnerships</a>
+    </div>
+  </div>
+</section>
+
+<!-- MOTTO -->
+<div class="motto-banner reveal">
+  <h2>ONE HUMANITY &bull; ONE FUTURE &bull; ONE GLOBAL COMPACT</h2>
+  <p>Divine Diplomacy — The Constitutional Morality of Global Order</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><img src="logo.jpg" alt="Global Compact Seal" /><div class="footer-logo-name">Global Compact<br/>for Peace &amp; Human Security</div></div>
+      <p class="footer-desc">A voluntary, non-binding, multipolar and multi-stakeholder international cooperation framework advancing peace, human dignity, and responsible international cooperation.</p>
+      <div class="footer-contact">
+        <div>Email: <a href="mailto:globalcompactinitiative@gmail.com">globalcompactinitiative@gmail.com</a></div>
+        <div>Tel: <a href="tel:+2348067056348">+234 806 705 6348</a></div>
+        <div>Lagos &amp; Abuja, Nigeria</div>
+        <div style="margin-top:6px;color:var(--gold-dim);">Ref. Registry: GC/REG/2026</div>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About the Compact</a></li><li><a href="founder.html">The Founder</a></li><li><a href="doctrine.html">Divine Diplomacy</a></li><li><a href="governance.html">Governance</a></li><li><a href="membership.html">Membership</a></li></ul></div>
+    <div class="footer-col"><h4>Programmes</h4><ul><li><a href="initiatives.html#imppera">IMPPERA</a></li><li><a href="initiatives.html#ncti">Nuclear Civilization</a></li><li><a href="initiatives.html#gsei">Security Employment</a></li><li><a href="initiatives.html#ungfsaii">Food Security</a></li><li><a href="initiatives.html#gspf">Peace Stabilization</a></li></ul></div>
+    <div class="footer-col"><h4>Engage</h4><ul><li><a href="partnerships.html">Endorsement</a></li><li><a href="partnerships.html#strategic">Strategic Partnership</a></li><li><a href="forum.html">Annual Global Forum</a></li><li><a href="publications.html">Document Registry</a></li><li><a href="contact.html">Contact Secretariat</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright &copy; 2026 Global Compact for Peace, Human Security and Responsible International Cooperation. All Rights Reserved.</p>
+    <div class="footer-bottom-right">One Humanity &middot; One Future &middot; One Global Compact</div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('mobile-drawer');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); drawer.classList.remove('open'); document.body.style.overflow = '';
+  }));
+
+  // Filter logic
+  function setFilter(cat, btn) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('[data-cat]').forEach(el => {
+      if (cat === 'all' || el.getAttribute('data-cat') === cat) {
+        el.style.display = '';
+      } else {
+        el.style.display = 'none';
+      }
+    });
+  }
+
+  function filterDocs() {
+    const q = document.getElementById('doc-search-input').value.toLowerCase();
+    document.querySelectorAll('[data-cat]').forEach(el => {
+      const text = el.textContent.toLowerCase();
+      el.style.display = text.includes(q) ? '' : 'none';
+    });
+  }
+
+  // Reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
