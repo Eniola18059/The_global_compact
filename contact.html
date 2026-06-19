@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Global Compact for Peace, Human Security and Responsible International Cooperation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #08111F; --navy-mid: #0D1B2E; --navy-light: #152235;
+      --gold: #C9A84C; --gold-light: #E2C87A; --gold-dim: #8A6E30;
+      --cream: #F4EFE4; --white: #FFFFFF; --muted: #8A9BB0;
+      --border: rgba(201,168,76,0.18);
+      --font-display: 'Cinzel', serif; --font-body: 'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: var(--font-body); overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 clamp(20px,5vw,80px); height: 72px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,17,31,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: contain; }
+    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: clamp(9px,1.1vw,11px); letter-spacing: 0.1em; color: var(--cream); text-transform: uppercase; font-weight: 600; }
+    .nav-logo-text span:last-child { font-size: 9px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; list-style: none; height: 72px; }
+    .nav-item { position: relative; height: 100%; display: flex; align-items: center; }
+    .nav-item > a, .nav-trigger { font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); text-decoration: none; font-weight: 500; padding: 0 14px; height: 100%; display: flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-family: var(--font-body); transition: color 0.2s; white-space: nowrap; }
+    .nav-item > a:hover, .nav-trigger:hover, .nav-item:hover > a, .nav-item:hover > .nav-trigger { color: var(--gold); }
+    .nav-item > a.active { color: var(--gold); }
+    .nav-trigger svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.25s; }
+    .nav-item:hover .nav-trigger svg { transform: rotate(180deg); }
+    .mega-panel { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(8,17,31,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px clamp(20px,5vw,80px) 40px; z-index: 199; animation: megaFade 0.22s ease; }
+    .nav-item:hover .mega-panel { display: block; }
+    @keyframes megaFade { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+    .mega-inner { display: grid; gap: 36px; }
+    .mega-inner.cols-4 { grid-template-columns: repeat(4,1fr); }
+    .mega-inner.cols-3 { grid-template-columns: repeat(3,1fr); }
+    .mega-inner.cols-5 { grid-template-columns: repeat(5,1fr); }
+    .mega-col-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .mega-links { display: flex; flex-direction: column; gap: 1px; }
+    .mega-link { display: flex; align-items: flex-start; gap: 11px; padding: 8px 10px; border-radius: 3px; text-decoration: none; transition: background 0.2s; }
+    .mega-link:hover { background: rgba(201,168,76,0.06); }
+    .mega-link-dot { width: 5px; height: 5px; border: 1px solid var(--gold-dim); border-radius: 50%; flex-shrink: 0; margin-top: 5px; transition: background 0.2s; }
+    .mega-link:hover .mega-link-dot { background: var(--gold); border-color: var(--gold); }
+    .mega-link-text strong { display: block; font-size: 12px; color: var(--cream); font-weight: 500; margin-bottom: 2px; }
+    .mega-link-text span { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .nav-cta-btn { padding: 9px 22px; border: 1px solid var(--gold-dim); color: var(--gold); border-radius: 2px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 10px; transition: background 0.25s, color 0.25s; }
+    .nav-cta-btn:hover { background: var(--gold); color: var(--navy); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-burger span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: all 0.3s ease; }
+    .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+    .mobile-drawer { display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0; background: rgba(8,17,31,0.99); backdrop-filter: blur(20px); z-index: 198; overflow-y: auto; padding: 0 clamp(20px,5vw,48px) 48px; }
+    .mobile-drawer.open { display: block; }
+    .mob-section { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 18px 0 4px; }
+    .mob-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; padding: 0 4px; }
+    .mob-section a { display: block; font-size: 13px; color: var(--muted); text-decoration: none; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.03); transition: color 0.2s; }
+    .mob-section a:hover { color: var(--cream); }
+    .mob-section a:last-child { border-bottom: none; }
+    .mob-engage { padding: 28px 0; }
+    .mob-engage a { display: inline-flex; padding: 12px 28px; border: 1px solid var(--gold-dim); color: var(--gold); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 2px; }
+    @media(max-width:1100px){ .nav-links,.nav-cta-btn{display:none} .nav-burger{display:flex} }
+
+    /* PAGE HERO */
+    .page-hero { padding: 140px clamp(20px,6vw,100px) 60px; background: var(--navy-mid); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .page-hero::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 100% at 80% 50%,rgba(201,168,76,0.04) 0%,transparent 70%); pointer-events:none; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb-sep { color: var(--gold-dim); }
+    .page-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .page-eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+    .page-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .page-title { font-family: var(--font-display); font-size: clamp(32px,5vw,64px); font-weight: 600; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .page-title em { font-style: normal; color: var(--gold); }
+    .page-subtitle { font-size: clamp(15px,1.6vw,18px); color: var(--muted); line-height: 1.7; max-width: 620px; }
+
+    /* SECTION COMMONS */
+    section { padding: clamp(56px,8vw,100px) clamp(20px,6vw,100px); }
+    .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .section-eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+    .section-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .section-heading { font-family: var(--font-display); font-size: clamp(24px,3.5vw,44px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+    .section-body { font-size: clamp(14px,1.3vw,16px); line-height: 1.9; color: #7D93AA; }
+
+    /* MAIN CONTACT GRID */
+    .main-contact { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .contact-layout { display: grid; grid-template-columns: 1fr 420px; gap: clamp(40px,6vw,80px); align-items: start; }
+
+    /* FORM */
+    .contact-form { background: var(--navy-light); border: 1px solid var(--border); border-radius: 4px; padding: clamp(28px,3.5vw,48px); }
+    .form-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .form-row { margin-bottom: 20px; }
+    .form-row.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-field-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: block; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; background: var(--navy); border: 1px solid var(--border);
+      border-radius: 2px; padding: 13px 16px; color: var(--cream);
+      font-size: 13px; font-family: var(--font-body); transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--gold-dim); }
+    .form-input::placeholder, .form-textarea::placeholder { color: #5A6B80; }
+    .form-textarea { resize: vertical; min-height: 120px; font-family: var(--font-body); }
+    .form-select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A9BB0'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+    .form-submit { width: 100%; padding: 15px; background: var(--gold); color: var(--navy); border: none; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; border-radius: 2px; cursor: pointer; font-family: var(--font-body); transition: background 0.2s; margin-top: 8px; }
+    .form-submit:hover { background: var(--gold-light); }
+    .form-note { font-size: 11px; color: var(--muted); margin-top: 16px; line-height: 1.6; text-align: center; }
+    .form-success { display: none; text-align: center; padding: 40px 20px; }
+    .form-success.show { display: block; }
+    .form-success-icon { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .form-success-icon svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; stroke-width: 2; }
+    .form-success h3 { font-family: var(--font-display); font-size: 18px; color: var(--cream); margin-bottom: 10px; }
+    .form-success p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* Contact info sidebar */
+    .contact-info { display: flex; flex-direction: column; gap: 20px; }
+    .info-card { background: var(--navy-light); border: 1px solid var(--border); border-radius: 3px; padding: 24px; transition: border-color 0.25s; }
+    .info-card:hover { border-color: var(--gold-dim); }
+    .info-card-icon { width: 38px; height: 38px; border: 1px solid var(--gold-dim); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .info-card-icon svg { width: 17px; height: 17px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .info-card-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 8px; }
+    .info-card-value { font-size: 13px; color: var(--cream); line-height: 1.6; font-weight: 500; }
+    .info-card-value a { color: var(--cream); text-decoration: none; transition: color 0.2s; }
+    .info-card-value a:hover { color: var(--gold); }
+    .info-card-sub { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+
+    /* CONTACT CHANNELS */
+    .channels { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .channels-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-top: 48px; }
+    .channel-card { border: 1px solid var(--border); border-radius: 3px; padding: 24px; background: var(--navy); transition: border-color 0.25s, transform 0.25s; }
+    .channel-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .channel-icon { width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .channel-icon svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .channel-title { font-family: var(--font-display); font-size: 12px; color: var(--cream); margin-bottom: 8px; }
+    .channel-desc { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+    /* OFFICES */
+    .offices { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .offices-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-top: 48px; }
+    .office-card { background: var(--navy-light); border: 1px solid var(--border); border-radius: 3px; padding: clamp(24px,3vw,36px); }
+    .office-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .office-title { font-family: var(--font-display); font-size: clamp(14px,1.5vw,18px); color: var(--cream); font-weight: 600; margin-bottom: 16px; }
+    .office-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .office-detail { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .office-detail strong { color: var(--cream); font-weight: 500; }
+
+    /* AUTHENTICATION NOTICE */
+    .auth-notice { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .notice-card { background: var(--navy); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 3px; padding: clamp(28px,3vw,44px); max-width: 800px; margin-top: 40px; }
+    .notice-card p { font-size: 14px; color: var(--muted); line-height: 1.85; }
+    .notice-card p + p { margin-top: 16px; }
+    .notice-card strong { color: var(--cream); }
+
+    /* MOTTO / FOOTER */
+    .motto-banner { background: var(--gold); padding: clamp(32px,4vw,56px) clamp(20px,6vw,100px); text-align: center; }
+    .motto-banner h2 { font-family: var(--font-display); font-size: clamp(15px,2.6vw,32px); color: var(--navy); letter-spacing: 0.12em; font-weight: 600; }
+    .motto-banner p { font-size: 11px; letter-spacing: 0.2em; color: var(--navy); opacity: 0.65; margin-top: 8px; text-transform: uppercase; }
+    footer { background: var(--navy-mid); border-top: 1px solid var(--border); padding: clamp(48px,6vw,80px) clamp(20px,6vw,100px) 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(32px,4vw,60px); margin-bottom: 48px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { width: 38px; height: 38px; border-radius: 50%; object-fit: contain; }
+    .footer-logo-name { font-family: var(--font-display); font-size: 10px; color: var(--cream); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5; }
+    .footer-desc { font-size: 12px; line-height: 1.75; color: var(--muted); max-width: 280px; margin-bottom: 20px; }
+    .footer-contact { font-size: 11px; color: var(--muted); line-height: 1.9; }
+    .footer-contact a { color: var(--gold-dim); text-decoration: none; }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-col h4 { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 11px; color: var(--muted); }
+    .footer-bottom-right { font-size: 10px; color: var(--gold-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    @media(max-width:1024px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .channels-grid { grid-template-columns: repeat(2,1fr); }
+      .offices-grid { grid-template-columns: 1fr; }
+      .form-row.two-col { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:640px) {
+      .channels-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Global Compact Seal" />
+    <div class="nav-logo-text"><span>Global Compact</span><span>Peace · Human Security · Cooperation</span></div>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">Institution <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-4">
+        <div><div class="mega-col-label">About</div><div class="mega-links"><a href="about.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>About the Compact</strong><span>History, identity & legal status</span></div></a><a href="about.html#declaration" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Founding Declaration</strong><span>Foundational statement of purpose</span></div></a><a href="founder.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>The Founder</strong><span>H.E. Tunde Atayeshe D. Owolabi</span></div></a></div></div>
+        <div><div class="mega-col-label">Framework</div><div class="mega-links"><a href="doctrine.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Doctrine of Divine Diplomacy</strong><span>Constitutional morality of global order</span></div></a><a href="about.html#charter" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Charter of Principles</strong><span>Foundational values & ethical framework</span></div></a><a href="about.html#vision" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Vision & Mission</strong><span>Strategic direction & objectives</span></div></a></div></div>
+        <div><div class="mega-col-label">Governance</div><div class="mega-links"><a href="governance.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Governance Structure</strong><span>Leadership offices & bodies</span></div></a><a href="governance.html#secretariat" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Secretariat</strong><span>Administration & coordination</span></div></a><a href="governance.html#council" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Council</strong><span>Advisory & thematic guidance</span></div></a></div></div>
+        <div><div class="mega-col-label">Membership</div><div class="mega-links"><a href="membership.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Membership Framework</strong><span>Categories, rights & responsibilities</span></div></a><a href="membership.html#join" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>How to Join</strong><span>Eligibility & process</span></div></a><a href="membership.html#fellows" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Diplomatic Fellows</strong><span>Ambassadors of goodwill</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Initiatives <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-5">
+        <div><div class="mega-col-label">Environment</div><div class="mega-links"><a href="initiatives.html#imppera" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>IMPPERA</strong><span>Marine plastic pollution prevention</span></div></a></div></div>
+        <div><div class="mega-col-label">Security</div><div class="mega-links"><a href="initiatives.html#ncti" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>NCTI</strong><span>Nuclear civilization transition</span></div></a><a href="initiatives.html#gsei" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSEI</strong><span>Global security employment</span></div></a></div></div>
+        <div><div class="mega-col-label">Development</div><div class="mega-links"><a href="initiatives.html#ungfsaii" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>UNGFSAII</strong><span>Food security & agricultural investment</span></div></a></div></div>
+        <div><div class="mega-col-label">Peace</div><div class="mega-links"><a href="initiatives.html#gspf" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSPF</strong><span>Global security & peace stabilization</span></div></a></div></div>
+        <div><div class="mega-col-label">Overview</div><div class="mega-links"><a href="initiatives.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>All Initiatives</strong><span>Full policy portfolio</span></div></a><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Policy Documents</strong><span>Official registry</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Engage <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-3">
+        <div><div class="mega-col-label">Partnership</div><div class="mega-links"><a href="partnerships.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Partnerships & Endorsement</strong><span>All engagement modalities</span></div></a><a href="partnerships.html#endorse" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Moral Endorsement</strong><span>Voluntary expression of alignment</span></div></a><a href="partnerships.html#strategic" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Strategic Partnership</strong><span>Structured programme collaboration</span></div></a></div></div>
+        <div><div class="mega-col-label">Participation</div><div class="mega-links"><a href="partnerships.html#observer" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Observer Status</strong><span>Forum & dialogue participation</span></div></a><a href="forum.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Annual Global Forum</strong><span>Principal convening platform</span></div></a></div></div>
+        <div><div class="mega-col-label">Resources</div><div class="mega-links"><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Publications & Documents</strong><span>Official registry & instruments</span></div></a><a href="contact.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Contact the Secretariat</strong><span>Diplomatic correspondence</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item"><a href="forum.html">Forum</a></li>
+    <li class="nav-item"><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="partnerships.html" class="nav-cta-btn">Endorse &amp; Engage</a>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mob-section"><div class="mob-label">Institution</div><a href="about.html">About the Compact</a><a href="founder.html">The Founder</a><a href="doctrine.html">Doctrine of Divine Diplomacy</a><a href="governance.html">Governance</a><a href="membership.html">Membership</a></div>
+  <div class="mob-section"><div class="mob-label">Initiatives</div><a href="initiatives.html#imppera">IMPPERA</a><a href="initiatives.html#ncti">NCTI</a><a href="initiatives.html#gsei">GSEI</a><a href="initiatives.html#ungfsaii">UNGFSAII</a><a href="initiatives.html#gspf">GSPF</a></div>
+  <div class="mob-section"><div class="mob-label">Engage</div><a href="partnerships.html">Partnerships & Endorsement</a><a href="forum.html">Annual Global Forum</a><a href="publications.html">Publications</a><a href="contact.html">Contact</a></div>
+  <div class="mob-engage"><a href="partnerships.html">Endorse &amp; Engage</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep">/</span><span>Contact</span></div>
+  <div class="page-eyebrow"><div class="page-eyebrow-line"></div><span class="page-eyebrow-text">Reach the Global Secretariat</span></div>
+  <h1 class="page-title">Contact &amp;<br/><em>Correspondence</em></h1>
+  <p class="page-subtitle">The Global Secretariat welcomes diplomatic correspondence, institutional engagement, partnership inquiries, endorsement submissions, and requests for information.</p>
+</div>
+
+<!-- MAIN CONTACT -->
+<section class="main-contact">
+  <div class="contact-layout">
+    <div class="reveal">
+      <div class="contact-form">
+        <div class="form-label">Diplomatic Enquiry Form</div>
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <div id="form-fields">
+            <div class="form-row two-col">
+              <div>
+                <label class="form-field-label">Full Name *</label>
+                <input type="text" class="form-input" placeholder="Your full name" required />
+              </div>
+              <div>
+                <label class="form-field-label">Institution / Organization</label>
+                <input type="text" class="form-input" placeholder="Your institution" />
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div>
+                <label class="form-field-label">Email Address *</label>
+                <input type="email" class="form-input" placeholder="you@institution.org" required />
+              </div>
+              <div>
+                <label class="form-field-label">Country</label>
+                <input type="text" class="form-input" placeholder="Your country" />
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="form-field-label">Nature of Enquiry *</label>
+              <select class="form-select" required>
+                <option value="">Select an option</option>
+                <option>General Enquiry</option>
+                <option>Diplomatic & Government Relations</option>
+                <option>Moral Endorsement</option>
+                <option>Strategic Partnership</option>
+                <option>Observer Participation</option>
+                <option>Advisory Engagement</option>
+                <option>Investment & Development Cooperation</option>
+                <option>Annual Global Forum Registration</option>
+                <option>Publications & Document Request</option>
+                <option>Media & Press Enquiry</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label class="form-field-label">Message *</label>
+              <textarea class="form-textarea" placeholder="Please describe your enquiry or request..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Submit Enquiry</button>
+            <p class="form-note">All correspondence is reviewed by the Global Secretariat. Responses are typically provided within 5–10 business days.</p>
+          </div>
+        </form>
+        <div class="form-success" id="form-success">
+          <div class="form-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3>Enquiry Received</h3>
+          <p>Thank you for contacting the Global Compact. The Global Secretariat has received your enquiry and will respond through the official communication channels.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-info reveal reveal-delay-1">
+      <div class="info-card">
+        <div class="info-card-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></div>
+        <div class="info-card-label">General Enquiries</div>
+        <div class="info-card-value"><a href="mailto:globalcompactinitiative@gmail.com">globalcompactinitiative@gmail.com</a></div>
+        <div class="info-card-value"><a href="mailto:diplomacydivine@gmail.com">diplomacydivine@gmail.com</a></div>
+        <div class="info-card-sub">Diplomatic & government relations, partnerships, and publications all route through these channels</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div class="info-card-label">Telephone</div>
+        <div class="info-card-value"><a href="tel:+2348067056348">+234 806 705 6348</a></div>
+        <div class="info-card-value"><a href="tel:+6646470024">+66 64 647 0024</a></div>
+        <div class="info-card-value"><a href="tel:+2348088880627">+234 808 888 0627</a></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="info-card-label">Correspondence Address</div>
+        <div class="info-card-value">Global Secretariat</div>
+        <div class="info-card-sub">Global Compact for Peace, Human Security and Responsible International Cooperation<br/>Lagos &amp; Abuja, Nigeria</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="info-card-label">Official Website</div>
+        <div class="info-card-value" style="color:var(--muted);">To be available soon</div>
+        <div class="info-card-sub">Reference Registry: GC/REG/2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CHANNELS -->
+<section class="channels">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Official Communication Channels</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Routing Your Enquiry</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">All enquiries are routed through the same official channels, organized by area of focus for efficient processing by the Global Secretariat.</p>
+  <div class="channels-grid">
+    <div class="channel-card reveal">
+      <div class="channel-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="channel-title">Diplomatic & Government Relations</div>
+      <p class="channel-desc">For Heads of State, government offices, ministries of foreign affairs, and diplomatic missions</p>
+    </div>
+    <div class="channel-card reveal reveal-delay-1">
+      <div class="channel-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+      <div class="channel-title">Partnerships & Institutional Cooperation</div>
+      <p class="channel-desc">For organizations, institutions, NGOs, and private sector partnership enquiries</p>
+    </div>
+    <div class="channel-card reveal reveal-delay-2">
+      <div class="channel-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="channel-title">Publications & Documentation</div>
+      <p class="channel-desc">For document requests, registry enquiries, and official publication access</p>
+    </div>
+    <div class="channel-card reveal reveal-delay-3">
+      <div class="channel-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>
+      <div class="channel-title">Annual Global Forum</div>
+      <p class="channel-desc">For Forum registration, accreditation, and participation enquiries</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFICES -->
+<section class="offices">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Institutional Offices</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Key Offices for<br/>Correspondence</h2>
+  <div class="offices-grid">
+    <div class="office-card reveal">
+      <div class="office-label">Primary Office</div>
+      <div class="office-title">Global Secretariat</div>
+      <p class="office-desc">Primary coordinating and administrative office for institutional communication, document registry, partnership engagement, and international liaison.</p>
+      <div class="office-detail"><strong>Function:</strong> &nbsp;Coordination & Administration</div>
+      <div class="office-detail"><strong>Reference:</strong> &nbsp;GC/CONTACT/2026/001</div>
+    </div>
+    <div class="office-card reveal reveal-delay-1">
+      <div class="office-label">Executive Office</div>
+      <div class="office-title">Office of the Founding Chair, President &amp; Global Convener</div>
+      <p class="office-desc">Provides strategic leadership, high-level diplomatic engagement, and overall stewardship of the vision and objectives of the Global Compact.</p>
+      <div class="office-detail"><strong>Function:</strong> &nbsp;Strategic Leadership & Diplomatic Stewardship</div>
+      <div class="office-detail"><strong>Correspondence:</strong> &nbsp;Via Global Secretariat</div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTHENTICATION NOTICE -->
+<section class="auth-notice">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Official Notice</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Document Authentication<br/>&amp; Correspondence Integrity</h2>
+  <div class="notice-card reveal reveal-delay-2">
+    <p>Only communications issued through officially designated Global Compact communication channels and bearing appropriate institutional reference numbers shall be regarded as <strong>authentic institutional correspondence</strong>.</p>
+    <p>The Global Compact reserves the right to update or modify its contact information and administrative arrangements as necessary to support effective international engagement.</p>
+    <p>The Global Secretariat remains committed to constructive dialogue, responsible international cooperation, and collaborative engagement with governments, international organizations, civil society, academia, development partners, and other stakeholders in pursuit of peace, human dignity, and the shared future of humanity.</p>
+  </div>
+</section>
+
+<!-- MOTTO -->
+<div class="motto-banner reveal">
+  <h2>ONE HUMANITY &bull; ONE FUTURE &bull; ONE GLOBAL COMPACT</h2>
+  <p>Divine Diplomacy — The Constitutional Morality of Global Order</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><img src="logo.jpg" alt="Global Compact Seal" /><div class="footer-logo-name">Global Compact<br/>for Peace &amp; Human Security</div></div>
+      <p class="footer-desc">A voluntary, non-binding, multipolar and multi-stakeholder international cooperation framework advancing peace, human dignity, and responsible international cooperation.</p>
+      <div class="footer-contact">
+        <div>Email: <a href="mailto:globalcompactinitiative@gmail.com">globalcompactinitiative@gmail.com</a></div>
+        <div>Tel: <a href="tel:+2348067056348">+234 806 705 6348</a></div>
+        <div>Lagos &amp; Abuja, Nigeria</div>
+        <div style="margin-top:6px;color:var(--gold-dim);">Ref. Registry: GC/REG/2026</div>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About the Compact</a></li><li><a href="founder.html">The Founder</a></li><li><a href="doctrine.html">Divine Diplomacy</a></li><li><a href="governance.html">Governance</a></li><li><a href="membership.html">Membership</a></li></ul></div>
+    <div class="footer-col"><h4>Programmes</h4><ul><li><a href="initiatives.html#imppera">IMPPERA</a></li><li><a href="initiatives.html#ncti">Nuclear Civilization</a></li><li><a href="initiatives.html#gsei">Security Employment</a></li><li><a href="initiatives.html#ungfsaii">Food Security</a></li><li><a href="initiatives.html#gspf">Peace Stabilization</a></li></ul></div>
+    <div class="footer-col"><h4>Engage</h4><ul><li><a href="partnerships.html">Endorsement</a></li><li><a href="partnerships.html#strategic">Strategic Partnership</a></li><li><a href="forum.html">Annual Global Forum</a></li><li><a href="publications.html">Document Registry</a></li><li><a href="contact.html">Contact Secretariat</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright &copy; 2026 Global Compact for Peace, Human Security and Responsible International Cooperation. All Rights Reserved.</p>
+    <div class="footer-bottom-right">One Humanity &middot; One Future &middot; One Global Compact</div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('mobile-drawer');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); drawer.classList.remove('open'); document.body.style.overflow = '';
+  }));
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-fields').style.display = 'none';
+    document.getElementById('form-success').classList.add('show');
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
