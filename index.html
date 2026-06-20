@@ -174,6 +174,17 @@
     .btn-primary:hover { background:var(--gold-light); transform:translateY(-1px); }
     .btn-ghost { display:inline-flex; align-items:center; gap:10px; padding:13px 32px; border:1px solid rgba(201,168,76,0.35); color:var(--cream); font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; text-decoration:none; border-radius:2px; transition:border-color 0.25s,color 0.25s,transform 0.2s; }
     .btn-ghost:hover { border-color:var(--gold); color:var(--gold); transform:translateY(-1px); }
+    .btn-outline-gallery { display:inline-flex; align-items:center; gap:10px; padding:13px 32px; border:1px solid var(--gold-dim); color:var(--gold); font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; text-decoration:none; border-radius:2px; background:transparent; transition:background 0.25s,color 0.25s,transform 0.2s; }
+    .btn-outline-gallery:hover { background:var(--gold); color:var(--navy); transform:translateY(-1px); }
+
+    /* Typewriter */
+    .typewriter-wrap { display:inline-block; min-height:1.3em; }
+    .typewriter-cursor {
+      display:inline-block; width:2px; height:1em; background:var(--gold);
+      margin-left:4px; vertical-align:middle;
+      animation: caretBlink 0.85s steps(1) infinite;
+    }
+    @keyframes caretBlink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
 
     /* ── MARQUEE ── */
     .marquee-strip { background:var(--navy-mid); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:14px 0; overflow:hidden; }
@@ -514,8 +525,7 @@
       One Compact.
     </h1>
     <div class="hero-subheading">
-      A Voluntary Multipolar Framework for Peace,<br/>
-      Human Security &amp; Responsible International Cooperation
+      <span class="typewriter-wrap" id="typewriter"></span><span class="typewriter-cursor"></span>
     </div>
     <div class="hero-divider"></div>
     <p class="hero-desc">
@@ -530,6 +540,10 @@ The Global Compact for Peace, Human Security and Responsible International Coope
         <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
       <a href="partnerships.html" class="btn-ghost">Endorse &amp; Engage</a>
+      <a href="gallery.html" class="btn-outline-gallery">
+        Gallery
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </a>
     </div>
   </div>
 
@@ -814,8 +828,45 @@ The Global Compact for Peace, Human Security and Responsible International Coope
     setTimeout(() => {
       document.getElementById('preloader').classList.add('hidden');
       document.body.style.overflow = '';
+      startTypewriter();
     }, 2400);
   });
+
+  // Typewriter effect for hero subheading
+  function startTypewriter() {
+    const phrases = [
+      'A Voluntary Multipolar Framework for Peace',
+      'Human Security & Responsible Cooperation',
+      'One Humanity. One Future. One Compact.'
+    ];
+    const el = document.getElementById('typewriter');
+    let phraseIndex = 0, charIndex = 0, deleting = false;
+
+    function tick() {
+      const current = phrases[phraseIndex];
+      if (!deleting) {
+        charIndex++;
+        el.textContent = current.slice(0, charIndex);
+        if (charIndex === current.length) {
+          deleting = true;
+          setTimeout(tick, 1800);
+          return;
+        }
+        setTimeout(tick, 45);
+      } else {
+        charIndex--;
+        el.textContent = current.slice(0, charIndex);
+        if (charIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          setTimeout(tick, 350);
+          return;
+        }
+        setTimeout(tick, 25);
+      }
+    }
+    tick();
+  }
 
   // Particles
   const pEl = document.getElementById('particles');
