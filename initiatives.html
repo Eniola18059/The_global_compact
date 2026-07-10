@@ -96,8 +96,8 @@
 
     /* ── OVERVIEW STRIP ── */
     .overview { background: var(--navy); border-bottom: 1px solid var(--border); }
-    .overview-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
-    .overview-card { background: var(--navy); padding: 24px 20px; text-align: center; cursor: pointer; transition: background 0.25s; text-decoration: none; display: block; }
+    .overview-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+    .overview-card { background: var(--navy); padding: 24px 18px; text-align: center; cursor: pointer; transition: background 0.25s; text-decoration: none; display: block; }
     .overview-card:hover { background: var(--navy-light); }
     .overview-num { font-family: var(--font-display); font-size: 28px; color: var(--gold); font-weight: 600; opacity: 0.4; margin-bottom: 8px; }
     .overview-abbr { font-size: 11px; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
@@ -113,7 +113,7 @@
     .init-layout.reverse > * { direction: ltr; }
 
     .init-header { margin-bottom: 32px; }
-    .init-code { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .init-code { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
     .init-badge { padding: 6px 14px; border: 1px solid var(--gold-dim); border-radius: 2px; font-family: var(--font-display); font-size: 11px; color: var(--gold); letter-spacing: 0.1em; }
     .init-domain { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
     .init-title-large { font-family: var(--font-display); font-size: clamp(20px,2.8vw,34px); font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 8px; letter-spacing: 0.01em; }
@@ -140,6 +140,26 @@
     .init-meta-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); }
     .init-meta-value { font-size: 13px; color: var(--cream); font-weight: 500; line-height: 1.5; }
     .init-meta-value.muted { color: var(--muted); font-weight: 400; }
+
+    /* ── COUNTRY MODEL (illustrative financing example) ── */
+    .country-model { margin-top: 36px; border: 1px solid var(--border); border-radius: 4px; background: var(--navy-light); overflow: hidden; }
+    .country-model-head { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .country-model-head h4 { font-family: var(--font-display); font-size: 14px; color: var(--cream); letter-spacing: 0.03em; }
+    .country-model-tag { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold-dim); border-radius: 2px; padding: 5px 10px; }
+    .country-model-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); }
+    .cm-stat { background: var(--navy-light); padding: 18px 20px; }
+    .cm-stat-label { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 6px; }
+    .cm-stat-value { font-family: var(--font-display); font-size: clamp(15px,1.6vw,19px); color: var(--gold); font-weight: 600; }
+    .country-model-alloc { padding: 22px 24px; }
+    .cm-alloc-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .cm-alloc-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .cm-alloc-row:last-child { border-bottom: none; }
+    .cm-alloc-name { flex: 1; font-size: 12.5px; color: var(--cream); }
+    .cm-alloc-bar-wrap { flex: 1.4; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+    .cm-alloc-bar { height: 100%; background: linear-gradient(90deg,var(--gold-dim),var(--gold)); border-radius: 3px; }
+    .cm-alloc-pct { width: 40px; text-align: right; font-size: 12px; color: var(--gold); font-weight: 600; }
+    .cm-alloc-amt { width: 100px; text-align: right; font-size: 11px; color: var(--muted); }
+    .country-model-note { padding: 16px 24px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--muted); line-height: 1.6; }
 
     /* ── POLICY INSTRUMENTS ── */
     .policy { background: var(--navy); border-bottom: 1px solid var(--border); }
@@ -210,6 +230,7 @@
       .cta-strip { grid-template-columns: 1fr; }
       .cta-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .country-model-stats { grid-template-columns: repeat(2,1fr); }
     }
     @media(max-width:640px) {
       .overview-grid { grid-template-columns: repeat(2,1fr); }
@@ -217,6 +238,8 @@
       .focus-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; text-align: center; }
+      .cm-alloc-row { flex-wrap: wrap; }
+      .cm-alloc-amt { width: auto; }
     }
   </style>
 </head>
@@ -242,7 +265,7 @@
       <button class="nav-trigger">Initiatives <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
       <div class="mega-panel"><div class="mega-inner cols-5">
         <div><div class="mega-col-label">Environment</div><div class="mega-links"><a href="initiatives.html#imppera" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>IMPPERA</strong><span>Marine plastic pollution prevention</span></div></a></div></div>
-        <div><div class="mega-col-label">Security</div><div class="mega-links"><a href="initiatives.html#ncti" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>NCTI</strong><span>Nuclear civilization transition</span></div></a><a href="initiatives.html#gsei" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSEI</strong><span>Global security employment</span></div></a></div></div>
+        <div><div class="mega-col-label">Security</div><div class="mega-links"><a href="initiatives.html#ncti" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>NCTI</strong><span>Nuclear civilization transition</span></div></a><a href="initiatives.html#gsei" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSEI</strong><span>Global security employment</span></div></a><a href="initiatives.html#desa" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>DESA</strong><span>Sovereign autonomy & cooperative security</span></div></a></div></div>
         <div><div class="mega-col-label">Development</div><div class="mega-links"><a href="initiatives.html#ungfsaii" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>UNGFSAII</strong><span>Food security & agricultural investment</span></div></a></div></div>
         <div><div class="mega-col-label">Peace</div><div class="mega-links"><a href="initiatives.html#gspf" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>GSPF</strong><span>Global security & peace stabilization</span></div></a></div></div>
         <div><div class="mega-col-label">Overview</div><div class="mega-links"><a href="initiatives.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>All Initiatives</strong><span>Full policy portfolio</span></div></a><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Policy Documents</strong><span>Official registry</span></div></a></div></div>
@@ -266,7 +289,7 @@
 <!-- MOBILE DRAWER -->
 <div class="mobile-drawer" id="mobile-drawer">
   <div class="mob-section"><div class="mob-label">Institution</div><a href="about.html">About the Compact</a><a href="founder.html">The Founder</a><a href="doctrine.html">Doctrine of Divine Diplomacy</a><a href="governance.html">Governance</a><a href="membership.html">Membership</a></div>
-  <div class="mob-section"><div class="mob-label">Initiatives</div><a href="#imppera">IMPPERA</a><a href="#ncti">NCTI</a><a href="#gsei">GSEI</a><a href="#ungfsaii">UNGFSAII</a><a href="#gspf">GSPF</a></div>
+  <div class="mob-section"><div class="mob-label">Initiatives</div><a href="#imppera">IMPPERA</a><a href="#ncti">NCTI</a><a href="#gsei">GSEI</a><a href="#desa">DESA</a><a href="#ungfsaii">UNGFSAII</a><a href="#gspf">GSPF</a></div>
   <div class="mob-section"><div class="mob-label">Engage</div><a href="partnerships.html">Partnerships & Endorsement</a><a href="forum.html">Annual Global Forum</a><a href="publications.html">Publications</a><a href="contact.html">Contact</a></div>
   <div class="mob-engage"><a href="partnerships.html">Endorse &amp; Engage</a></div>
 </div>
@@ -276,27 +299,29 @@
   <div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep">/</span><span>Initiatives & Policy</span></div>
   <div class="page-eyebrow"><div class="page-eyebrow-line"></div><span class="page-eyebrow-text">Flagship Initiatives</span></div>
   <h1 class="page-title">Core International<br/><em>Policy Domains</em></h1>
-  <p class="page-subtitle">Five strategic programmes addressing humanity's most pressing global challenges through structured international cooperation, voluntary engagement, and shared responsibility.</p>
+  <p class="page-subtitle">Six strategic programmes addressing humanity's most pressing global challenges through structured international cooperation, voluntary engagement, and shared responsibility.</p>
   <div class="init-quick-nav">
     <a href="#imppera" class="init-pill"><span class="init-pill-num">01</span><span class="init-pill-name">IMPPERA</span></a>
     <a href="#ncti" class="init-pill"><span class="init-pill-num">02</span><span class="init-pill-name">NCTI</span></a>
     <a href="#gsei" class="init-pill"><span class="init-pill-num">03</span><span class="init-pill-name">GSEI</span></a>
-    <a href="#ungfsaii" class="init-pill"><span class="init-pill-num">04</span><span class="init-pill-name">UNGFSAII</span></a>
-    <a href="#gspf" class="init-pill"><span class="init-pill-num">05</span><span class="init-pill-name">GSPF</span></a>
+    <a href="#desa" class="init-pill"><span class="init-pill-num">04</span><span class="init-pill-name">DESA</span></a>
+    <a href="#ungfsaii" class="init-pill"><span class="init-pill-num">05</span><span class="init-pill-name">UNGFSAII</span></a>
+    <a href="#gspf" class="init-pill"><span class="init-pill-num">06</span><span class="init-pill-name">GSPF</span></a>
   </div>
 </div>
 
 <!-- OVERVIEW -->
 <section class="overview">
   <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">At a Glance</span></div>
-  <h2 class="section-heading reveal reveal-delay-1">Five Flagship Initiatives</h2>
+  <h2 class="section-heading reveal reveal-delay-1">Six Flagship Initiatives</h2>
   <p class="section-body reveal reveal-delay-2" style="max-width:640px;">Each initiative represents a structured policy framework — open for endorsement, technical cooperation, strategic partnership, and engagement by eligible stakeholders worldwide.</p>
   <div class="overview-grid reveal reveal-delay-2">
     <a href="#imppera" class="overview-card"><div class="overview-num">01</div><div class="overview-abbr">IMPPERA</div><div class="overview-name">Marine Plastic Pollution Prevention</div></a>
     <a href="#ncti" class="overview-card"><div class="overview-num">02</div><div class="overview-abbr">NCTI</div><div class="overview-name">Nuclear Civilization Transition</div></a>
     <a href="#gsei" class="overview-card"><div class="overview-num">03</div><div class="overview-abbr">GSEI</div><div class="overview-name">Global Security Employment</div></a>
-    <a href="#ungfsaii" class="overview-card"><div class="overview-num">04</div><div class="overview-abbr">UNGFSAII</div><div class="overview-name">Food Security & Agricultural Investment</div></a>
-    <a href="#gspf" class="overview-card"><div class="overview-num">05</div><div class="overview-abbr">GSPF</div><div class="overview-name">Peace Stabilization Framework</div></a>
+    <a href="#desa" class="overview-card"><div class="overview-num">04</div><div class="overview-abbr">DESA</div><div class="overview-name">Defense &amp; Enhancement of Sovereign Autonomy</div></a>
+    <a href="#ungfsaii" class="overview-card"><div class="overview-num">05</div><div class="overview-abbr">UNGFSAII</div><div class="overview-name">Food Security & Agricultural Investment</div></a>
+    <a href="#gspf" class="overview-card"><div class="overview-num">06</div><div class="overview-abbr">GSPF</div><div class="overview-name">Peace Stabilization Framework</div></a>
   </div>
 </section>
 
@@ -312,17 +337,17 @@
         <div class="init-title-large">International Marine Plastic Pollution Prevention, Enforcement &amp; Environmental Restoration Framework</div>
         <div class="init-subtitle">Environmental Protection · Marine Conservation · Sustainable Development</div>
       </div>
-      <p class="init-desc-full">An international environmental policy proposal advocating strengthened cooperation, environmental enforcement mechanisms, marine pollution prevention measures, ecological restoration initiatives, and sustainable environmental governance to address the global challenge of marine plastic pollution.</p>
-      <p class="init-desc-full">IMPPERA recognizes that marine plastic pollution represents one of the most urgent environmental crises of our time — threatening ocean ecosystems, marine biodiversity, food security, and human health worldwide. It calls for coordinated international action grounded in shared responsibility and sustainable governance.</p>
+      <p class="init-desc-full">Recognizing the growing scientific evidence of severe plastic contamination throughout the world's oceans, rivers, coastal environments, and marine ecosystems, IMPPERA calls upon international and regional institutions to strengthen environmental governance, promote coordinated ecological protection mechanisms, and advance effective international accountability standards.</p>
+      <p class="init-desc-full">Marine plastic pollution and microplastic contamination present significant threats to marine biodiversity, human health, food security, maritime sustainability, climate stability, coastal economies, fisheries, tourism, and future generations. IMPPERA has been formally submitted for the consideration of the United Nations, European Union, African Union, ASEAN, the Commonwealth, ECOWAS, the G20, and the United Kingdom.</p>
       <div class="init-objectives">
         <div class="init-obj-label">Policy Objectives</div>
         <div class="init-obj-list">
-          <div class="init-obj-item">Strengthened international cooperation on marine pollution prevention</div>
-          <div class="init-obj-item">Development and enforcement of environmental protection mechanisms</div>
-          <div class="init-obj-item">Ecological restoration initiatives for degraded marine ecosystems</div>
-          <div class="init-obj-item">Sustainable environmental governance frameworks for ocean stewardship</div>
-          <div class="init-obj-item">International research and knowledge-sharing on marine conservation</div>
-          <div class="init-obj-item">Community and stakeholder engagement in environmental protection</div>
+          <div class="init-obj-item">Eliminate unlawful marine plastic pollution globally</div>
+          <div class="init-obj-item">Establish effective international environmental compliance standards</div>
+          <div class="init-obj-item">Strengthen accountability mechanisms for large-scale ecological contamination</div>
+          <div class="init-obj-item">Enhance environmental law-enforcement cooperation through Environmental Protection Task Forces and Marine Pollution Surveillance Units</div>
+          <div class="init-obj-item">Promote responsible industrial plastic production, disposal practices and corporate environmental responsibility</div>
+          <div class="init-obj-item">Advance ecological restoration through a proposed International Ecological Restoration Fund</div>
         </div>
       </div>
     </div>
@@ -337,8 +362,8 @@
           <div class="init-meta"><div class="init-meta-label">Initiative Code</div><div class="init-meta-value">IMPPERA</div></div>
           <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Environmental Affairs & Climate Policy</div></div>
           <div class="init-meta"><div class="init-meta-label">Focus Area</div><div class="init-meta-value">Marine Conservation & Sustainable Development</div></div>
+          <div class="init-meta"><div class="init-meta-label">Submitted To</div><div class="init-meta-value muted">UN, EU, AU, ASEAN, Commonwealth, ECOWAS, G20, UK</div></div>
           <div class="init-meta"><div class="init-meta-label">Nature</div><div class="init-meta-value muted">Non-binding international policy proposal</div></div>
-          <div class="init-meta"><div class="init-meta-label">Engagement</div><div class="init-meta-value muted">Open to governments, institutions & organizations</div></div>
         </div>
       </div>
     </div>
@@ -355,19 +380,19 @@
           <span class="init-domain">Peace, Strategic Stability & Global Cooperation</span>
         </div>
         <div class="init-title-large">Nuclear Civilization Transition Initiative</div>
-        <div class="init-subtitle">From Deterrence to Cooperation · From Fear to Future</div>
+        <div class="init-subtitle">Responsible Nuclear Stewardship · Cooperative Security · Strategic Stability</div>
       </div>
-      <p class="init-desc-full">A strategic policy initiative encouraging progressive international dialogue on nuclear risk reduction, strategic stability, peaceful coexistence, confidence-building measures, responsible security governance, and the long-term transition from doctrines of mutual deterrence toward frameworks of cooperation, shared security, human survival, and sustainable global peace.</p>
-      <p class="init-desc-full">NCTI holds that human civilization should progressively reduce its dependence upon doctrines rooted in existential fear and mutual destruction, and advance toward a cooperative model grounded in trust, shared security, and responsible stewardship of global peace.</p>
+      <p class="init-desc-full">NCTI is founded on the principle that long-term global security is strengthened through responsible leadership, confidence-building, mutual trust, scientific cooperation, effective diplomacy, and full respect for the sovereignty and equality of all States. It has been submitted to the UN, UN Security Council, IAEA, EU, AU, ASEAN, the Commonwealth, ECOWAS, the G20, and the Conference on Disarmament.</p>
+      <p class="init-desc-full">The Initiative encourages governments to expand peaceful international engagement, responsible scientific collaboration, institutional resilience, strategic transparency where appropriate, and cooperative security initiatives that reduce risk while promoting sustainable development — advancing a long-term transition from doctrines of mutual deterrence toward frameworks of shared security.</p>
       <div class="init-objectives">
         <div class="init-obj-label">Policy Objectives</div>
         <div class="init-obj-list">
-          <div class="init-obj-item">Progressive international dialogue on nuclear risk reduction</div>
-          <div class="init-obj-item">Confidence-building measures among nuclear and non-nuclear states</div>
-          <div class="init-obj-item">Strategic stability frameworks grounded in cooperation not deterrence</div>
-          <div class="init-obj-item">Responsible security governance and arms-control cooperation</div>
-          <div class="init-obj-item">Long-term transition toward frameworks of shared security</div>
-          <div class="init-obj-item">Support for international disarmament dialogue and trust-building</div>
+          <div class="init-obj-item">Strengthen responsible international nuclear stewardship and safety cooperation</div>
+          <div class="init-obj-item">Promote peaceful international cooperation and strategic stability</div>
+          <div class="init-obj-item">Encourage confidence-building measures and crisis communication mechanisms</div>
+          <div class="init-obj-item">Support peaceful applications of nuclear science — medicine, agriculture, clean energy and environmental monitoring</div>
+          <div class="init-obj-item">Strengthen scientific exchange through a proposed International Nuclear Civilization Transition Fund</div>
+          <div class="init-obj-item">Advance risk reduction consistent with existing international legal obligations</div>
         </div>
       </div>
     </div>
@@ -382,8 +407,8 @@
           <div class="init-meta"><div class="init-meta-label">Initiative Code</div><div class="init-meta-value">NCTI</div></div>
           <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Strategic Stability & Global Cooperation</div></div>
           <div class="init-meta"><div class="init-meta-label">Tagline</div><div class="init-meta-value">From Deterrence to Cooperation, From Fear to Future</div></div>
+          <div class="init-meta"><div class="init-meta-label">Submitted To</div><div class="init-meta-value muted">UN, UNSC, IAEA, EU, AU, ASEAN, Commonwealth, ECOWAS, G20, CD</div></div>
           <div class="init-meta"><div class="init-meta-label">Nature</div><div class="init-meta-value muted">Strategic policy initiative — non-binding</div></div>
-          <div class="init-meta"><div class="init-meta-label">Engagement</div><div class="init-meta-value muted">States, security institutions & international organizations</div></div>
         </div>
       </div>
     </div>
@@ -397,22 +422,22 @@
       <div class="init-header">
         <div class="init-code">
           <span class="init-badge">GSEI</span>
-          <span class="init-domain">Peace, Security & Human Development</span>
+          <span class="init-domain">Employment, Human Security & Economic Resilience</span>
         </div>
         <div class="init-title-large">Global Security Employment Initiative</div>
-        <div class="init-subtitle">Public Safety · Employment Generation · Human Security</div>
+        <div class="init-subtitle">Decent Work · Workforce Development · Human Security</div>
       </div>
-      <p class="init-desc-full">A policy recommendation encouraging governments, regional organizations, and international institutions to explore accountable, community-oriented security-sector development as a means of strengthening public safety, generating employment opportunities, promoting social stability, and advancing human development.</p>
-      <p class="init-desc-full">GSEI recognizes the intersection between security and human development — that communities which are safer, more employed, and more stable are also more peaceful. It promotes security-sector growth as a sustainable engine for employment and social cohesion.</p>
+      <p class="init-desc-full">GSEI is founded on the principle that meaningful employment is fundamental to human dignity, social stability, economic prosperity, and lasting peace. Sustainable employment strengthens national resilience, promotes responsible governance, reduces poverty, supports social cohesion, and contributes to preventing insecurity, violent extremism, organized crime, irregular migration, and humanitarian vulnerability.</p>
+      <p class="init-desc-full">The Initiative has been submitted for consideration by the UN, EU, AU, ASEAN, the Commonwealth, ECOWAS, the G20, the International Labour Organization, the World Bank Group, the IMF, and Regional Development Banks — encouraging cooperation among governments, employers, workers' organizations, academia, and civil society to promote decent work and inclusive economic opportunity.</p>
       <div class="init-objectives">
         <div class="init-obj-label">Policy Objectives</div>
         <div class="init-obj-list">
-          <div class="init-obj-item">Community-oriented security-sector development frameworks</div>
-          <div class="init-obj-item">Employment generation through accountable security institutions</div>
-          <div class="init-obj-item">Strengthening public safety and community resilience</div>
-          <div class="init-obj-item">Promoting social stability through human security investment</div>
-          <div class="init-obj-item">Advancing human development alongside security governance</div>
-          <div class="init-obj-item">Regional and international cooperation on security-development nexus</div>
+          <div class="init-obj-item">Promote sustainable employment opportunities across all sectors of national economies</div>
+          <div class="init-obj-item">Strengthen workforce development, vocational education and lifelong learning</div>
+          <div class="init-obj-item">Advance youth employment, entrepreneurship and women's economic empowerment</div>
+          <div class="init-obj-item">Encourage responsible public-private partnerships and investment for job creation</div>
+          <div class="init-obj-item">Strengthen inclusive labour markets, social protection and equal opportunity</div>
+          <div class="init-obj-item">Support an International Employment Cooperation, Capacity-Building and Development Fund</div>
         </div>
       </div>
     </div>
@@ -425,19 +450,64 @@
       <div class="init-visual-body">
         <div class="init-meta-row">
           <div class="init-meta"><div class="init-meta-label">Initiative Code</div><div class="init-meta-value">GSEI</div></div>
-          <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Peace, Security & Human Development</div></div>
-          <div class="init-meta"><div class="init-meta-label">Focus Area</div><div class="init-meta-value">Public Safety, Employment & Human Security</div></div>
+          <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Employment, Human Security & Economic Resilience</div></div>
+          <div class="init-meta"><div class="init-meta-label">Focus Area</div><div class="init-meta-value">Decent Work, Workforce Development & Human Security</div></div>
+          <div class="init-meta"><div class="init-meta-label">Submitted To</div><div class="init-meta-value muted">UN, EU, AU, ASEAN, Commonwealth, ECOWAS, G20, ILO, World Bank, IMF</div></div>
           <div class="init-meta"><div class="init-meta-label">Nature</div><div class="init-meta-value muted">Policy recommendation — non-binding</div></div>
-          <div class="init-meta"><div class="init-meta-label">Engagement</div><div class="init-meta-value muted">Governments, regional organizations & institutions</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INITIATIVE 4: UNGFSAII -->
-<section class="initiative-section" id="ungfsaii">
+<!-- INITIATIVE 4: DESA -->
+<section class="initiative-section" id="desa">
   <div class="init-layout reverse">
+    <div>
+      <div class="init-header">
+        <div class="init-code">
+          <span class="init-badge">DESA</span>
+          <span class="init-domain">Peace, Security, Governance & Cooperative Policy</span>
+        </div>
+        <div class="init-title-large">Defense and Enhancement of Sovereign Autonomy</div>
+        <div class="init-subtitle">Cooperative Security · Sovereign Equality · Institutional Resilience</div>
+      </div>
+      <p class="init-desc-full">Recognizing the evolving nature of global security challenges — geopolitical tensions, humanitarian emergencies, transnational crime, cyber threats, terrorism, climate-related risks, and emerging technologies — DESA invites international and regional institutions to consider a cooperative framework that strengthens peaceful collaboration while fully respecting the sovereignty, independence, territorial integrity, and equality of all States.</p>
+      <p class="init-desc-full">Rather than a military alliance, DESA is presented as a voluntary global policy framework intended to complement existing cooperation mechanisms — strengthening sovereign equality, peaceful engagement, institutional resilience, and collaborative responses to shared global challenges through dialogue and mutually agreed arrangements consistent with international law.</p>
+      <div class="init-objectives">
+        <div class="init-obj-label">Policy Objectives</div>
+        <div class="init-obj-list">
+          <div class="init-obj-item">Promote sovereign equality, territorial integrity and non-interference among all participating States</div>
+          <div class="init-obj-item">Strengthen cooperative security dialogue on terrorism, piracy, organized crime and cybercrime</div>
+          <div class="init-obj-item">Support conflict prevention, mediation and peaceful dispute resolution</div>
+          <div class="init-obj-item">Enhance institutional resilience, capacity-building and preventive diplomacy</div>
+          <div class="init-obj-item">Advance resilient, inclusive economic growth and responsible investment</div>
+          <div class="init-obj-item">Strengthen human security through education, healthcare and disaster risk reduction</div>
+        </div>
+      </div>
+    </div>
+    <div class="init-visual-card reveal reveal-delay-1">
+      <div class="init-visual-top">
+        <div class="init-big-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+      </div>
+      <div class="init-visual-body">
+        <div class="init-meta-row">
+          <div class="init-meta"><div class="init-meta-label">Initiative Code</div><div class="init-meta-value">DESA</div></div>
+          <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Peace, Security, Governance & Cooperative Policy</div></div>
+          <div class="init-meta"><div class="init-meta-label">Comparative Context</div><div class="init-meta-value muted">A voluntary cooperation platform — not a military alliance</div></div>
+          <div class="init-meta"><div class="init-meta-label">Submitted To</div><div class="init-meta-value muted">UN, EU, AU, ASEAN, Commonwealth, ECOWAS, G20, UK</div></div>
+          <div class="init-meta"><div class="init-meta-label">Nature</div><div class="init-meta-value muted">Voluntary policy framework — non-binding</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INITIATIVE 5: UNGFSAII -->
+<section class="initiative-section" id="ungfsaii">
+  <div class="init-layout">
     <div>
       <div class="init-header">
         <div class="init-code">
@@ -447,18 +517,43 @@
         <div class="init-title-large">United Nations Global Food Security &amp; Agricultural Investment Initiative</div>
         <div class="init-subtitle">Food Security · Agricultural Development · Economic Resilience</div>
       </div>
-      <p class="init-desc-full">A cooperative international policy proposal designed to strengthen global food security, agricultural investment, rural transformation, climate-resilient farming systems, and sustainable economic development. The Initiative encourages enhanced national and international collaboration to promote food sovereignty, agricultural innovation, employment creation, and environmental stewardship.</p>
-      <p class="init-desc-full">UNGFSAII recognizes resilient food systems as essential foundations for peace, human security, and long-term global stability — affirming that hunger and food insecurity are not only humanitarian crises but also drivers of conflict, displacement, and social fragmentation.</p>
+      <p class="init-desc-full">As populations increase, climate variability intensifies, and global supply chains grow more vulnerable, agriculture has become a matter not only of economic development but of national security, human security, and peace. UNGFSAII presents a comprehensive diplomatic and investment framework designed to assist Member States in strengthening national food systems through sustainable public investment, strategic partnerships, and responsible international cooperation.</p>
+      <p class="init-desc-full">The Initiative recommends that participating Member States progressively allocate <strong style="color:var(--cream);">not less than 10% of annual national public expenditure</strong> toward agriculture, food security, rural transformation, climate-smart agriculture, value chains, processing, research and innovation.</p>
       <div class="init-objectives">
         <div class="init-obj-label">Policy Objectives</div>
         <div class="init-obj-list">
-          <div class="init-obj-item">Strengthening global food security through international cooperation</div>
-          <div class="init-obj-item">Agricultural investment, innovation and rural transformation</div>
-          <div class="init-obj-item">Climate-resilient farming systems and sustainable practices</div>
-          <div class="init-obj-item">Food sovereignty and agricultural self-sufficiency</div>
-          <div class="init-obj-item">Employment creation through agricultural development</div>
-          <div class="init-obj-item">Environmental stewardship in food production systems</div>
+          <div class="init-obj-item">Strengthen global food security through coordinated international cooperation</div>
+          <div class="init-obj-item">Mobilize agricultural investment, innovation and rural transformation</div>
+          <div class="init-obj-item">Build climate-resilient farming systems and sustainable irrigation</div>
+          <div class="init-obj-item">Advance food sovereignty and agricultural self-sufficiency</div>
+          <div class="init-obj-item">Create employment through agro-industrial and mechanisation development</div>
+          <div class="init-obj-item">Establish strategic national grain reserves and emergency food security systems</div>
         </div>
+      </div>
+
+      <!-- KENYA COUNTRY MODEL — illustrative financing example from official policy estimation -->
+      <div class="country-model reveal reveal-delay-2">
+        <div class="country-model-head">
+          <h4>Illustrative Country Model — Kenya</h4>
+          <span class="country-model-tag">Policy Estimation</span>
+        </div>
+        <div class="country-model-stats">
+          <div class="cm-stat"><div class="cm-stat-label">National Budget FY 2025/26</div><div class="cm-stat-value">KSh 4.3 Trillion</div></div>
+          <div class="cm-stat"><div class="cm-stat-label">Recommended Allocation</div><div class="cm-stat-value">10%</div></div>
+          <div class="cm-stat"><div class="cm-stat-label">Estimated Investment</div><div class="cm-stat-value">KSh 430 Billion</div></div>
+          <div class="cm-stat"><div class="cm-stat-label">Equivalent</div><div class="cm-stat-value">≈ USD 3.3 Billion</div></div>
+        </div>
+        <div class="country-model-alloc">
+          <div class="cm-alloc-label">Proposed National Investment Framework</div>
+          <div class="cm-alloc-row"><div class="cm-alloc-name">Irrigation, Water & Climate-Resilient Agriculture</div><div class="cm-alloc-bar-wrap"><div class="cm-alloc-bar" style="width:25%"></div></div><div class="cm-alloc-pct">25%</div><div class="cm-alloc-amt">KSh 107.5B</div></div>
+          <div class="cm-alloc-row"><div class="cm-alloc-name">Research, Innovation & Technology</div><div class="cm-alloc-bar-wrap"><div class="cm-alloc-bar" style="width:20%"></div></div><div class="cm-alloc-pct">20%</div><div class="cm-alloc-amt">KSh 86B</div></div>
+          <div class="cm-alloc-row"><div class="cm-alloc-name">Rural Infrastructure & Logistics</div><div class="cm-alloc-bar-wrap"><div class="cm-alloc-bar" style="width:20%"></div></div><div class="cm-alloc-pct">20%</div><div class="cm-alloc-amt">KSh 86B</div></div>
+          <div class="cm-alloc-row"><div class="cm-alloc-name">Farmer Empowerment & Agricultural Finance</div><div class="cm-alloc-bar-wrap"><div class="cm-alloc-bar" style="width:15%"></div></div><div class="cm-alloc-pct">15%</div><div class="cm-alloc-amt">KSh 64.5B</div></div>
+          <div class="cm-alloc-row"><div class="cm-alloc-name">Mechanisation & Industrialisation</div><div class="cm-alloc-bar-wrap"><div class="cm-alloc-bar" style="width:10%"></div></div><div class="cm-alloc-pct">10%</div><div class="cm-alloc-amt">KSh 43B</div></div>
+          <div class="cm-alloc-row"><div class="cm-alloc-name">Education, Skills & Human Capacity</div><div class="cm-alloc-bar-wrap"><div class="cm-alloc-bar" style="width:5%"></div></div><div class="cm-alloc-pct">5%</div><div class="cm-alloc-amt">KSh 21.5B</div></div>
+          <div class="cm-alloc-row"><div class="cm-alloc-name">Strategic Food Reserves & Emergency Response</div><div class="cm-alloc-bar-wrap"><div class="cm-alloc-bar" style="width:5%"></div></div><div class="cm-alloc-pct">5%</div><div class="cm-alloc-amt">KSh 21.5B</div></div>
+        </div>
+        <div class="country-model-note">Kenya is used solely as an illustrative model demonstrating how a 10% strategic agricultural allocation could transform national productivity while attracting domestic and international investment. Figures are estimation-based policy projections, not confirmed government commitments.</div>
       </div>
     </div>
     <div class="init-visual-card reveal reveal-delay-1">
@@ -471,18 +566,18 @@
         <div class="init-meta-row">
           <div class="init-meta"><div class="init-meta-label">Initiative Code</div><div class="init-meta-value">UNGFSAII</div></div>
           <div class="init-meta"><div class="init-meta-label">Policy Domain</div><div class="init-meta-value">Food Security, Agriculture & Sustainable Development</div></div>
-          <div class="init-meta"><div class="init-meta-label">Focus Area</div><div class="init-meta-value">Food Security, Agricultural Development & Economic Resilience</div></div>
+          <div class="init-meta"><div class="init-meta-label">Benchmark</div><div class="init-meta-value">10% of annual national public expenditure</div></div>
+          <div class="init-meta"><div class="init-meta-label">Aligned With</div><div class="init-meta-value muted">SDGs, AU Agenda 2063, CAADP, Malabo Declaration, Paris Agreement</div></div>
           <div class="init-meta"><div class="init-meta-label">Nature</div><div class="init-meta-value muted">Cooperative international policy proposal</div></div>
-          <div class="init-meta"><div class="init-meta-label">Engagement</div><div class="init-meta-value muted">Governments, UN system, development banks & NGOs</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INITIATIVE 5: GSPF -->
+<!-- INITIATIVE 6: GSPF -->
 <section class="initiative-section" id="gspf">
-  <div class="init-layout">
+  <div class="init-layout reverse">
     <div>
       <div class="init-header">
         <div class="init-code">
@@ -529,7 +624,7 @@
 <section class="policy">
   <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Diplomatic Instruments</span></div>
   <h2 class="section-heading reveal reveal-delay-1">Policy Proposals &amp;<br/>International Instruments</h2>
-  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">In addition to the five flagship initiatives, the Global Compact has established formal diplomatic instruments to facilitate voluntary state and institutional engagement.</p>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">In addition to the six flagship initiatives, the Global Compact has established formal diplomatic instruments to facilitate voluntary state and institutional engagement.</p>
   <div class="policy-grid">
     <div class="policy-card reveal">
       <div class="policy-card-label">Diplomatic Instrument A</div>
@@ -553,7 +648,7 @@
 <section class="focus">
   <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Strategic Focus Areas</span></div>
   <h2 class="section-heading reveal reveal-delay-1">Thematic Areas of<br/>International Cooperation</h2>
-  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">All five initiatives operate within the broader strategic focus areas of the Global Compact, ensuring coherence and alignment across the full policy portfolio.</p>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">All six initiatives operate within the broader strategic focus areas of the Global Compact, ensuring coherence and alignment across the full policy portfolio.</p>
   <div class="focus-grid reveal reveal-delay-2">
     <div class="focus-item"><span class="focus-dot"></span>Global Peace and Stability</div>
     <div class="focus-item"><span class="focus-dot"></span>Human Security and Human Dignity</div>
@@ -575,7 +670,7 @@
   <div class="cta-strip reveal">
     <div>
       <h3>Engage with the Initiatives</h3>
-      <p>All five flagship initiatives are open for endorsement, technical cooperation, strategic partnership, and collaborative engagement by governments, international organizations, academic institutions, civil society, and the private sector.</p>
+      <p>All six flagship initiatives are open for endorsement, technical cooperation, strategic partnership, and collaborative engagement by governments, international organizations, academic institutions, civil society, and the private sector.</p>
     </div>
     <div class="cta-actions">
       <a href="partnerships.html" class="btn-primary">Endorse &amp; Engage</a>
@@ -604,7 +699,7 @@
       </div>
     </div>
     <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About the Compact</a></li><li><a href="founder.html">The Founder</a></li><li><a href="doctrine.html">Divine Diplomacy</a></li><li><a href="governance.html">Governance</a></li><li><a href="membership.html">Membership</a></li></ul></div>
-    <div class="footer-col"><h4>Programmes</h4><ul><li><a href="#imppera">IMPPERA</a></li><li><a href="#ncti">Nuclear Civilization</a></li><li><a href="#gsei">Security Employment</a></li><li><a href="#ungfsaii">Food Security</a></li><li><a href="#gspf">Peace Stabilization</a></li></ul></div>
+    <div class="footer-col"><h4>Programmes</h4><ul><li><a href="#imppera">IMPPERA</a></li><li><a href="#ncti">Nuclear Civilization</a></li><li><a href="#gsei">Security Employment</a></li><li><a href="#desa">Sovereign Autonomy</a></li><li><a href="#ungfsaii">Food Security</a></li><li><a href="#gspf">Peace Stabilization</a></li></ul></div>
     <div class="footer-col"><h4>Engage</h4><ul><li><a href="partnerships.html">Endorsement</a></li><li><a href="partnerships.html#strategic">Strategic Partnership</a></li><li><a href="forum.html">Annual Global Forum</a></li><li><a href="publications.html">Document Registry</a></li><li><a href="contact.html">Contact Secretariat</a></li></ul></div>
   </div>
   <div class="footer-bottom">
