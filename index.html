@@ -216,7 +216,10 @@
     /* ── HERO ── */
     .hero { min-height: 100svh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 120px clamp(20px,6vw,100px) 80px; }
     .hero-canvas { position: absolute; inset: 0; overflow: hidden; }
-    .globe-svg { position: absolute; right: -5%; top: 50%; transform: translateY(-50%); width: clamp(380px,52vw,860px); height: clamp(380px,52vw,860px); opacity: 0.07; animation: globeSpin 80s linear infinite; }
+    .hero-bg-photo { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+    .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; filter: saturate(0.65) brightness(0.55); }
+    .hero-bg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,17,31,0.5) 0%, var(--navy) 94%); }
+    .globe-svg { position: absolute; right: -5%; top: 50%; transform: translateY(-50%); width: clamp(380px,52vw,860px); height: clamp(380px,52vw,860px); opacity: 0.07; animation: globeSpin 80s linear infinite; z-index: 1; }
     @keyframes globeSpin { from{transform:translateY(-50%) rotate(0deg)} to{transform:translateY(-50%) rotate(360deg)} }
     .hero-canvas::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 30% 50%,rgba(8,17,31,0) 0%,var(--navy) 72%); }
     .particles { position:absolute; inset:0; pointer-events:none; }
@@ -560,6 +563,9 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-canvas">
+    <div class="hero-bg-photo">
+      <img src="bg.jpg" alt="Global diplomacy and international cooperation" />
+    </div>
     <svg class="globe-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
       <circle cx="250" cy="250" r="240" fill="none" stroke="#C9A84C" stroke-width="0.8"/>
       <ellipse cx="250" cy="250" rx="120" ry="240" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
