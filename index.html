@@ -217,11 +217,11 @@
     .hero { min-height: 100svh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 120px clamp(20px,6vw,100px) 80px; }
     .hero-canvas { position: absolute; inset: 0; overflow: hidden; }
     .hero-bg-photo { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-    .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; filter: saturate(0.65) brightness(0.55); }
-    .hero-bg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,17,31,0.5) 0%, var(--navy) 94%); }
+    .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; filter: saturate(0.85) brightness(0.8); }
+    .hero-bg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--navy) 0%, rgba(8,17,31,0.88) 20%, rgba(8,17,31,0.55) 45%, rgba(8,17,31,0.25) 70%, rgba(8,17,31,0.15) 100%); }
     .globe-svg { position: absolute; right: -5%; top: 50%; transform: translateY(-50%); width: clamp(380px,52vw,860px); height: clamp(380px,52vw,860px); opacity: 0.07; animation: globeSpin 80s linear infinite; z-index: 1; }
     @keyframes globeSpin { from{transform:translateY(-50%) rotate(0deg)} to{transform:translateY(-50%) rotate(360deg)} }
-    .hero-canvas::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 30% 50%,rgba(8,17,31,0) 0%,var(--navy) 72%); }
+    .hero-canvas::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 25% 50%,rgba(8,17,31,0.25) 0%,rgba(8,17,31,0) 45%); }
     .particles { position:absolute; inset:0; pointer-events:none; }
     .particle { position:absolute; width:2px; height:2px; background:var(--gold); border-radius:50%; animation:particleFloat linear infinite; opacity:0; }
     @keyframes particleFloat { 0%{transform:translateY(0) translateX(0);opacity:0} 10%{opacity:.4} 90%{opacity:.15} 100%{transform:translateY(-120px) translateX(30px);opacity:0} }
