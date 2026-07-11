@@ -217,8 +217,8 @@
     .hero { min-height: 100svh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 120px clamp(20px,6vw,100px) 80px; }
     .hero-canvas { position: absolute; inset: 0; overflow: hidden; }
     .hero-bg-photo { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-    .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; filter: saturate(0.85) brightness(0.8); }
-    .hero-bg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--navy) 0%, rgba(8,17,31,0.88) 20%, rgba(8,17,31,0.55) 45%, rgba(8,17,31,0.25) 70%, rgba(8,17,31,0.15) 100%); }
+    .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; filter: saturate(0.9) brightness(0.85); }
+    .hero-bg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--navy) 0%, rgba(8,17,31,0.75) 18%, rgba(8,17,31,0.35) 45%, rgba(8,17,31,0.12) 70%, rgba(8,17,31,0.05) 100%); }
     .globe-svg { position: absolute; right: -5%; top: 50%; transform: translateY(-50%); width: clamp(380px,52vw,860px); height: clamp(380px,52vw,860px); opacity: 0.07; animation: globeSpin 80s linear infinite; z-index: 1; }
     @keyframes globeSpin { from{transform:translateY(-50%) rotate(0deg)} to{transform:translateY(-50%) rotate(360deg)} }
     .hero-canvas::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 25% 50%,rgba(8,17,31,0.25) 0%,rgba(8,17,31,0) 45%); }
@@ -629,7 +629,7 @@ The Global Compact for Peace, Human Security and Responsible International Coope
     <div class="marquee-item"><span class="marquee-dot"></span>Digital Governance</div>
     <div class="marquee-item"><span class="marquee-dot"></span>Youth Leadership</div>
     <div class="marquee-item"><span class="marquee-dot"></span>Intercultural Dialogue</div>
-    <div class="marquee-item"><span class="marquee-dot"></span>Nuclear Disarmament</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Nuclear Civilization</div>
     <div class="marquee-item"><span class="marquee-dot"></span>Food Security</div>
     <div class="marquee-item"><span class="marquee-dot"></span>Peace &amp; Human Security</div>
     <div class="marquee-item"><span class="marquee-dot"></span>Environmental Stewardship</div>
@@ -639,7 +639,7 @@ The Global Compact for Peace, Human Security and Responsible International Coope
     <div class="marquee-item"><span class="marquee-dot"></span>Digital Governance</div>
     <div class="marquee-item"><span class="marquee-dot"></span>Youth Leadership</div>
     <div class="marquee-item"><span class="marquee-dot"></span>Intercultural Dialogue</div>
-    <div class="marquee-item"><span class="marquee-dot"></span>Nuclear Disarmament</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Nuclear Civilization</div>
     <div class="marquee-item"><span class="marquee-dot"></span>Food Security</div>
   </div>
 </div>
@@ -656,7 +656,7 @@ The Global Compact for Peace, Human Security and Responsible International Coope
         <div class="about-card-label">Institutional Profile</div>
         <div class="about-stat-row">
           <div class="about-stat">
-            <div class="about-stat-num">4</div>
+            <div class="about-stat-num">6</div>
             <div class="about-stat-info">
               <strong>Flagship Initiatives</strong>
               <span>Marine protection, food security, employment & peace</span>
@@ -706,7 +706,7 @@ The Global Compact for Peace, Human Security and Responsible International Coope
       <span class="section-eyebrow-text">Flagship Initiatives</span>
     </div>
     <h2 class="section-heading">Core International<br/>Policy Domains</h2>
-    <p class="section-body" style="margin-top:16px;">Four strategic programmes addressing humanity's most pressing global challenges through structured international cooperation and voluntary engagement.</p>
+    <p class="section-body" style="margin-top:16px;">Six strategic programmes addressing humanity's most pressing global challenges through structured international cooperation and voluntary engagement.</p>
     <div style="margin-top:24px;">
       <a href="initiatives.html" class="btn-primary" style="font-size:10px;padding:11px 26px;">View All Initiatives <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
@@ -722,10 +722,20 @@ The Global Compact for Peace, Human Security and Responsible International Coope
         <p class="init-desc">Environmental protection, marine conservation & sustainable development through strengthened international cooperation and ecological restoration.</p>
       </div>
     </div>
+    <div class="init-card reveal reveal-delay-1">
+      <div class="init-photo"><img src="init-ncti.jpg" alt="Nuclear science cooperation and strategic stability" loading="lazy" /></div>
+      <div class="init-card-body">
+        <div class="init-number">02</div>
+        <div class="init-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/><circle cx="12" cy="12" r="8" fill="none" stroke-dasharray="3 3"/></svg></div>
+        <div class="init-abbr">NCTI</div>
+        <div class="init-title">Nuclear Civilization Transition Initiative</div>
+        <p class="init-desc">Responsible nuclear stewardship, cooperative security & strategic stability. From deterrence to cooperation, from fear to future.</p>
+      </div>
+    </div>
     <div class="init-card reveal reveal-delay-2">
       <div class="init-photo"><img src="init-gsei.jpg" alt="Community security and public safety personnel" loading="lazy" /></div>
       <div class="init-card-body">
-        <div class="init-number">02</div>
+        <div class="init-number">03</div>
         <div class="init-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <div class="init-abbr">GSEI</div>
         <div class="init-title">Global Security Employment Initiative</div>
@@ -733,26 +743,36 @@ The Global Compact for Peace, Human Security and Responsible International Coope
       </div>
     </div>
     <div class="init-card reveal reveal-delay-1">
+      <div class="init-photo"><img src="init-desa.jpg" alt="Sovereign cooperation and diplomatic dialogue" loading="lazy" /></div>
+      <div class="init-card-body">
+        <div class="init-number">04</div>
+        <div class="init-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="init-abbr">DESA</div>
+        <div class="init-title">Defense &amp; Enhancement of Sovereign Autonomy</div>
+        <p class="init-desc">Cooperative security, sovereign equality & institutional resilience. A voluntary platform for peaceful international engagement.</p>
+      </div>
+    </div>
+    <div class="init-card reveal reveal-delay-2">
       <div class="init-photo"><img src="init-ungfsaii.jpg" alt="Agricultural farmland and food security" loading="lazy" /></div>
       <div class="init-card-body">
-        <div class="init-number">03</div>
+        <div class="init-number">05</div>
         <div class="init-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <div class="init-abbr">UNGFSAII</div>
         <div class="init-title">UN Global Food Security &amp; Agricultural Investment Initiative</div>
         <p class="init-desc">Food security, agricultural development & economic resilience. Climate-resilient farming systems for sustainable global stability.</p>
       </div>
     </div>
-    <div class="init-card reveal reveal-delay-2">
+    <div class="init-card reveal reveal-delay-1">
       <div class="init-photo"><img src="init-gspf.jpg" alt="International peace and diplomacy dialogue" loading="lazy" /></div>
       <div class="init-card-body">
-        <div class="init-number">04</div>
+        <div class="init-number">06</div>
         <div class="init-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 0 0 1.946-.806 3.42 3.42 0 0 1 4.438 0 3.42 3.42 0 0 0 1.946.806 3.42 3.42 0 0 1 3.138 3.138 3.42 3.42 0 0 0 .806 1.946 3.42 3.42 0 0 1 0 4.438 3.42 3.42 0 0 0-.806 1.946 3.42 3.42 0 0 1-3.138 3.138 3.42 3.42 0 0 0-1.946.806 3.42 3.42 0 0 1-4.438 0 3.42 3.42 0 0 0-1.946-.806 3.42 3.42 0 0 1-3.138-3.138 3.42 3.42 0 0 0-.806-1.946 3.42 3.42 0 0 1 0-4.438 3.42 3.42 0 0 0 .806-1.946 3.42 3.42 0 0 1 3.138-3.138z"/></svg></div>
         <div class="init-abbr">GSPF</div>
         <div class="init-title">Global Security &amp; Peace Stabilization Framework</div>
         <p class="init-desc">Peacebuilding, conflict prevention & responsible security governance. Structured pathways toward sustainable international peace.</p>
       </div>
     </div>
-    <div class="init-card reveal reveal-delay-3" style="display:flex;flex-direction:column;justify-content:center;background:var(--navy-light);">
+    <div class="init-card reveal reveal-delay-2" style="display:flex;flex-direction:column;justify-content:center;background:var(--navy-light);">
       <div class="init-card-body">
         <div class="section-eyebrow" style="margin-bottom:16px;"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Learn More</span></div>
         <h3 style="font-family:var(--font-display);font-size:clamp(15px,1.8vw,20px);color:var(--cream);margin-bottom:14px;letter-spacing:0.02em;">Explore All Initiatives in Detail</h3>
