@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Executive Leadership — Global Compact for Peace, Human Security and Responsible International Cooperation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #08111F; --navy-mid: #0D1B2E; --navy-light: #152235;
+      --gold: #C9A84C; --gold-light: #E2C87A; --gold-dim: #8A6E30;
+      --cream: #F4EFE4; --white: #FFFFFF; --muted: #8A9BB0;
+      --border: rgba(201,168,76,0.18);
+      --font-display: 'Cinzel', serif; --font-body: 'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: var(--font-body); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 clamp(20px,5vw,80px); height: 72px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,17,31,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: contain; }
+    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: clamp(9px,1.1vw,11px); letter-spacing: 0.1em; color: var(--cream); text-transform: uppercase; font-weight: 600; }
+    .nav-logo-text span:last-child { font-size: 9px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; list-style: none; height: 72px; }
+    .nav-item { position: relative; height: 100%; display: flex; align-items: center; }
+    .nav-item > a, .nav-trigger { font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); text-decoration: none; font-weight: 500; padding: 0 14px; height: 100%; display: flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; font-family: var(--font-body); transition: color 0.2s; white-space: nowrap; }
+    .nav-item > a:hover, .nav-trigger:hover, .nav-item:hover > a, .nav-item:hover > .nav-trigger { color: var(--gold); }
+    .nav-trigger svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.25s; }
+    .nav-item:hover .nav-trigger svg { transform: rotate(180deg); }
+    .mega-panel { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(8,17,31,0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px clamp(20px,5vw,80px) 40px; z-index: 199; animation: megaFade 0.22s ease forwards; }
+    .nav-item:hover .mega-panel { display: block; }
+    @keyframes megaFade { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+    .mega-inner { display: grid; gap: 36px; }
+    .mega-inner.cols-4 { grid-template-columns: repeat(4,1fr); }
+    .mega-inner.cols-3 { grid-template-columns: repeat(3,1fr); }
+    .mega-inner.cols-5 { grid-template-columns: repeat(5,1fr); }
+    .mega-col-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .mega-links { display: flex; flex-direction: column; gap: 1px; }
+    .mega-link { display: flex; align-items: flex-start; gap: 11px; padding: 8px 10px; border-radius: 3px; text-decoration: none; transition: background 0.2s; }
+    .mega-link:hover { background: rgba(201,168,76,0.06); }
+    .mega-link-dot { width: 5px; height: 5px; border: 1px solid var(--gold-dim); border-radius: 50%; flex-shrink: 0; margin-top: 5px; transition: background 0.2s; }
+    .mega-link:hover .mega-link-dot { background: var(--gold); border-color: var(--gold); }
+    .mega-link-text strong { display: block; font-size: 12px; color: var(--cream); font-weight: 500; margin-bottom: 2px; }
+    .mega-link-text span { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .nav-cta-btn { padding: 9px 22px; border: 1px solid var(--gold-dim); color: var(--gold); border-radius: 2px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 10px; transition: background 0.25s, color 0.25s; }
+    .nav-cta-btn:hover { background: var(--gold); color: var(--navy); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-burger span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: all 0.3s ease; }
+    .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+    .mobile-drawer { display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0; background: rgba(8,17,31,0.99); backdrop-filter: blur(20px); z-index: 198; overflow-y: auto; padding: 0 clamp(20px,5vw,48px) 48px; }
+    .mobile-drawer.open { display: block; }
+    .mob-section { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 18px 0 4px; }
+    .mob-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; padding: 0 4px; }
+    .mob-section a { display: block; font-size: 13px; color: var(--muted); text-decoration: none; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.03); transition: color 0.2s; }
+    .mob-section a:hover { color: var(--cream); }
+    .mob-section a:last-child { border-bottom: none; }
+    .mob-engage { padding: 28px 0; }
+    .mob-engage a { display: inline-flex; padding: 12px 28px; border: 1px solid var(--gold-dim); color: var(--gold); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 2px; }
+    @media(max-width:1100px){ .nav-links,.nav-cta-btn{display:none} .nav-burger{display:flex} }
+
+    /* ── PAGE HERO ── */
+    .page-hero { padding: 140px clamp(20px,6vw,100px) 80px; background: var(--navy-mid); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .page-hero::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 100% at 80% 50%,rgba(201,168,76,0.04) 0%,transparent 70%); pointer-events:none; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb-sep { color: var(--gold-dim); }
+    .page-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .page-eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+    .page-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .page-title { font-family: var(--font-display); font-size: clamp(30px,4.6vw,58px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 16px; }
+    .page-title em { font-style: normal; color: var(--gold); }
+    .page-subtitle { font-size: clamp(14px,1.5vw,17px); color: var(--gold-dim); letter-spacing: 0.04em; text-transform: uppercase; max-width: 640px; margin-bottom: 8px; }
+    .page-locus { font-size: 13px; color: var(--muted); }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: clamp(56px,8vw,100px) clamp(20px,6vw,100px); }
+    .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .section-eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+    .section-eyebrow-text { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .section-heading { font-family: var(--font-display); font-size: clamp(24px,3.5vw,44px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+    .section-body { font-size: clamp(14px,1.3vw,16px); line-height: 1.9; color: #7D93AA; }
+
+    /* ── EXECUTIVE POSTER GRID ── */
+    .exec-directory { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .exec-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 18px; margin-top: 48px; }
+    .exec-card { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; background: var(--navy-light); transition: border-color 0.3s, transform 0.3s; }
+    .exec-card:hover { border-color: var(--gold-dim); transform: translateY(-4px); }
+    .exec-photo { position: relative; width: 100%; aspect-ratio: 3/4; overflow: hidden; }
+    .exec-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── PROFILE ── */
+    .profile { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .profile-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(40px,6vw,90px); align-items: start; }
+    .profile-photo-wrap { position: relative; }
+    .profile-photo { border-radius: 4px; overflow: hidden; border: 1px solid var(--border); position: relative; }
+    .profile-photo img { display: block; width: 100%; height: 460px; object-fit: cover; filter: saturate(0.85) brightness(0.92); }
+    .profile-photo::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,17,31,0) 55%,rgba(8,17,31,0.55) 100%); }
+    .profile-accent { position: absolute; top: -18px; left: -18px; width: 70px; height: 70px; border-top: 1px solid var(--gold-dim); border-left: 1px solid var(--gold-dim); pointer-events: none; }
+    .profile-caption { margin-top: 18px; padding: 18px 20px; border: 1px solid var(--border); border-radius: 4px; background: var(--navy-light); }
+    .profile-caption-name { font-family: var(--font-display); font-size: 15px; color: var(--cream); margin-bottom: 4px; }
+    .profile-caption-title { font-size: 11px; color: var(--gold-dim); letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.6; }
+
+    .profile-content .section-body { margin-bottom: 18px; }
+    .profile-roles { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
+    .profile-role { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 3px; font-size: 13px; color: var(--muted); line-height: 1.6; transition: border-color 0.2s, color 0.2s; }
+    .profile-role:hover { border-color: var(--gold-dim); color: var(--cream); }
+    .profile-role::before { content:''; width:5px; height:5px; border:1px solid var(--gold); border-radius:50%; flex-shrink:0; margin-top:5px; }
+    .profile-role strong { color: var(--cream); font-weight: 600; }
+
+    /* ── QUOTE ── */
+    .exec-quote-section { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .exec-quote { max-width: 820px; margin: 0 auto; text-align: center; }
+    .exec-quote blockquote { font-family: var(--font-display); font-size: clamp(18px,2.6vw,30px); color: var(--cream); line-height: 1.5; font-weight: 400; font-style: italic; margin-bottom: 20px; }
+    .exec-quote-attr { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+
+    /* ── LEADERSHIP PRINCIPLES ── */
+    .principles { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .principles-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 48px; }
+    .principle-card { border: 1px solid var(--border); border-radius: 3px; padding: 24px 20px; background: var(--navy-light); transition: border-color 0.3s, transform 0.3s; }
+    .principle-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .principle-num { font-family: var(--font-display); font-size: 11px; color: var(--gold-dim); letter-spacing: 0.1em; margin-bottom: 14px; }
+    .principle-card h4 { font-family: var(--font-display); font-size: 13px; color: var(--cream); margin-bottom: 8px; letter-spacing: 0.02em; }
+    .principle-card p { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+    /* ── CTA ── */
+    .exec-cta { background: var(--navy-mid); }
+    .cta-strip { background: var(--navy-light); border: 1px solid var(--border); border-radius: 4px; padding: clamp(32px,4vw,56px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+    .cta-strip h3 { font-family: var(--font-display); font-size: clamp(18px,2.5vw,28px); color: var(--white); margin-bottom: 10px; }
+    .cta-strip p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .cta-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+    /* ── MOTTO ── */
+    .motto-banner { background: var(--gold); padding: clamp(32px,4vw,56px) clamp(20px,6vw,100px); text-align: center; }
+    .motto-banner h2 { font-family: var(--font-display); font-size: clamp(15px,2.6vw,32px); color: var(--navy); letter-spacing: 0.12em; font-weight: 600; }
+    .motto-banner p { font-size: 11px; letter-spacing: 0.2em; color: var(--navy); opacity: 0.65; margin-top: 8px; text-transform: uppercase; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-mid); border-top: 1px solid var(--border); padding: clamp(48px,6vw,80px) clamp(20px,6vw,100px) 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(32px,4vw,60px); margin-bottom: 48px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { width: 38px; height: 38px; border-radius: 50%; object-fit: contain; }
+    .footer-logo-name { font-family: var(--font-display); font-size: 10px; color: var(--cream); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5; }
+    .footer-desc { font-size: 12px; line-height: 1.75; color: var(--muted); max-width: 280px; margin-bottom: 20px; }
+    .footer-contact { font-size: 11px; color: var(--muted); line-height: 1.9; }
+    .footer-contact a { color: var(--gold-dim); text-decoration: none; }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-col h4 { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 11px; color: var(--muted); }
+    .footer-bottom-right { font-size: 10px; color: var(--gold-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+
+    /* Buttons */
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 30px; background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 12px 30px; border: 1px solid rgba(201,168,76,0.35); color: var(--cream); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: border-color 0.25s, color 0.25s, transform 0.2s; white-space: nowrap; }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* Responsive */
+    @media(max-width:1024px) {
+      .profile-grid { grid-template-columns: 1fr; }
+      .profile-photo img { height: 360px; }
+      .principles-grid { grid-template-columns: repeat(2,1fr); }
+      .cta-strip { grid-template-columns: 1fr; }
+      .cta-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:640px) {
+      .principles-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Global Compact Seal" />
+    <div class="nav-logo-text"><span>Global Compact</span><span>Peace · Human Security · Cooperation</span></div>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">Institution <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-4">
+        <div><div class="mega-col-label">About</div><div class="mega-links"><a href="about.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>About the Compact</strong><span>History, identity & legal status</span></div></a><a href="about.html#declaration" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Founding Declaration</strong><span>Foundational statement of purpose</span></div></a><a href="executive.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Executive Leadership</strong><span>Founder & 50-member Global Council</span></div></a></div></div>
+        <div><div class="mega-col-label">Framework</div><div class="mega-links"><a href="doctrine.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Doctrine of Divine Diplomacy</strong><span>Constitutional morality of global order</span></div></a><a href="about.html#charter" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Charter of Principles</strong><span>Foundational values & ethical framework</span></div></a><a href="about.html#vision" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Vision & Mission</strong><span>Strategic direction & objectives</span></div></a></div></div>
+        <div><div class="mega-col-label">Governance</div><div class="mega-links"><a href="governance.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Governance Structure</strong><span>Leadership offices & bodies</span></div></a><a href="governance.html#secretariat" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Secretariat</strong><span>Administration & coordination</span></div></a><a href="governance.html#council" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Global Council</strong><span>Advisory & thematic guidance</span></div></a></div></div>
+        <div><div class="mega-col-label">Membership</div><div class="mega-links"><a href="membership.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Membership Framework</strong><span>Categories, rights & responsibilities</span></div></a><a href="membership.html#join" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>How to Join</strong><span>Eligibility & process</span></div></a><a href="membership.html#fellows" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Diplomatic Fellows</strong><span>Ambassadors of goodwill</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item"><a href="initiatives.html">Initiatives</a></li>
+    <li class="nav-item">
+      <button class="nav-trigger">Engage <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mega-panel"><div class="mega-inner cols-3">
+        <div><div class="mega-col-label">Partnership</div><div class="mega-links"><a href="partnerships.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Partnerships & Endorsement</strong><span>All engagement modalities</span></div></a><a href="partnerships.html#endorse" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Moral Endorsement</strong><span>Voluntary expression of alignment</span></div></a><a href="partnerships.html#strategic" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Strategic Partnership</strong><span>Structured programme collaboration</span></div></a></div></div>
+        <div><div class="mega-col-label">Participation</div><div class="mega-links"><a href="partnerships.html#observer" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Observer Status</strong><span>Forum & dialogue participation</span></div></a><a href="forum.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Annual Global Forum</strong><span>Principal convening platform</span></div></a></div></div>
+        <div><div class="mega-col-label">Resources</div><div class="mega-links"><a href="publications.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Publications & Documents</strong><span>Official registry & instruments</span></div></a><a href="contact.html" class="mega-link"><span class="mega-link-dot"></span><div class="mega-link-text"><strong>Contact the Secretariat</strong><span>Diplomatic correspondence</span></div></a></div></div>
+      </div></div>
+    </li>
+    <li class="nav-item"><a href="forum.html">Forum</a></li>
+    <li class="nav-item"><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="partnerships.html" class="nav-cta-btn">Endorse &amp; Engage</a>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mob-section"><div class="mob-label">Institution</div><a href="about.html">About the Compact</a><a href="executive.html">Executive Leadership</a><a href="doctrine.html">Doctrine of Divine Diplomacy</a><a href="governance.html">Governance</a><a href="membership.html">Membership</a></div>
+  <div class="mob-section"><div class="mob-label">Initiatives</div><a href="initiatives.html">All Initiatives</a></div>
+  <div class="mob-section"><div class="mob-label">Engage</div><a href="partnerships.html">Partnerships & Endorsement</a><a href="forum.html">Annual Global Forum</a><a href="publications.html">Publications</a><a href="contact.html">Contact</a></div>
+  <div class="mob-engage"><a href="partnerships.html">Endorse &amp; Engage</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep">/</span><a href="index.html#about">Institution</a><span class="breadcrumb-sep">/</span><span>Executive Leadership</span></div>
+  <div class="page-eyebrow"><div class="page-eyebrow-line"></div><span class="page-eyebrow-text">Executive Leadership</span></div>
+  <h1 class="page-title">H.E. Tunde Atayeshe D. <em>Owolabi</em></h1>
+  <p class="page-subtitle">Founding Chair · President &amp; Global Convener</p>
+  <p class="page-locus">Global Compact for Peace, Human Security and Responsible International Cooperation — Lagos &amp; Abuja, Nigeria</p>
+</div>
+
+<!-- PROFILE -->
+<section class="profile">
+  <div class="profile-grid">
+    <div class="profile-photo-wrap reveal">
+      <div class="profile-accent"></div>
+      <div class="profile-photo">
+        <img src="executive.jpg" alt="H.E. Tunde Atayeshe D. Owolabi, Founding Chair, President and Global Convener" loading="lazy" />
+      </div>
+      <div class="profile-caption">
+        <div class="profile-caption-name">H.E. Tunde Atayeshe D. Owolabi</div>
+        <div class="profile-caption-title">Founding Chair · President &amp; Global Convener<br/>Global Compact for Peace, Human Security and Responsible International Cooperation</div>
+      </div>
+    </div>
+    <div class="profile-content">
+      <div class="section-eyebrow reveal reveal-delay-1"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Founder &amp; Global Convener</span></div>
+      <h2 class="section-heading reveal reveal-delay-1">Leadership Grounded in<br/>Diplomacy and Service</h2>
+      <p class="section-body reveal reveal-delay-2">H.E. Tunde Atayeshe D. Owolabi founded the Global Compact for Peace, Human Security and Responsible International Cooperation to establish a neutral, voluntary platform through which governments, institutions, and stakeholders worldwide could pursue peace, human dignity, and responsible cooperation without binding legal obligation or compromise of sovereignty.</p>
+      <p class="section-body reveal reveal-delay-2">As Founding Chair, President and Global Convener, he provides the institutional vision behind the Compact's flagship initiatives and its guiding philosophy — the Doctrine of Divine Diplomacy — which holds that diplomacy is the universal architecture through which humanity negotiates order, balance, justice, and peaceful continuity.</p>
+      <p class="section-body reveal reveal-delay-3">Headquartered in Lagos and Abuja, Nigeria, his leadership has directed the Compact's outreach across governments, international organizations, academia, civil society, and the private sector, positioning the institution as a multipolar, multi-stakeholder complement to the existing United Nations system.</p>
+
+      <div class="profile-roles reveal reveal-delay-3">
+        <div class="profile-role"><strong>Founding Chair</strong> — Original architect of the Global Compact's institutional structure and founding declaration</div>
+        <div class="profile-role"><strong>President</strong> — Chief executive authority over the Compact's Secretariat and institutional operations</div>
+        <div class="profile-role"><strong>Global Convener</strong> — Principal convening authority for the Annual Global Forum and diplomatic engagement</div>
+        <div class="profile-role"><strong>Author of the Doctrine of Divine Diplomacy</strong> — The Compact's constitutional and ethical framework</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTIVE COUNCIL DIRECTORY -->
+<section class="exec-directory">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Global Council</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">Executive Leadership<br/>Directory</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">The Global Compact's Executive Council brings together diplomatic, institutional, and thematic leadership from across governments, international organizations, academia, and civil society.</p>
+  <div class="exec-grid">
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-01.jpg" alt="Executive Council Member 01" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-02.jpg" alt="Executive Council Member 02" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-03.jpg" alt="Executive Council Member 03" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-04.jpg" alt="Executive Council Member 04" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-05.jpg" alt="Executive Council Member 05" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-06.jpg" alt="Executive Council Member 06" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-07.jpg" alt="Executive Council Member 07" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-08.jpg" alt="Executive Council Member 08" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-09.jpg" alt="Executive Council Member 09" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-10.jpg" alt="Executive Council Member 10" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-11.jpg" alt="Executive Council Member 11" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-12.jpg" alt="Executive Council Member 12" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-13.jpg" alt="Executive Council Member 13" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-14.jpg" alt="Executive Council Member 14" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-15.jpg" alt="Executive Council Member 15" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-16.jpg" alt="Executive Council Member 16" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-17.jpg" alt="Executive Council Member 17" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-18.jpg" alt="Executive Council Member 18" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-19.jpg" alt="Executive Council Member 19" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-20.jpg" alt="Executive Council Member 20" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-21.jpg" alt="Executive Council Member 21" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-22.jpg" alt="Executive Council Member 22" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-23.jpg" alt="Executive Council Member 23" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-24.jpg" alt="Executive Council Member 24" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-25.jpg" alt="Executive Council Member 25" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-26.jpg" alt="Executive Council Member 26" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-27.jpg" alt="Executive Council Member 27" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-28.jpg" alt="Executive Council Member 28" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-29.jpg" alt="Executive Council Member 29" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-30.jpg" alt="Executive Council Member 30" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-31.jpg" alt="Executive Council Member 31" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-32.jpg" alt="Executive Council Member 32" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-33.jpg" alt="Executive Council Member 33" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-34.jpg" alt="Executive Council Member 34" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-35.jpg" alt="Executive Council Member 35" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-36.jpg" alt="Executive Council Member 36" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-37.jpg" alt="Executive Council Member 37" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-38.jpg" alt="Executive Council Member 38" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-39.jpg" alt="Executive Council Member 39" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-40.jpg" alt="Executive Council Member 40" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-41.jpg" alt="Executive Council Member 41" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-42.jpg" alt="Executive Council Member 42" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-43.jpg" alt="Executive Council Member 43" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-44.jpg" alt="Executive Council Member 44" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-45.jpg" alt="Executive Council Member 45" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-46.jpg" alt="Executive Council Member 46" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-47.jpg" alt="Executive Council Member 47" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-48.jpg" alt="Executive Council Member 48" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-49.jpg" alt="Executive Council Member 49" loading="lazy" /></div>
+    </div>
+    <div class="exec-card reveal">
+      <div class="exec-photo"><img src="exec-50.jpg" alt="Executive Council Member 50" loading="lazy" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="exec-quote-section">
+  <div class="exec-quote reveal">
+    <blockquote>"Diplomacy is the universal architecture of coexistence through which humanity negotiates order, balance, justice, and peaceful continuity."</blockquote>
+    <div class="exec-quote-attr">H.E. Tunde Atayeshe D. Owolabi — Founding Chair, President &amp; Global Convener</div>
+  </div>
+</section>
+
+<!-- LEADERSHIP PRINCIPLES -->
+<section class="principles">
+  <div class="section-eyebrow reveal"><div class="section-eyebrow-line"></div><span class="section-eyebrow-text">Guiding Philosophy</span></div>
+  <h2 class="section-heading reveal reveal-delay-1">The Principles Behind<br/>the Founder's Vision</h2>
+  <p class="section-body reveal reveal-delay-2" style="max-width:640px;">The Executive's leadership is guided by the same foundational principles that anchor the Compact's Doctrine of Divine Diplomacy.</p>
+  <div class="principles-grid">
+    <div class="principle-card reveal">
+      <div class="principle-num">01</div>
+      <h4>Sovereign Equilibrium</h4>
+      <p>Balancing the interests of states and stakeholders within a shared global reality, without compromising sovereignty.</p>
+    </div>
+    <div class="principle-card reveal reveal-delay-1">
+      <div class="principle-num">02</div>
+      <h4>Ethical Governance</h4>
+      <p>Leadership rooted in integrity, accountability, and transparency across every institutional office.</p>
+    </div>
+    <div class="principle-card reveal reveal-delay-2">
+      <div class="principle-num">03</div>
+      <h4>Multipolar Cooperation</h4>
+      <p>Convening governments, institutions, and civil society as equal partners in a voluntary, non-binding framework.</p>
+    </div>
+    <div class="principle-card reveal reveal-delay-3">
+      <div class="principle-num">04</div>
+      <h4>Constitutional Morality</h4>
+      <p>Grounding institutional direction in the Doctrine of Divine Diplomacy as the Compact's ethical constitution.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="exec-cta">
+  <div class="cta-strip reveal">
+    <div>
+      <h3>Engage with the Executive Office</h3>
+      <p>The Office of the Founding Chair, President &amp; Global Convener welcomes diplomatic correspondence, institutional partnership inquiries, and formal engagement from governments, organizations, and stakeholders worldwide.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn-primary">Contact the Secretariat</a>
+      <a href="partnerships.html" class="btn-ghost">Explore Partnerships</a>
+    </div>
+  </div>
+</section>
+
+<!-- MOTTO -->
+<div class="motto-banner reveal">
+  <h2>ONE HUMANITY &bull; ONE FUTURE &bull; ONE GLOBAL COMPACT</h2>
+  <p>Divine Diplomacy — The Constitutional Morality of Global Order</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><img src="logo.jpg" alt="Global Compact Seal" /><div class="footer-logo-name">Global Compact<br/>for Peace &amp; Human Security</div></div>
+      <p class="footer-desc">A voluntary, non-binding, multipolar and multi-stakeholder international cooperation framework advancing peace, human dignity, and responsible international cooperation.</p>
+      <div class="footer-contact">
+        <div>Email: <a href="mailto:globalcompactinitiative@gmail.com">globalcompactinitiative@gmail.com</a></div>
+        <div>Tel: <a href="tel:+2348067056348">+234 806 705 6348</a></div>
+        <div>Lagos &amp; Abuja, Nigeria</div>
+        <div style="margin-top:6px;color:var(--gold-dim);">Ref. Registry: GC/REG/2026</div>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About the Compact</a></li><li><a href="executive.html">Executive Leadership</a></li><li><a href="doctrine.html">Divine Diplomacy</a></li><li><a href="governance.html">Governance</a></li><li><a href="membership.html">Membership</a></li></ul></div>
+    <div class="footer-col"><h4>Programmes</h4><ul><li><a href="initiatives.html#imppera">IMPPERA</a></li><li><a href="initiatives.html#gsei">Security Employment</a></li><li><a href="initiatives.html#ungfsaii">Food Security</a></li><li><a href="initiatives.html#gspf">Peace Stabilization</a></li></ul></div>
+    <div class="footer-col"><h4>Engage</h4><ul><li><a href="partnerships.html">Endorsement</a></li><li><a href="partnerships.html#strategic">Strategic Partnership</a></li><li><a href="forum.html">Annual Global Forum</a></li><li><a href="publications.html">Document Registry</a></li><li><a href="contact.html">Contact Secretariat</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright &copy; 2026 Global Compact for Peace, Human Security and Responsible International Cooperation. All Rights Reserved.</p>
+    <div class="footer-bottom-right">One Humanity &middot; One Future &middot; One Global Compact</div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('mobile-drawer');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); drawer.classList.remove('open'); document.body.style.overflow = '';
+  }));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
